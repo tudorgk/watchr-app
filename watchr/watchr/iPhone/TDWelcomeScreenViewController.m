@@ -19,7 +19,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-            }
+		_visible = ScreenVisibleNone;
+	}
     return self;
 }
 
@@ -33,6 +34,7 @@
 
 -(void) initOtherViews{
 	_loginViewController = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"loginViewController"];
+	_loginViewController.delegate=self;
 	
 	_registerViewController = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"registerViewController"];
 	_registerViewController.delegate = self;
@@ -44,6 +46,7 @@
 	//set the content size for introScrollView
 	[self.introScrollView setContentSize:CGSizeMake(2*self.view.bounds.size.width, self.view.bounds.size.height)];
 		
+	[_loginViewController.view setFrame:CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
 	[_registerViewController.view setFrame:CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
 	
 	self.introScrollView.delegate = self;
@@ -86,11 +89,17 @@
 
 - (IBAction)loginButtonPressed:(id)sender {
 	//set the frames for the other screens
-	[_loginViewController.view setFrame:CGRectMake(self.view.bounds.size.width, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+	[self.introScrollView addSubview:_loginViewController.view];
+	[UIView animateWithDuration:0.5f animations:^ {
+		[self.introScrollView setContentOffset:CGPointMake(self.view.bounds.size.width,0) animated:NO];
+		[self.backgroundImageView setAlpha:0];
+		[self.backgroundImageView2 setAlpha:1];
+	}];
+	_visible=ScreenVisibleLogin;
+
 }
 
 - (IBAction)registerButtonPressed:(id)sender {
-	
 	
 	[self.introScrollView addSubview:_registerViewController.view];
 	[UIView animateWithDuration:0.5f animations:^ {
@@ -99,6 +108,8 @@
 		[self.backgroundImageView2 setAlpha:1];
 
 	}];
+	_visible = ScreenVisibleRegister;
+	
 	
 }
 
@@ -111,7 +122,13 @@
 		[self.backgroundImageView setAlpha:1];
 		[self.backgroundImageView2 setAlpha:0];
 	} completion:^(BOOL finished){
-		[_registerViewController.view removeFromSuperview];
+		if (_visible == ScreenVisibleLogin) {
+			[_loginViewController.view removeFromSuperview];
+		}else if (_visible == ScreenVisibleRegister){
+			[_registerViewController.view removeFromSuperview];
+		}
+		
+		_visible = ScreenVisibleNone;
 	}];
 
 

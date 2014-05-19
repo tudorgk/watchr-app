@@ -10,10 +10,19 @@
 #import "TDRegisterViewController.h"
 #import "TDLoginViewController.h"
 #import "FBShimmeringView.h"
-@interface TDWelcomeScreenViewController : UIViewController<UIScrollViewDelegate,TDRegisterViewControllerDelegate>{
+#import "TDWelcomeNavigationDelegate.h"
+
+typedef enum ScreenVisible : NSInteger ScreenVisible;
+enum ScreenVisible : NSInteger {
+	ScreenVisibleNone,
+	ScreenVisibleLogin,
+	ScreenVisibleRegister
+};
+
+@interface TDWelcomeScreenViewController : UIViewController<UIScrollViewDelegate,TDWelcomeNavigationDelegate>{
 	TDLoginViewController * _loginViewController;
 	TDRegisterViewController * _registerViewController;
-	
+	ScreenVisible _visible;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *watchrTitle;

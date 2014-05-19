@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TDCoreTabBarController : UITabBarController
+#import "ECSlidingViewController.h"
+@interface TDCoreTabBarController : UITabBarController<ECSlidingViewControllerDelegate>
 
 @end

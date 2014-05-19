@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol TDRegisterViewControllerDelegate <NSObject>
-
--(void) userPressedBackButton:(id)sender;
-
-@end
+#import "TDWelcomeNavigationDelegate.h"
 
 @interface TDRegisterViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIScrollView *registerScrollView;
@@ -22,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
-@property (assign,nonatomic) id<TDRegisterViewControllerDelegate> delegate;
+@property (assign,nonatomic) id<TDWelcomeNavigationDelegate> delegate;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *registerFormTextFields;
 
 - (IBAction)backButtonPressed:(id)sender;

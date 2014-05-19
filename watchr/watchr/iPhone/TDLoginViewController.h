@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDWelcomeNavigationDelegate.h"
 
 @interface TDLoginViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *loginFormTextFields;
+@property (weak, nonatomic) IBOutlet UIScrollView *loginScrollView;
+@property (assign,nonatomic) id<TDWelcomeNavigationDelegate> delegate;
+- (IBAction)loginButtonPressed:(id)sender;
+
+- (IBAction)backButtonPressed:(id)sender;
 
 @end

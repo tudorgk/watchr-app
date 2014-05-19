@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
 
-@interface TDSecondViewController : UIViewController
+@interface TDSecondViewController : UIViewController<ECSlidingViewControllerDelegate>
+- (IBAction)menuButtonPressed:(id)sender;
 
 @end
