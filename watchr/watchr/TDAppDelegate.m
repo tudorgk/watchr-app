@@ -7,7 +7,7 @@
 //
 
 #import "TDAppDelegate.h"
-
+#import "ECSlidingViewController.h"
 @implementation TDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -18,9 +18,13 @@
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 		//iPad
 	} else {
-		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 		//iPhone
+		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+		ECSlidingViewController * rootViewController = (ECSlidingViewController *) self.window.rootViewController;
+		rootViewController.topViewController = [[UIStoryboard storyboardWithName:@"DashboardStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	}
+	
+	
     return YES;
 }
 							

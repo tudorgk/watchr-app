@@ -1,30 +1,54 @@
 //
-//  TDSecondViewController.m
+//  TDCoreNavigationController.m
 //  watchr
 //
-//  Created by Tudor Dragan on 15/5/14.
+//  Created by Tudor Dragan on 19/5/14.
 //  Copyright (c) 2014 Tudor Dragan. All rights reserved.
 //
 
-#import "TDSecondViewController.h"
+#import "TDCoreNavigationController.h"
 #import "MEDynamicTransition.h"
 #import "METransitions.h"
 #import "UIViewController+ECSlidingViewController.h"
-@interface TDSecondViewController ()
+@interface TDCoreNavigationController ()
 @property (nonatomic, strong) METransitions *transitions;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
+-(void) configureView;
 @end
 
-@implementation TDSecondViewController
+@implementation TDCoreNavigationController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.transitions.dynamicTransition.slidingViewController = self.slidingViewController;
-
-	// Do any additional setup after loading the view, typically from a nib.
+	[self configureView];
+	self.transitions.dynamicTransition.slidingViewController = self.slidingViewController;
+    // Do any additional setup after loading the view.
 }
+
+-(void) configureView{
+	NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+	if ([[ver objectAtIndex:0] intValue] >= 7) {
+		self.navigationBar.barTintColor = [UIColor colorWithRed:0 green:174.0f/255.0f blue:239.0f/255.0f alpha:1.0f];
+		//self.navigationBar.translucent = NO;
+	}else {
+		self.navigationBar.tintColor = [UIColor colorWithRed:0 green:174.0f/255.0f blue:239.0f/255.0f alpha:1.0f];
+	}
+	
+	NSDictionary * attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+	 [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0], NSForegroundColorAttributeName, nil];
+	self.navigationBar.titleTextAttributes = attributes;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -34,6 +58,8 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+	
+	//set the UIDynamic Transition
 	NSDictionary *transitionData = self.transitions.all[3];
     id<ECSlidingViewControllerDelegate> transition = transitionData[@"transition"];
     if (transition == (id)[NSNull null]) {
@@ -76,6 +102,8 @@
 }
 
 - (IBAction)menuButtonPressed:(id)sender {
-	 [self.slidingViewController anchorTopViewToRightAnimated:YES];
+	[self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
+
+
 @end

@@ -26,8 +26,6 @@
 		05C077A61924EC12005AB425 /* TDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C077A51924EC12005AB425 /* TDAppDelegate.m */; };
 		05C077A91924EC12005AB425 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C077A71924EC12005AB425 /* Main_iPhone.storyboard */; };
 		05C077AC1924EC12005AB425 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C077AA1924EC12005AB425 /* Main_iPad.storyboard */; };
-		05C077AF1924EC12005AB425 /* TDFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C077AE1924EC12005AB425 /* TDFirstViewController.m */; };
-		05C077B21924EC12005AB425 /* TDSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C077B11924EC12005AB425 /* TDSecondViewController.m */; };
 		05C077B41924EC12005AB425 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05C077B31924EC12005AB425 /* Images.xcassets */; };
 		05C077BB1924EC12005AB425 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C077BA1924EC12005AB425 /* XCTest.framework */; };
 		05C077BC1924EC12005AB425 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C077951924EC12005AB425 /* Foundation.framework */; };
@@ -36,7 +34,6 @@
 		05C077C71924EC12005AB425 /* watchrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C077C61924EC12005AB425 /* watchrTests.m */; };
 		05C077D51924EE2B005AB425 /* IntroStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C077D41924EE2B005AB425 /* IntroStoryboard_iPhone.storyboard */; };
 		05C077DA1924EF03005AB425 /* TDWelcomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C077D91924EF03005AB425 /* TDWelcomeScreenViewController.m */; };
-		05C0782B1924F192005AB425 /* TDCoreTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C0782A1924F192005AB425 /* TDCoreTabBarController.m */; };
 		05C0782F1924FCE5005AB425 /* blurred-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C0782E1924FCE5005AB425 /* blurred-background.png */; };
 		05C0783419253B63005AB425 /* TDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C0783319253B63005AB425 /* TDLoginViewController.m */; };
 		05C0783719253B73005AB425 /* TDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C0783619253B73005AB425 /* TDRegisterViewController.m */; };
@@ -50,6 +47,10 @@
 		05C40A53192A4D8E002F1F1A /* MEDynamicTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A50192A4D8E002F1F1A /* MEDynamicTransition.m */; };
 		05C40A57192A4E30002F1F1A /* METransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A56192A4E30002F1F1A /* METransitions.m */; };
 		05C40A59192A54B6002F1F1A /* libPods-TransitionFun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C40A58192A54B6002F1F1A /* libPods-TransitionFun.a */; };
+		05C40A5C192A60B9002F1F1A /* TDCoreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A5B192A60B9002F1F1A /* TDCoreNavigationController.m */; };
+		05C40A60192A676D002F1F1A /* TDDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A5F192A676D002F1F1A /* TDDashboardViewController.m */; };
+		05C40A63192A7151002F1F1A /* DashboardStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C40A62192A7151002F1F1A /* DashboardStoryboard_iPhone.storyboard */; };
+		05C40A65192A73CA002F1F1A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C40A64192A73CA002F1F1A /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,10 +99,6 @@
 		05C077A51924EC12005AB425 /* TDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDAppDelegate.m; sourceTree = "<group>"; };
 		05C077A81924EC12005AB425 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		05C077AB1924EC12005AB425 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		05C077AD1924EC12005AB425 /* TDFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDFirstViewController.h; sourceTree = "<group>"; };
-		05C077AE1924EC12005AB425 /* TDFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDFirstViewController.m; sourceTree = "<group>"; };
-		05C077B01924EC12005AB425 /* TDSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDSecondViewController.h; sourceTree = "<group>"; };
-		05C077B11924EC12005AB425 /* TDSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDSecondViewController.m; sourceTree = "<group>"; };
 		05C077B31924EC12005AB425 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = watchr/Images.xcassets; sourceTree = "<group>"; };
 		05C077B91924EC12005AB425 /* watchrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = watchrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C077BA1924EC12005AB425 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -111,8 +108,6 @@
 		05C077D41924EE2B005AB425 /* IntroStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = IntroStoryboard_iPhone.storyboard; path = iPhone/IntroStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		05C077D81924EF03005AB425 /* TDWelcomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDWelcomeScreenViewController.h; path = iPhone/TDWelcomeScreenViewController.h; sourceTree = "<group>"; };
 		05C077D91924EF03005AB425 /* TDWelcomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDWelcomeScreenViewController.m; path = iPhone/TDWelcomeScreenViewController.m; sourceTree = "<group>"; };
-		05C078291924F192005AB425 /* TDCoreTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDCoreTabBarController.h; path = iPhone/TDCoreTabBarController.h; sourceTree = "<group>"; };
-		05C0782A1924F192005AB425 /* TDCoreTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDCoreTabBarController.m; path = iPhone/TDCoreTabBarController.m; sourceTree = "<group>"; };
 		05C0782E1924FCE5005AB425 /* blurred-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blurred-background.png"; sourceTree = "<group>"; };
 		05C0783219253B63005AB425 /* TDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDLoginViewController.h; path = iPhone/TDLoginViewController.h; sourceTree = "<group>"; };
 		05C0783319253B63005AB425 /* TDLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDLoginViewController.m; path = iPhone/TDLoginViewController.m; sourceTree = "<group>"; };
@@ -132,6 +127,12 @@
 		05C40A55192A4E30002F1F1A /* METransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METransitions.h; sourceTree = "<group>"; };
 		05C40A56192A4E30002F1F1A /* METransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METransitions.m; sourceTree = "<group>"; };
 		05C40A58192A54B6002F1F1A /* libPods-TransitionFun.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPods-TransitionFun.a"; sourceTree = "<group>"; };
+		05C40A5A192A60B9002F1F1A /* TDCoreNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCoreNavigationController.h; sourceTree = "<group>"; };
+		05C40A5B192A60B9002F1F1A /* TDCoreNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCoreNavigationController.m; sourceTree = "<group>"; };
+		05C40A5E192A676D002F1F1A /* TDDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDDashboardViewController.h; path = iPhone/TDDashboardViewController.h; sourceTree = "<group>"; };
+		05C40A5F192A676D002F1F1A /* TDDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDDashboardViewController.m; path = iPhone/TDDashboardViewController.m; sourceTree = "<group>"; };
+		05C40A62192A7151002F1F1A /* DashboardStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = DashboardStoryboard_iPhone.storyboard; path = iPhone/DashboardStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		05C40A64192A73CA002F1F1A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05C40A65192A73CA002F1F1A /* MapKit.framework in Frameworks */,
 				05C40A59192A54B6002F1F1A /* libPods-TransitionFun.a in Frameworks */,
 				05C077981924EC12005AB425 /* CoreGraphics.framework in Frameworks */,
 				05C0779A1924EC12005AB425 /* UIKit.framework in Frameworks */,
@@ -225,6 +227,7 @@
 		05C077941924EC12005AB425 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05C40A64192A73CA002F1F1A /* MapKit.framework */,
 				05C40A58192A54B6002F1F1A /* libPods-TransitionFun.a */,
 				05C077951924EC12005AB425 /* Foundation.framework */,
 				05C077971924EC12005AB425 /* CoreGraphics.framework */,
@@ -240,10 +243,6 @@
 				05409D77192557B300E8544C /* Vendor */,
 				05C0782C1924FCC8005AB425 /* Assets */,
 				05C077D01924EDCA005AB425 /* iPhone */,
-				05C077AD1924EC12005AB425 /* TDFirstViewController.h */,
-				05C077AE1924EC12005AB425 /* TDFirstViewController.m */,
-				05C077B01924EC12005AB425 /* TDSecondViewController.h */,
-				05C077B11924EC12005AB425 /* TDSecondViewController.m */,
 				05C077D61924EE59005AB425 /* iPad */,
 				05C0779C1924EC12005AB425 /* Supporting Files */,
 			);
@@ -286,6 +285,7 @@
 				05C077A51924EC12005AB425 /* TDAppDelegate.m */,
 				05C077A71924EC12005AB425 /* Main_iPhone.storyboard */,
 				05C077D11924EDD3005AB425 /* Intro */,
+				05C40A5D192A673D002F1F1A /* Dashboard */,
 				05C078281924F173005AB425 /* Core */,
 			);
 			name = iPhone;
@@ -323,8 +323,8 @@
 		05C078281924F173005AB425 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				05C078291924F192005AB425 /* TDCoreTabBarController.h */,
-				05C0782A1924F192005AB425 /* TDCoreTabBarController.m */,
+				05C40A5A192A60B9002F1F1A /* TDCoreNavigationController.h */,
+				05C40A5B192A60B9002F1F1A /* TDCoreNavigationController.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -384,6 +384,16 @@
 				05C40A50192A4D8E002F1F1A /* MEDynamicTransition.m */,
 			);
 			name = Transitions;
+			sourceTree = "<group>";
+		};
+		05C40A5D192A673D002F1F1A /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				05C40A62192A7151002F1F1A /* DashboardStoryboard_iPhone.storyboard */,
+				05C40A5E192A676D002F1F1A /* TDDashboardViewController.h */,
+				05C40A5F192A676D002F1F1A /* TDDashboardViewController.m */,
+			);
+			name = Dashboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -477,6 +487,7 @@
 				05C0783F19253C6E005AB425 /* login-background@2x.png in Resources */,
 				05C0783D19253C6E005AB425 /* back-chevron.png in Resources */,
 				05C0784019253C6E005AB425 /* login-button-clear.png in Resources */,
+				05C40A63192A7151002F1F1A /* DashboardStoryboard_iPhone.storyboard in Resources */,
 				05C0782F1924FCE5005AB425 /* blurred-background.png in Resources */,
 				05C077D51924EE2B005AB425 /* IntroStoryboard_iPhone.storyboard in Resources */,
 				05C0784119253C6E005AB425 /* login-button-clear@2x.png in Resources */,
@@ -501,7 +512,7 @@
 				0578F9831928BDCA00F8F7B3 /* ECSlidingInteractiveTransition.m in Sources */,
 				05409D7F192557CE00E8544C /* FBShimmeringLayer.m in Sources */,
 				05C40A51192A4D8E002F1F1A /* MEFoldAnimationController.m in Sources */,
-				05C0782B1924F192005AB425 /* TDCoreTabBarController.m in Sources */,
+				05C40A5C192A60B9002F1F1A /* TDCoreNavigationController.m in Sources */,
 				05C077A61924EC12005AB425 /* TDAppDelegate.m in Sources */,
 				05C40A53192A4D8E002F1F1A /* MEDynamicTransition.m in Sources */,
 				05C40A52192A4D8E002F1F1A /* MEZoomAnimationController.m in Sources */,
@@ -512,12 +523,11 @@
 				05C0783419253B63005AB425 /* TDLoginViewController.m in Sources */,
 				0578F9821928BDCA00F8F7B3 /* ECSlidingAnimationController.m in Sources */,
 				05C077A21924EC12005AB425 /* main.m in Sources */,
+				05C40A60192A676D002F1F1A /* TDDashboardViewController.m in Sources */,
 				0578F9841928BDCA00F8F7B3 /* ECSlidingSegue.m in Sources */,
 				0578F9851928BDCA00F8F7B3 /* ECSlidingViewController.m in Sources */,
 				05C077DA1924EF03005AB425 /* TDWelcomeScreenViewController.m in Sources */,
-				05C077B21924EC12005AB425 /* TDSecondViewController.m in Sources */,
 				0578F9861928BDCA00F8F7B3 /* UIViewController+ECSlidingViewController.m in Sources */,
-				05C077AF1924EC12005AB425 /* TDFirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
