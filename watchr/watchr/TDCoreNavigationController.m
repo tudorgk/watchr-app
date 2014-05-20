@@ -38,10 +38,10 @@
 -(void) configureView{
 	NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
 	if ([[ver objectAtIndex:0] intValue] >= 7) {
-		self.navigationBar.barTintColor = [UIColor colorWithRed:0 green:174.0f/255.0f blue:239.0f/255.0f alpha:1.0f];
+		self.navigationBar.barTintColor = [UIColor colorWithRed:0 green:164.0f/255.0f blue:249.0f/255.0f alpha:1.0f];
 		//self.navigationBar.translucent = NO;
 	}else {
-		self.navigationBar.tintColor = [UIColor colorWithRed:0 green:174.0f/255.0f blue:239.0f/255.0f alpha:1.0f];
+		self.navigationBar.tintColor = [UIColor colorWithRed:0 green:164.0f/255.0f blue:249.0f/255.0f alpha:1.0f];
 	}
 	
 	NSDictionary * attributes = [NSDictionary dictionaryWithObjectsAndKeys:

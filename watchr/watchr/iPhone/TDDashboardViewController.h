@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "UIView+Origami.h"
+#import "TDDashboardEventTableViewCell.h"
+#import "TDDashboardFilterButton.h"
+@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *dashboardTableView;
+@property (weak, nonatomic) IBOutlet UIButton *mapButton;
+- (IBAction)mapButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet TDDashboardFilterButton *radiusFilterButton;
+@property (weak, nonatomic) IBOutlet TDDashboardFilterButton *sortingFilterButton;
+@property (weak, nonatomic) IBOutlet TDDashboardFilterButton *tagFilterButton;
 
-@interface TDDashboardViewController : UIViewController
 
 @end
