@@ -39,10 +39,11 @@
 	NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
 	if ([[ver objectAtIndex:0] intValue] >= 7) {
 		self.navigationBar.barTintColor = [UIColor colorWithRed:0 green:164.0f/255.0f blue:249.0f/255.0f alpha:1.0f];
-		//self.navigationBar.translucent = NO;
+		self.navigationBar.tintColor = [UIColor whiteColor];
 	}else {
 		self.navigationBar.tintColor = [UIColor colorWithRed:0 green:164.0f/255.0f blue:249.0f/255.0f alpha:1.0f];
 	}
+
 	
 	NSDictionary * attributes = [NSDictionary dictionaryWithObjectsAndKeys:
 	 [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0], NSForegroundColorAttributeName, nil];

@@ -7,7 +7,7 @@
 //
 
 #import "TDDashboardViewController.h"
-
+#import "TDEventDetailsViewController.h"
 typedef enum MapViewVisibility : NSInteger MapViewVisibility;
 enum MapViewVisibility : NSInteger {
 	MapViewVisibilityHidden,
@@ -83,6 +83,12 @@ enum MapViewVisibility : NSInteger {
 }
 
 #pragma mark - UITableViewDelegate Methods
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	TDEventDetailsViewController * detailsController = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+	[self.navigationController pushViewController:detailsController animated:YES];
+	
+}
 
 #pragma mark - UITableViewDataSource Methods
 
