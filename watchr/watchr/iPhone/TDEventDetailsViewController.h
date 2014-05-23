@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TDEventDescriptionViewController.h"
+#import "TDEventDescriptionView.h"
+#import "HeaderInsetTableView.h"
 @interface TDEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 
-@property (weak, nonatomic) IBOutlet UITableView *eventDetailsTableView;
-@property (nonatomic,strong) TDEventDescriptionViewController * eventDescriptionView;
+@property (weak, nonatomic) IBOutlet HeaderInsetTableView *eventDetailsTableView;
 @end

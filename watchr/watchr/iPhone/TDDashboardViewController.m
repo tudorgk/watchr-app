@@ -8,6 +8,7 @@
 
 #import "TDDashboardViewController.h"
 #import "TDEventDetailsViewController.h"
+#import "UIViewController+ECSlidingViewController.h"
 typedef enum MapViewVisibility : NSInteger MapViewVisibility;
 enum MapViewVisibility : NSInteger {
 	MapViewVisibilityHidden,
@@ -130,5 +131,9 @@ enum MapViewVisibility : NSInteger {
 		_mapState = MapViewVisibilityHidden;
 	}
 				
+}
+
+- (IBAction)menuButtonPressed:(id)sender {
+	[self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
 @end

@@ -44,13 +44,15 @@
 	
 	//add Parallax View to tableView
 	[self.eventDetailsTableView addParallaxWithView:carousel andHeight:150];
-	
+	[self.eventDetailsTableView setHeaderViewInsets:UIEdgeInsetsMake(-150, 0, 0, 0)]; // Content inset's opposite for this example
 	[self initDescriptionView];
 	
 }
 
 -(void) initDescriptionView{
-	self.eventDescriptionView = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"eventDescriptionView"];
+//	self.eventDescriptionView = [[TDEventDescriptionViewController alloc] initWithNibName:@"TDEventDescriptionViewController" bundle:nil];
+	[self.eventDetailsTableView registerNib:[UINib nibWithNibName:@"TDEventDescriptionView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"descriptionView"];
+//	[self.eventDescriptionView.view setFrame:CGRectMake(0, 0, 320, 150)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,6 +63,11 @@
 
 #pragma mark - UITableViewDelegate Methods
 
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+	TDEventDescriptionView * headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"descriptionView"];
+	return headerView;
+}
+
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	TDEventDetailsViewController * detailsController = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	[self.navigationController pushViewController:detailsController animated:YES];
@@ -69,9 +76,6 @@
 
 #pragma mark - UITableViewDataSource Methods
 
--(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-	return self.eventDescriptionView.view;
-}
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -87,8 +91,7 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-	return 300;
+	return 150;
 }
-
 
 @end

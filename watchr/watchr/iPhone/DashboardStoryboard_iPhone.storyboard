@@ -135,6 +135,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="mPF-VS-yxK">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="3GK-c1-Tdh">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rem-M4-iff">
+                                <rect key="frame" x="16" y="7" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="watchr-menu-button.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="menuButtonPressed:" destination="Ss5-L8-GVy" eventType="touchUpInside" id="LJM-4X-4cR"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="rOK-kB-J2s">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CpH-Ej-8kC">
                                 <rect key="frame" x="233" y="5" width="71" height="33"/>
@@ -154,6 +166,7 @@
                     <connections>
                         <outlet property="dashboardTableView" destination="l8x-sz-23t" id="ul0-Jn-tx1"/>
                         <outlet property="mapButton" destination="CpH-Ej-8kC" id="yKG-rD-BJM"/>
+                        <outlet property="menuButton" destination="rem-M4-iff" id="T6r-D8-zPV"/>
                         <outlet property="radiusFilterButton" destination="KD8-kO-1zH" id="WGX-B9-7Ma"/>
                         <outlet property="sortingFilterButton" destination="HU5-fN-cfa" id="tc5-qZ-CeO"/>
                         <outlet property="tagFilterButton" destination="8qr-5c-XAh" id="hFD-CF-tGY"/>
@@ -167,6 +180,7 @@
     <resources>
         <image name="importance-icon.png" width="25" height="25"/>
         <image name="pin-small-icon.png" width="7" height="14"/>
+        <image name="watchr-menu-button.png" width="24" height="15"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

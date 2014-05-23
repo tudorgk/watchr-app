@@ -1,18 +1,18 @@
 //
-//  TDEventDescriptionViewController.m
+//  TDSideMenuViewController.m
 //  watchr
 //
-//  Created by Tudor Dragan on 22/5/14.
+//  Created by Tudor Dragan on 23/5/14.
 //  Copyright (c) 2014 Tudor Dragan. All rights reserved.
 //
 
-#import "TDEventDescriptionViewController.h"
+#import "TDSideMenuViewController.h"
 
-@interface TDEventDescriptionViewController ()
+@interface TDSideMenuViewController ()
 
 @end
 
-@implementation TDEventDescriptionViewController
+@implementation TDSideMenuViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
