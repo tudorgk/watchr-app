@@ -7,7 +7,7 @@
 //
 
 #import "TDCarouselView.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "SDWebImage/UIImageView+WebCache.h"
 
 @interface TDCarouselView()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView * scrollView;

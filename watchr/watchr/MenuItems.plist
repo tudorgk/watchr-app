@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>Event Feed</string>
+		<key>selectedIcon</key>
+		<string>menu-feed-icon-on.png</string>
+		<key>deselectedIcon</key>
+		<string>menu-feed-icon-off.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>My Spots</string>
+		<key>selectedIcon</key>
+		<string>menu-spots-icon-on.png</string>
+		<key>deselectedIcon</key>
+		<string>menu-spots-icon-off.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Friends</string>
+		<key>selectedIcon</key>
+		<string>menu-friends-icon-on.png</string>
+		<key>deselectedIcon</key>
+		<string>menu-friends-icon-off.png</string>
+	</dict>
+</array>
+</plist>

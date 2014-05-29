@@ -9,6 +9,7 @@
 #import "TDDashboardViewController.h"
 #import "TDEventDetailsViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
+#import "TDAddEventViewController.h"
 typedef enum MapViewVisibility : NSInteger MapViewVisibility;
 enum MapViewVisibility : NSInteger {
 	MapViewVisibilityHidden,
@@ -39,6 +40,24 @@ enum MapViewVisibility : NSInteger {
 
 -(void)awakeFromNib{
 	 self.title = @"Dashboard";
+	//add multiple bar button items to navigation bar
+	
+	//map button
+	UIButton * mapButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
+	self.mapButton =mapButton;
+	[self.mapButton setTitle:@"Map" forState:UIControlStateNormal];
+    self.mapButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+	self.mapButton.titleLabel.textColor = [UIColor whiteColor];
+	[self.mapButton addTarget:self action:@selector(mapButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *mapButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.mapButton];
+	
+	//add button
+	UIButton * addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+	[addButton addTarget:self action:@selector(addButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem * addButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+
+	
+	[self.navigationItem setRightBarButtonItems:@[addButtonItem,mapButtonItem] animated:YES];
 }
 
 - (void)viewDidLoad
@@ -73,7 +92,9 @@ enum MapViewVisibility : NSInteger {
 	UIImage * tagsImage = [UIImage imageNamed:@"tags-small-icon.png"];
 	[self.tagFilterButton setImage:tagsImage forState:UIControlStateNormal];
 	[self.tagFilterButton setCustomTitle:@"Accid." forControlState:UIControlStateNormal];
+
 	
+
 }
 
 
@@ -136,4 +157,15 @@ enum MapViewVisibility : NSInteger {
 - (IBAction)menuButtonPressed:(id)sender {
 	[self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
+
+-(IBAction)addButtonPressed:(id)sender
+{
+	UINavigationController * addEventNavigationController  = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"addEventNavigationController"];
+	
+	[self presentViewController:addEventNavigationController animated:YES completion:^{
+		
+	}];
+}
+
+
 @end

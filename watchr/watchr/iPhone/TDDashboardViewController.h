@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
 - (IBAction)mapButtonPressed:(id)sender;
 - (IBAction)menuButtonPressed:(id)sender;
+-(IBAction)addButtonPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet TDDashboardFilterButton *radiusFilterButton;
 @property (weak, nonatomic) IBOutlet TDDashboardFilterButton *sortingFilterButton;
 @property (weak, nonatomic) IBOutlet TDDashboardFilterButton *tagFilterButton;

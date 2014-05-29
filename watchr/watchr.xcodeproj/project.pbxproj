@@ -52,6 +52,14 @@
 		058117621925FC6E00B79087 /* blurred-violet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 058117611925FC6E00B79087 /* blurred-violet.jpg */; };
 		058117641925FCC700B79087 /* bg-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 058117631925FCC700B79087 /* bg-yellow.png */; };
 		058117661925FD6F00B79087 /* bg-red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 058117651925FD6F00B79087 /* bg-red.jpg */; };
+		05965B9319372E2100B0B870 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05965B9219372E2100B0B870 /* CoreData.framework */; };
+		05965B971937312600B0B870 /* WatchrDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05965B951937312600B0B870 /* WatchrDB.xcdatamodeld */; };
+		05965B9A1937327E00B0B870 /* MenuItems.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05965B991937327E00B0B870 /* MenuItems.plist */; };
+		05965BA1193742C500B0B870 /* TDAddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BA0193742C500B0B870 /* TDAddEventViewController.m */; };
+		05965BA71937581500B0B870 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BA41937581500B0B870 /* WYPopoverController.m */; };
+		05965BA81937581500B0B870 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BA61937581500B0B870 /* WYStoryboardPopoverSegue.m */; };
+		05965BAD19376BD000B0B870 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BAA19376BD000B0B870 /* HPGrowingTextView.m */; };
+		05965BAE19376BD000B0B870 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BAC19376BD000B0B870 /* HPTextViewInternal.m */; };
 		05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */; };
 		05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFA192F572700D9BE6A /* TDEventDescriptionView.m */; };
 		05BB5EFF192F594F00D9BE6A /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFE192F594F00D9BE6A /* FXBlurView.m */; };
@@ -60,15 +68,19 @@
 		05BB5F12192F7C1800D9BE6A /* menu-feed-icon-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F06192F7C1800D9BE6A /* menu-feed-icon-on@2x.png */; };
 		05BB5F13192F7C1800D9BE6A /* menu-friends-icon-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F07192F7C1800D9BE6A /* menu-friends-icon-off@2x.png */; };
 		05BB5F14192F7C1800D9BE6A /* menu-friends-icon-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F08192F7C1800D9BE6A /* menu-friends-icon-on@2x.png */; };
-		05BB5F15192F7C1800D9BE6A /* menu-notification-button-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F09192F7C1800D9BE6A /* menu-notification-button-off@2x.png */; };
-		05BB5F16192F7C1800D9BE6A /* menu-notification-button-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F0A192F7C1800D9BE6A /* menu-notification-button-on@2x.png */; };
-		05BB5F17192F7C1800D9BE6A /* menu-request-button-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F0B192F7C1800D9BE6A /* menu-request-button-off@2x.png */; };
-		05BB5F18192F7C1800D9BE6A /* menu-request-button-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F0C192F7C1800D9BE6A /* menu-request-button-on@2x.png */; };
 		05BB5F19192F7C1800D9BE6A /* menu-settings-icon-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F0D192F7C1800D9BE6A /* menu-settings-icon-on@2x.png */; };
 		05BB5F1A192F7C1800D9BE6A /* menu-spots-icon-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F0E192F7C1800D9BE6A /* menu-spots-icon-off@2x.png */; };
 		05BB5F1B192F7C1800D9BE6A /* menu-spots-icon-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F0F192F7C1800D9BE6A /* menu-spots-icon-on@2x.png */; };
 		05BB5F1C192F7C1800D9BE6A /* watchr-menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F10192F7C1800D9BE6A /* watchr-menu-button@2x.png */; };
 		05BB5F20192F7DBB00D9BE6A /* TDSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5F1F192F7DBB00D9BE6A /* TDSideMenuViewController.m */; };
+		05BB5F22192F7E6E00D9BE6A /* SideMenuStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F21192F7E6E00D9BE6A /* SideMenuStoryboard_iPhone.storyboard */; };
+		05BB5F26192FA73100D9BE6A /* TDProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5F25192FA73100D9BE6A /* TDProfileHeaderView.m */; };
+		05BB5F28192FA74300D9BE6A /* TDProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F27192FA74300D9BE6A /* TDProfileHeaderView.xib */; };
+		05BB5F2A192FA7CD00D9BE6A /* profile-demo-picture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F29192FA7CD00D9BE6A /* profile-demo-picture.jpg */; };
+		05BB5F2F192FAC7100D9BE6A /* menu-notification-button-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F2B192FAC7100D9BE6A /* menu-notification-button-off@2x.png */; };
+		05BB5F30192FAC7100D9BE6A /* menu-notification-button-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F2C192FAC7100D9BE6A /* menu-notification-button-on@2x.png */; };
+		05BB5F31192FAC7100D9BE6A /* menu-request-button-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F2D192FAC7100D9BE6A /* menu-request-button-off@2x.png */; };
+		05BB5F32192FAC7100D9BE6A /* menu-request-button-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F2E192FAC7100D9BE6A /* menu-request-button-on@2x.png */; };
 		05C077961924EC12005AB425 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C077951924EC12005AB425 /* Foundation.framework */; };
 		05C077981924EC12005AB425 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C077971924EC12005AB425 /* CoreGraphics.framework */; };
 		05C0779A1924EC12005AB425 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C077991924EC12005AB425 /* UIKit.framework */; };
@@ -202,6 +214,19 @@
 		058117611925FC6E00B79087 /* blurred-violet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blurred-violet.jpg"; sourceTree = "<group>"; };
 		058117631925FCC700B79087 /* bg-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-yellow.png"; sourceTree = "<group>"; };
 		058117651925FD6F00B79087 /* bg-red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bg-red.jpg"; sourceTree = "<group>"; };
+		05965B9219372E2100B0B870 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		05965B961937312600B0B870 /* WatchrDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchrDB.xcdatamodel; sourceTree = "<group>"; };
+		05965B991937327E00B0B870 /* MenuItems.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuItems.plist; sourceTree = "<group>"; };
+		05965B9F193742C500B0B870 /* TDAddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDAddEventViewController.h; path = iPhone/TDAddEventViewController.h; sourceTree = "<group>"; };
+		05965BA0193742C500B0B870 /* TDAddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDAddEventViewController.m; path = iPhone/TDAddEventViewController.m; sourceTree = "<group>"; };
+		05965BA31937581500B0B870 /* WYPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPopoverController.h; sourceTree = "<group>"; };
+		05965BA41937581500B0B870 /* WYPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPopoverController.m; sourceTree = "<group>"; };
+		05965BA51937581500B0B870 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
+		05965BA61937581500B0B870 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
+		05965BA919376BD000B0B870 /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
+		05965BAA19376BD000B0B870 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		05965BAB19376BD000B0B870 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		05965BAC19376BD000B0B870 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		05B66A1B1928ACC9009D6F1F /* TDWelcomeNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDWelcomeNavigationDelegate.h; path = iPhone/TDWelcomeNavigationDelegate.h; sourceTree = "<group>"; };
 		05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TDEventDescriptionView.xib; path = iPhone/TDEventDescriptionView.xib; sourceTree = "<group>"; };
 		05BB5EF9192F572700D9BE6A /* TDEventDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDEventDescriptionView.h; path = iPhone/TDEventDescriptionView.h; sourceTree = "<group>"; };
@@ -214,16 +239,21 @@
 		05BB5F06192F7C1800D9BE6A /* menu-feed-icon-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-feed-icon-on@2x.png"; sourceTree = "<group>"; };
 		05BB5F07192F7C1800D9BE6A /* menu-friends-icon-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-friends-icon-off@2x.png"; sourceTree = "<group>"; };
 		05BB5F08192F7C1800D9BE6A /* menu-friends-icon-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-friends-icon-on@2x.png"; sourceTree = "<group>"; };
-		05BB5F09192F7C1800D9BE6A /* menu-notification-button-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-notification-button-off@2x.png"; sourceTree = "<group>"; };
-		05BB5F0A192F7C1800D9BE6A /* menu-notification-button-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-notification-button-on@2x.png"; sourceTree = "<group>"; };
-		05BB5F0B192F7C1800D9BE6A /* menu-request-button-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-request-button-off@2x.png"; sourceTree = "<group>"; };
-		05BB5F0C192F7C1800D9BE6A /* menu-request-button-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-request-button-on@2x.png"; sourceTree = "<group>"; };
 		05BB5F0D192F7C1800D9BE6A /* menu-settings-icon-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-settings-icon-on@2x.png"; sourceTree = "<group>"; };
 		05BB5F0E192F7C1800D9BE6A /* menu-spots-icon-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-spots-icon-off@2x.png"; sourceTree = "<group>"; };
 		05BB5F0F192F7C1800D9BE6A /* menu-spots-icon-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-spots-icon-on@2x.png"; sourceTree = "<group>"; };
 		05BB5F10192F7C1800D9BE6A /* watchr-menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watchr-menu-button@2x.png"; sourceTree = "<group>"; };
 		05BB5F1E192F7DBB00D9BE6A /* TDSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDSideMenuViewController.h; path = iPhone/TDSideMenuViewController.h; sourceTree = "<group>"; };
 		05BB5F1F192F7DBB00D9BE6A /* TDSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDSideMenuViewController.m; path = iPhone/TDSideMenuViewController.m; sourceTree = "<group>"; };
+		05BB5F21192F7E6E00D9BE6A /* SideMenuStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SideMenuStoryboard_iPhone.storyboard; path = iPhone/SideMenuStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		05BB5F24192FA73100D9BE6A /* TDProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDProfileHeaderView.h; path = iPhone/TDProfileHeaderView.h; sourceTree = "<group>"; };
+		05BB5F25192FA73100D9BE6A /* TDProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDProfileHeaderView.m; path = iPhone/TDProfileHeaderView.m; sourceTree = "<group>"; };
+		05BB5F27192FA74300D9BE6A /* TDProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TDProfileHeaderView.xib; path = iPhone/TDProfileHeaderView.xib; sourceTree = "<group>"; };
+		05BB5F29192FA7CD00D9BE6A /* profile-demo-picture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "profile-demo-picture.jpg"; sourceTree = "<group>"; };
+		05BB5F2B192FAC7100D9BE6A /* menu-notification-button-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-notification-button-off@2x.png"; sourceTree = "<group>"; };
+		05BB5F2C192FAC7100D9BE6A /* menu-notification-button-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-notification-button-on@2x.png"; sourceTree = "<group>"; };
+		05BB5F2D192FAC7100D9BE6A /* menu-request-button-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-request-button-off@2x.png"; sourceTree = "<group>"; };
+		05BB5F2E192FAC7100D9BE6A /* menu-request-button-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-request-button-on@2x.png"; sourceTree = "<group>"; };
 		05C077921924EC12005AB425 /* watchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C077951924EC12005AB425 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05C077971924EC12005AB425 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -292,6 +322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05965B9319372E2100B0B870 /* CoreData.framework in Frameworks */,
 				05C40A65192A73CA002F1F1A /* MapKit.framework in Frameworks */,
 				05C40A59192A54B6002F1F1A /* libPods-TransitionFun.a in Frameworks */,
 				05C077981924EC12005AB425 /* CoreGraphics.framework in Frameworks */,
@@ -360,6 +391,8 @@
 		05409D77192557B300E8544C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				05965BAF19376BD400B0B870 /* Growing Text View */,
+				05965BA21937581500B0B870 /* WYPopoverController */,
 				05BB5F03192F5A6600D9BE6A /* ILTranslucentView */,
 				05BB5EFC192F594F00D9BE6A /* FXBlurView */,
 				054F40A4192E46C300960ABE /* Header Inset TableView */,
@@ -388,14 +421,15 @@
 			path = FBShimmering;
 			sourceTree = "<group>";
 		};
-		054F4058192E1AA200960ABE /* Event Details */ = {
+		054F4058192E1AA200960ABE /* Events */ = {
 			isa = PBXGroup;
 			children = (
 				054F4059192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard */,
+				05965B9E1937428C00B0B870 /* Add Event View Controller */,
 				054F4069192E292900960ABE /* Event Details View Controller */,
 				054F405B192E20F400960ABE /* Carousel View */,
 			);
-			name = "Event Details";
+			name = Events;
 			sourceTree = "<group>";
 		};
 		054F405B192E20F400960ABE /* Carousel View */ = {
@@ -512,6 +546,66 @@
 			path = ECSlidingViewController;
 			sourceTree = "<group>";
 		};
+		05965B941937310800B0B870 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				05965B951937312600B0B870 /* WatchrDB.xcdatamodeld */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		05965B9B19373DED00B0B870 /* MySpots */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MySpots;
+			sourceTree = "<group>";
+		};
+		05965B9C19373DFA00B0B870 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
+		05965B9D19373E0500B0B870 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		05965B9E1937428C00B0B870 /* Add Event View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				05965B9F193742C500B0B870 /* TDAddEventViewController.h */,
+				05965BA0193742C500B0B870 /* TDAddEventViewController.m */,
+			);
+			name = "Add Event View Controller";
+			sourceTree = "<group>";
+		};
+		05965BA21937581500B0B870 /* WYPopoverController */ = {
+			isa = PBXGroup;
+			children = (
+				05965BA31937581500B0B870 /* WYPopoverController.h */,
+				05965BA41937581500B0B870 /* WYPopoverController.m */,
+				05965BA51937581500B0B870 /* WYStoryboardPopoverSegue.h */,
+				05965BA61937581500B0B870 /* WYStoryboardPopoverSegue.m */,
+			);
+			path = WYPopoverController;
+			sourceTree = "<group>";
+		};
+		05965BAF19376BD400B0B870 /* Growing Text View */ = {
+			isa = PBXGroup;
+			children = (
+				05965BA919376BD000B0B870 /* HPGrowingTextView.h */,
+				05965BAA19376BD000B0B870 /* HPGrowingTextView.m */,
+				05965BAB19376BD000B0B870 /* HPTextViewInternal.h */,
+				05965BAC19376BD000B0B870 /* HPTextViewInternal.m */,
+			);
+			name = "Growing Text View";
+			sourceTree = "<group>";
+		};
 		05BB5EFC192F594F00D9BE6A /* FXBlurView */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,14 +627,15 @@
 		05BB5F04192F7BF000D9BE6A /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				05BB5F2B192FAC7100D9BE6A /* menu-notification-button-off@2x.png */,
+				05BB5F2C192FAC7100D9BE6A /* menu-notification-button-on@2x.png */,
+				05BB5F2D192FAC7100D9BE6A /* menu-request-button-off@2x.png */,
+				05BB5F2E192FAC7100D9BE6A /* menu-request-button-on@2x.png */,
+				05BB5F29192FA7CD00D9BE6A /* profile-demo-picture.jpg */,
 				05BB5F05192F7C1800D9BE6A /* menu-feed-icon-off@2x.png */,
 				05BB5F06192F7C1800D9BE6A /* menu-feed-icon-on@2x.png */,
 				05BB5F07192F7C1800D9BE6A /* menu-friends-icon-off@2x.png */,
 				05BB5F08192F7C1800D9BE6A /* menu-friends-icon-on@2x.png */,
-				05BB5F09192F7C1800D9BE6A /* menu-notification-button-off@2x.png */,
-				05BB5F0A192F7C1800D9BE6A /* menu-notification-button-on@2x.png */,
-				05BB5F0B192F7C1800D9BE6A /* menu-request-button-off@2x.png */,
-				05BB5F0C192F7C1800D9BE6A /* menu-request-button-on@2x.png */,
 				05BB5F0D192F7C1800D9BE6A /* menu-settings-icon-on@2x.png */,
 				05BB5F0E192F7C1800D9BE6A /* menu-spots-icon-off@2x.png */,
 				05BB5F0F192F7C1800D9BE6A /* menu-spots-icon-on@2x.png */,
@@ -552,10 +647,23 @@
 		05BB5F1D192F7D9700D9BE6A /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				05965B991937327E00B0B870 /* MenuItems.plist */,
+				05BB5F21192F7E6E00D9BE6A /* SideMenuStoryboard_iPhone.storyboard */,
 				05BB5F1E192F7DBB00D9BE6A /* TDSideMenuViewController.h */,
 				05BB5F1F192F7DBB00D9BE6A /* TDSideMenuViewController.m */,
+				05BB5F23192FA70900D9BE6A /* Profile Header View */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		05BB5F23192FA70900D9BE6A /* Profile Header View */ = {
+			isa = PBXGroup;
+			children = (
+				05BB5F24192FA73100D9BE6A /* TDProfileHeaderView.h */,
+				05BB5F25192FA73100D9BE6A /* TDProfileHeaderView.m */,
+				05BB5F27192FA74300D9BE6A /* TDProfileHeaderView.xib */,
+			);
+			name = "Profile Header View";
 			sourceTree = "<group>";
 		};
 		05C077891924EC12005AB425 = {
@@ -581,6 +689,7 @@
 		05C077941924EC12005AB425 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05965B9219372E2100B0B870 /* CoreData.framework */,
 				05C40A64192A73CA002F1F1A /* MapKit.framework */,
 				05C40A58192A54B6002F1F1A /* libPods-TransitionFun.a */,
 				05C077951924EC12005AB425 /* Foundation.framework */,
@@ -594,6 +703,7 @@
 		05C0779B1924EC12005AB425 /* watchr */ = {
 			isa = PBXGroup;
 			children = (
+				05965B941937310800B0B870 /* Core Data */,
 				05409D77192557B300E8544C /* Vendor */,
 				05C0782C1924FCC8005AB425 /* Assets */,
 				05C077D01924EDCA005AB425 /* iPhone */,
@@ -640,8 +750,11 @@
 				05C077A71924EC12005AB425 /* Main_iPhone.storyboard */,
 				05BB5F1D192F7D9700D9BE6A /* Menu */,
 				05C077D11924EDD3005AB425 /* Intro */,
+				054F4058192E1AA200960ABE /* Events */,
 				05C40A5D192A673D002F1F1A /* Dashboard */,
-				054F4058192E1AA200960ABE /* Event Details */,
+				05965B9D19373E0500B0B870 /* Profile */,
+				05965B9C19373DFA00B0B870 /* Friends */,
+				05965B9B19373DED00B0B870 /* MySpots */,
 				05C078281924F173005AB425 /* Core */,
 			);
 			name = iPhone;
@@ -861,33 +974,37 @@
 				05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */,
 				05228135192BB0B6000E8868 /* pin-small-icon@2x.png in Resources */,
 				054F405A192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard in Resources */,
+				05BB5F2F192FAC7100D9BE6A /* menu-notification-button-off@2x.png in Resources */,
 				05BB5F1A192F7C1800D9BE6A /* menu-spots-icon-off@2x.png in Resources */,
 				05BB5F14192F7C1800D9BE6A /* menu-friends-icon-on@2x.png in Resources */,
+				05BB5F28192FA74300D9BE6A /* TDProfileHeaderView.xib in Resources */,
 				058117641925FCC700B79087 /* bg-yellow.png in Resources */,
 				05C077AC1924EC12005AB425 /* Main_iPad.storyboard in Resources */,
 				058117661925FD6F00B79087 /* bg-red.jpg in Resources */,
+				05BB5F2A192FA7CD00D9BE6A /* profile-demo-picture.jpg in Resources */,
+				05BB5F22192F7E6E00D9BE6A /* SideMenuStoryboard_iPhone.storyboard in Resources */,
 				05C077B41924EC12005AB425 /* Images.xcassets in Resources */,
 				05228140192BC3F5000E8868 /* tags-small-icon@2x.png in Resources */,
 				058117621925FC6E00B79087 /* blurred-violet.jpg in Resources */,
-				05BB5F15192F7C1800D9BE6A /* menu-notification-button-off@2x.png in Resources */,
 				05C077A91924EC12005AB425 /* Main_iPhone.storyboard in Resources */,
 				05228134192BB0B6000E8868 /* pin-small-icon.png in Resources */,
-				05BB5F17192F7C1800D9BE6A /* menu-request-button-off@2x.png in Resources */,
+				05965B9A1937327E00B0B870 /* MenuItems.plist in Resources */,
 				05C0783E19253C6E005AB425 /* back-chevron@2x.png in Resources */,
 				05BB5F12192F7C1800D9BE6A /* menu-feed-icon-on@2x.png in Resources */,
 				05BB5F19192F7C1800D9BE6A /* menu-settings-icon-on@2x.png in Resources */,
 				05C077A01924EC12005AB425 /* InfoPlist.strings in Resources */,
 				05C0783F19253C6E005AB425 /* login-background@2x.png in Resources */,
 				05C0783D19253C6E005AB425 /* back-chevron.png in Resources */,
+				05BB5F30192FAC7100D9BE6A /* menu-notification-button-on@2x.png in Resources */,
 				05BB5F1B192F7C1800D9BE6A /* menu-spots-icon-on@2x.png in Resources */,
+				05BB5F31192FAC7100D9BE6A /* menu-request-button-off@2x.png in Resources */,
 				05C0784019253C6E005AB425 /* login-button-clear.png in Resources */,
 				05C40A63192A7151002F1F1A /* DashboardStoryboard_iPhone.storyboard in Resources */,
 				0522813D192BC3F5000E8868 /* sort-small-icon.png in Resources */,
 				05228141192BC3F5000E8868 /* user-location-small-icon.png in Resources */,
-				05BB5F18192F7C1800D9BE6A /* menu-request-button-on@2x.png in Resources */,
+				05BB5F32192FAC7100D9BE6A /* menu-request-button-on@2x.png in Resources */,
 				05BB5F1C192F7C1800D9BE6A /* watchr-menu-button@2x.png in Resources */,
 				05228142192BC3F5000E8868 /* user-location-small-icon@2x.png in Resources */,
-				05BB5F16192F7C1800D9BE6A /* menu-notification-button-on@2x.png in Resources */,
 				05C0782F1924FCE5005AB425 /* blurred-background.png in Resources */,
 				05C077D51924EE2B005AB425 /* IntroStoryboard_iPhone.storyboard in Resources */,
 				05228132192BB0B6000E8868 /* importance-icon.png in Resources */,
@@ -921,7 +1038,9 @@
 				05409D7F192557CE00E8544C /* FBShimmeringLayer.m in Sources */,
 				054F4062192E21D500960ABE /* UIScrollView+APParallaxHeader.m in Sources */,
 				05C40A78192A8018002F1F1A /* PaperFoldView.m in Sources */,
+				05965BA71937581500B0B870 /* WYPopoverController.m in Sources */,
 				054F409B192E2CA600960ABE /* UIImageView+WebCache.m in Sources */,
+				05BB5F26192FA73100D9BE6A /* TDProfileHeaderView.m in Sources */,
 				05C40A51192A4D8E002F1F1A /* MEFoldAnimationController.m in Sources */,
 				05C40A5C192A60B9002F1F1A /* TDCoreNavigationController.m in Sources */,
 				054F4096192E2CA600960ABE /* UIButton+WebCache.m in Sources */,
@@ -937,6 +1056,7 @@
 				054F4092192E2CA600960ABE /* SDWebImageDownloader.m in Sources */,
 				054F4093192E2CA600960ABE /* SDWebImageDownloaderOperation.m in Sources */,
 				05BB5F02192F59C100D9BE6A /* ILTranslucentView.m in Sources */,
+				05965BAE19376BD000B0B870 /* HPTextViewInternal.m in Sources */,
 				054F4091192E2CA600960ABE /* SDWebImageDecoder.m in Sources */,
 				054F4094192E2CA600960ABE /* SDWebImageManager.m in Sources */,
 				05409D80192557CE00E8544C /* FBShimmeringView.m in Sources */,
@@ -945,14 +1065,18 @@
 				05C0783419253B63005AB425 /* TDLoginViewController.m in Sources */,
 				054F405E192E210C00960ABE /* TDCarouselView.m in Sources */,
 				05228145192BD501000E8868 /* TDDashboardFilterButton.m in Sources */,
+				05965BA1193742C500B0B870 /* TDAddEventViewController.m in Sources */,
 				05228129192B86A6000E8868 /* UIView+Origami.m in Sources */,
 				054F40A7192E46E500960ABE /* HeaderInsetTableView.m in Sources */,
 				0578F9821928BDCA00F8F7B3 /* ECSlidingAnimationController.m in Sources */,
+				05965B971937312600B0B870 /* WatchrDB.xcdatamodeld in Sources */,
 				05C40A77192A8018002F1F1A /* MultiFoldView.m in Sources */,
 				05C077A21924EC12005AB425 /* main.m in Sources */,
+				05965BAD19376BD000B0B870 /* HPGrowingTextView.m in Sources */,
 				054F408D192E2CA600960ABE /* MKAnnotationView+WebCache.m in Sources */,
 				054F40A2192E39C400960ABE /* UILabel+dynamicSizeMe.m in Sources */,
 				054F4098192E2CA600960ABE /* UIImage+MultiFormat.m in Sources */,
+				05965BA81937581500B0B870 /* WYStoryboardPopoverSegue.m in Sources */,
 				05C40A60192A676D002F1F1A /* TDDashboardViewController.m in Sources */,
 				054F406C192E294600960ABE /* TDEventDetailsViewController.m in Sources */,
 				054F408E192E2CA600960ABE /* NSData+ImageContentType.m in Sources */,
@@ -1206,6 +1330,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		05965B951937312600B0B870 /* WatchrDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				05965B961937312600B0B870 /* WatchrDB.xcdatamodel */,
+			);
+			currentVersion = 05965B961937312600B0B870 /* WatchrDB.xcdatamodel */;
+			path = WatchrDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 05C0778A1924EC12005AB425 /* Project object */;
 }
