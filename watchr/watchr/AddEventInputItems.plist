@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<dict>
+			<key>height</key>
+			<integer>44</integer>
+			<key>cellType</key>
+			<string>input</string>
+			<key>placeholder</key>
+			<string>Event name</string>
+			<key>tag</key>
+			<integer>0</integer>
+			<key>selected</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>height</key>
+			<integer>44</integer>
+			<key>cellType</key>
+			<string>bigInput</string>
+			<key>placeholder</key>
+			<string>Event description</string>
+			<key>tag</key>
+			<string>1</string>
+			<key>selected</key>
+			<string>0</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>height</key>
+			<integer>44</integer>
+			<key>tag</key>
+			<integer>2</integer>
+			<key>selected 0</key>
+			<integer>0</integer>
+			<key>placeholder</key>
+			<string>Categories</string>
+			<key>cellType</key>
+			<string>selector</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>height</key>
+			<integer>140</integer>
+			<key>tag</key>
+			<integer>3</integer>
+			<key>selected 0</key>
+			<integer>0</integer>
+			<key>placeholder</key>
+			<string>Position</string>
+			<key>cellType</key>
+			<string>mapSelector</string>
+		</dict>
+	</array>
+</array>
+</plist>

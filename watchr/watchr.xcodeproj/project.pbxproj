@@ -60,6 +60,11 @@
 		05965BA81937581500B0B870 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BA61937581500B0B870 /* WYStoryboardPopoverSegue.m */; };
 		05965BAD19376BD000B0B870 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BAA19376BD000B0B870 /* HPGrowingTextView.m */; };
 		05965BAE19376BD000B0B870 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BAC19376BD000B0B870 /* HPTextViewInternal.m */; };
+		05965BB119376CC700B0B870 /* AddEventInputItems.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05965BB019376CC700B0B870 /* AddEventInputItems.plist */; };
+		05965BB51937754700B0B870 /* TDMapSelectorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BB41937754700B0B870 /* TDMapSelectorTableViewCell.m */; };
+		05965BBB193776A300B0B870 /* TDInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BBA193776A300B0B870 /* TDInputTableViewCell.m */; };
+		05965BBE193776AF00B0B870 /* TDBigInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */; };
+		05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */; };
 		05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */; };
 		05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFA192F572700D9BE6A /* TDEventDescriptionView.m */; };
 		05BB5EFF192F594F00D9BE6A /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFE192F594F00D9BE6A /* FXBlurView.m */; };
@@ -227,6 +232,15 @@
 		05965BAA19376BD000B0B870 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		05965BAB19376BD000B0B870 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		05965BAC19376BD000B0B870 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
+		05965BB019376CC700B0B870 /* AddEventInputItems.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AddEventInputItems.plist; sourceTree = "<group>"; };
+		05965BB31937754700B0B870 /* TDMapSelectorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDMapSelectorTableViewCell.h; path = iPhone/TDMapSelectorTableViewCell.h; sourceTree = "<group>"; };
+		05965BB41937754700B0B870 /* TDMapSelectorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDMapSelectorTableViewCell.m; path = iPhone/TDMapSelectorTableViewCell.m; sourceTree = "<group>"; };
+		05965BB9193776A300B0B870 /* TDInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDInputTableViewCell.h; path = iPhone/TDInputTableViewCell.h; sourceTree = "<group>"; };
+		05965BBA193776A300B0B870 /* TDInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDInputTableViewCell.m; path = iPhone/TDInputTableViewCell.m; sourceTree = "<group>"; };
+		05965BBC193776AF00B0B870 /* TDBigInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBigInputTableViewCell.h; sourceTree = "<group>"; };
+		05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBigInputTableViewCell.m; sourceTree = "<group>"; };
+		05965BC0193799D100B0B870 /* TDSubmitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDSubmitTableViewCell.h; path = iPhone/TDSubmitTableViewCell.h; sourceTree = "<group>"; };
+		05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDSubmitTableViewCell.m; path = iPhone/TDSubmitTableViewCell.m; sourceTree = "<group>"; };
 		05B66A1B1928ACC9009D6F1F /* TDWelcomeNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDWelcomeNavigationDelegate.h; path = iPhone/TDWelcomeNavigationDelegate.h; sourceTree = "<group>"; };
 		05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TDEventDescriptionView.xib; path = iPhone/TDEventDescriptionView.xib; sourceTree = "<group>"; };
 		05BB5EF9192F572700D9BE6A /* TDEventDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDEventDescriptionView.h; path = iPhone/TDEventDescriptionView.h; sourceTree = "<group>"; };
@@ -580,6 +594,8 @@
 			children = (
 				05965B9F193742C500B0B870 /* TDAddEventViewController.h */,
 				05965BA0193742C500B0B870 /* TDAddEventViewController.m */,
+				05965BB019376CC700B0B870 /* AddEventInputItems.plist */,
+				05965BB2193774A600B0B870 /* Custom Cells */,
 			);
 			name = "Add Event View Controller";
 			sourceTree = "<group>";
@@ -604,6 +620,53 @@
 				05965BAC19376BD000B0B870 /* HPTextViewInternal.m */,
 			);
 			name = "Growing Text View";
+			sourceTree = "<group>";
+		};
+		05965BB2193774A600B0B870 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				05965BBF193799BE00B0B870 /* Submit Cell */,
+				05965BB81937768600B0B870 /* Big Input Cell */,
+				05965BB71937767D00B0B870 /* Input Cell */,
+				05965BB61937767300B0B870 /* Map Selection Cell */,
+			);
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		05965BB61937767300B0B870 /* Map Selection Cell */ = {
+			isa = PBXGroup;
+			children = (
+				05965BB31937754700B0B870 /* TDMapSelectorTableViewCell.h */,
+				05965BB41937754700B0B870 /* TDMapSelectorTableViewCell.m */,
+			);
+			name = "Map Selection Cell";
+			sourceTree = "<group>";
+		};
+		05965BB71937767D00B0B870 /* Input Cell */ = {
+			isa = PBXGroup;
+			children = (
+				05965BB9193776A300B0B870 /* TDInputTableViewCell.h */,
+				05965BBA193776A300B0B870 /* TDInputTableViewCell.m */,
+			);
+			name = "Input Cell";
+			sourceTree = "<group>";
+		};
+		05965BB81937768600B0B870 /* Big Input Cell */ = {
+			isa = PBXGroup;
+			children = (
+				05965BBC193776AF00B0B870 /* TDBigInputTableViewCell.h */,
+				05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */,
+			);
+			name = "Big Input Cell";
+			sourceTree = "<group>";
+		};
+		05965BBF193799BE00B0B870 /* Submit Cell */ = {
+			isa = PBXGroup;
+			children = (
+				05965BC0193799D100B0B870 /* TDSubmitTableViewCell.h */,
+				05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */,
+			);
+			name = "Submit Cell";
 			sourceTree = "<group>";
 		};
 		05BB5EFC192F594F00D9BE6A /* FXBlurView */ = {
@@ -1002,6 +1065,7 @@
 				05C40A63192A7151002F1F1A /* DashboardStoryboard_iPhone.storyboard in Resources */,
 				0522813D192BC3F5000E8868 /* sort-small-icon.png in Resources */,
 				05228141192BC3F5000E8868 /* user-location-small-icon.png in Resources */,
+				05965BB119376CC700B0B870 /* AddEventInputItems.plist in Resources */,
 				05BB5F32192FAC7100D9BE6A /* menu-request-button-on@2x.png in Resources */,
 				05BB5F1C192F7C1800D9BE6A /* watchr-menu-button@2x.png in Resources */,
 				05228142192BC3F5000E8868 /* user-location-small-icon@2x.png in Resources */,
@@ -1033,6 +1097,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				054F409A192E2CA600960ABE /* UIImageView+HighlightedWebCache.m in Sources */,
+				05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */,
 				05C40A79192A8018002F1F1A /* ShadowView.m in Sources */,
 				0578F9831928BDCA00F8F7B3 /* ECSlidingInteractiveTransition.m in Sources */,
 				05409D7F192557CE00E8544C /* FBShimmeringLayer.m in Sources */,
@@ -1041,9 +1106,11 @@
 				05965BA71937581500B0B870 /* WYPopoverController.m in Sources */,
 				054F409B192E2CA600960ABE /* UIImageView+WebCache.m in Sources */,
 				05BB5F26192FA73100D9BE6A /* TDProfileHeaderView.m in Sources */,
+				05965BBE193776AF00B0B870 /* TDBigInputTableViewCell.m in Sources */,
 				05C40A51192A4D8E002F1F1A /* MEFoldAnimationController.m in Sources */,
 				05C40A5C192A60B9002F1F1A /* TDCoreNavigationController.m in Sources */,
 				054F4096192E2CA600960ABE /* UIButton+WebCache.m in Sources */,
+				05965BB51937754700B0B870 /* TDMapSelectorTableViewCell.m in Sources */,
 				05C077A61924EC12005AB425 /* TDAppDelegate.m in Sources */,
 				05C40A53192A4D8E002F1F1A /* MEDynamicTransition.m in Sources */,
 				05C40A75192A8018002F1F1A /* FacingView.m in Sources */,
@@ -1087,6 +1154,7 @@
 				05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */,
 				0578F9851928BDCA00F8F7B3 /* ECSlidingViewController.m in Sources */,
 				0522812C192BAD82000E8868 /* TDDashboardEventTableViewCell.m in Sources */,
+				05965BBB193776A300B0B870 /* TDInputTableViewCell.m in Sources */,
 				05C40A7B192A8018002F1F1A /* UIView+Screenshot.m in Sources */,
 				05C40A7A192A8018002F1F1A /* TouchThroughUIView.m in Sources */,
 				05C077DA1924EF03005AB425 /* TDWelcomeScreenViewController.m in Sources */,
