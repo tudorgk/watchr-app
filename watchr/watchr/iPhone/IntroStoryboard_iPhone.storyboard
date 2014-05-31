@@ -152,7 +152,7 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="registerButtonPressed:" destination="gCY-Ao-2JZ" eventType="touchUpInside" id="UD9-hf-XWR"/>
+                                                    <action selector="registerButtonPressed:" destination="gCY-Ao-2JZ" eventType="touchUpInside" id="aHR-dK-bPo"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="LEp-Fe-iFt">
@@ -163,7 +163,7 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="loginButtonPressed:" destination="gCY-Ao-2JZ" eventType="touchUpInside" id="2Ih-1U-eAg"/>
+                                                    <action selector="loginButtonPressed:" destination="gCY-Ao-2JZ" eventType="touchUpInside" id="ydw-gH-V3F"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -179,8 +179,8 @@
                         <outlet property="backgroundImageView" destination="Xkr-14-pIL" id="j8g-Ed-V7n"/>
                         <outlet property="backgroundImageView2" destination="Syb-Se-u48" id="GRG-fQ-SwS"/>
                         <outlet property="introScrollView" destination="JC8-LM-hkm" id="oH0-kE-XHl"/>
-                        <outlet property="loginButton" destination="LEp-Fe-iFt" id="D6j-d7-dln"/>
-                        <outlet property="registerButton" destination="D9l-1V-ODU" id="EZV-gH-8re"/>
+                        <outlet property="loginButton" destination="LEp-Fe-iFt" id="AgQ-vw-pUZ"/>
+                        <outlet property="registerButton" destination="D9l-1V-ODU" id="viN-Yi-jUd"/>
                         <outlet property="watchrTitle" destination="AXd-rC-X3O" id="njf-Q5-W8b"/>
                         <outlet property="welcomeView" destination="8lA-Rm-8ie" id="2Z0-5J-ZT4"/>
                     </connections>

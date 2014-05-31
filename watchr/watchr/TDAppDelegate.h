@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TDAppDelegate : UIResponder <UIApplicationDelegate>
+#import "ECSlidingViewController.h"
+@interface TDAppDelegate : UIResponder <UIApplicationDelegate>{
+	UINavigationController * _welcomeScreen;
+	ECSlidingViewController * _rootViewController;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

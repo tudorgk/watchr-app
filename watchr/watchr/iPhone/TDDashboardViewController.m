@@ -64,7 +64,8 @@ enum MapViewVisibility : NSInteger {
 {
     [super viewDidLoad];
 	[self configureView];
-    // Do any additional setup after loading the view.
+
+	
 }
 
 -(void) configureView{

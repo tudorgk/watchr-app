@@ -7,7 +7,7 @@
 //
 
 #import "TDAppDelegate.h"
-#import "ECSlidingViewController.h"
+
 @implementation TDAppDelegate
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -22,12 +22,21 @@
 	} else {
 		//iPhone
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-		ECSlidingViewController * rootViewController = (ECSlidingViewController *) self.window.rootViewController;
-		rootViewController.topViewController = [[UIStoryboard storyboardWithName:@"DashboardStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
-		rootViewController.underLeftViewController = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+		_rootViewController = (ECSlidingViewController *) self.window.rootViewController;
+		_rootViewController.topViewController = [[UIStoryboard storyboardWithName:@"DashboardStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+		_rootViewController.underLeftViewController = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+	
+		
+		//check if the user is logged in
+		if([[[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"] count] != 0){
+			//if there are no accounts (this means the user isn't logged in) display the user login screen
+			_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+			[_welcomeScreen.view setFrame:_rootViewController.topViewController.view.bounds];
+			[_rootViewController.topViewController.view addSubview:_welcomeScreen.view];
+			
+		}
+		
 	}
-	
-	
     return YES;
 }
 
@@ -38,13 +47,15 @@
 											  scope:[NSSet setWithObject:@"basic"]
                                    authorizationURL:[NSURL URLWithString:@"http://192.168.1.100/oauth/authorize"]
                                            tokenURL:[NSURL URLWithString:@"http://192.168.1.100/oauth/access_token"]
-                                        redirectURL:[NSURL URLWithString:@"http://192.168.1.100/access_token"]
+                                        redirectURL:[NSURL URLWithString:@"http://192.168.1.100/"]
                                      forAccountType:@"watchrAPI"];
+		
 	
 	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification
 													  object:[NXOAuth2AccountStore sharedStore]
 													   queue:nil
 												  usingBlock:^(NSNotification *aNotification){
+													  //everything a ok
 													  NSLog(@"success = %@", [aNotification description]);
 												  }];
 	
@@ -53,27 +64,9 @@
 													   queue:nil
 												  usingBlock:^(NSNotification *aNotification){
 													  NSError *error = [aNotification.userInfo objectForKey:NXOAuth2AccountStoreErrorKey];
+													  //error upon request for access
 													  NSLog(@"error = %@", [error description]);
 												  }];
-	
-	//test request
-	//[[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"watchrAPI" username:@"tudorgk" password:@"secret"];
-	
-	for (NXOAuth2Account *account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
-		[NXOAuth2Request performMethod:@"GET"
-							onResource:[NSURL URLWithString:@"http://192.168.1.100/users"]
-					   usingParameters:nil
-						   withAccount:account
-				   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) { // e.g., update a progress indicator
-				   }
-				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
-					   NSLog(@"users = %@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-				   }];
-					   
-	}
-	
-
-	
 
 }
 
