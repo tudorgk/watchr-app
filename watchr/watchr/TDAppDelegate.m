@@ -33,14 +33,50 @@
 
 + (void)initialize;
 {
-    [[NXOAuth2AccountStore sharedStore] setClientID:@"xXxXxXxXxXxX"
-                                             secret:@"xXxXxXxXxXxX"
-                                   authorizationURL:[NSURL URLWithString:@"https://...your auth URL..."]
-                                           tokenURL:[NSURL URLWithString:@"https://...your token URL..."]
-                                        redirectURL:[NSURL URLWithString:@"https://...your redirect URL..."]
-                                     forAccountType:@"myFancyService"];
+    [[NXOAuth2AccountStore sharedStore] setClientID:@"b9a498c3d5a0ba46214d1d000bad50b6"
+                                             secret:@"0f9e736b70e4c093fac59ad8d567c73c"
+											  scope:[NSSet setWithObject:@"basic"]
+                                   authorizationURL:[NSURL URLWithString:@"http://192.168.1.100/oauth/authorize"]
+                                           tokenURL:[NSURL URLWithString:@"http://192.168.1.100/oauth/access_token"]
+                                        redirectURL:[NSURL URLWithString:@"http://192.168.1.100/access_token"]
+                                     forAccountType:@"watchrAPI"];
+	
+	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification
+													  object:[NXOAuth2AccountStore sharedStore]
+													   queue:nil
+												  usingBlock:^(NSNotification *aNotification){
+													  NSLog(@"success = %@", [aNotification description]);
+												  }];
+	
+	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification
+													  object:[NXOAuth2AccountStore sharedStore]
+													   queue:nil
+												  usingBlock:^(NSNotification *aNotification){
+													  NSError *error = [aNotification.userInfo objectForKey:NXOAuth2AccountStoreErrorKey];
+													  NSLog(@"error = %@", [error description]);
+												  }];
+	
+	//test request
+	//[[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"watchrAPI" username:@"tudorgk" password:@"secret"];
+	
+	for (NXOAuth2Account *account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
+		[NXOAuth2Request performMethod:@"GET"
+							onResource:[NSURL URLWithString:@"http://192.168.1.100/users"]
+					   usingParameters:nil
+						   withAccount:account
+				   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) { // e.g., update a progress indicator
+				   }
+				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+					   NSLog(@"users = %@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+				   }];
+					   
+	}
+	
+
+	
+
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
