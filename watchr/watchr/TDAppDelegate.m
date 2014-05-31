@@ -25,11 +25,20 @@
 		ECSlidingViewController * rootViewController = (ECSlidingViewController *) self.window.rootViewController;
 		rootViewController.topViewController = [[UIStoryboard storyboardWithName:@"DashboardStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 		rootViewController.underLeftViewController = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
-
 	}
 	
 	
     return YES;
+}
+
++ (void)initialize;
+{
+    [[NXOAuth2AccountStore sharedStore] setClientID:@"xXxXxXxXxXxX"
+                                             secret:@"xXxXxXxXxXxX"
+                                   authorizationURL:[NSURL URLWithString:@"https://...your auth URL..."]
+                                           tokenURL:[NSURL URLWithString:@"https://...your token URL..."]
+                                        redirectURL:[NSURL URLWithString:@"https://...your redirect URL..."]
+                                     forAccountType:@"myFancyService"];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

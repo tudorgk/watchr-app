@@ -34,7 +34,7 @@
 			<integer>44</integer>
 			<key>tag</key>
 			<integer>2</integer>
-			<key>selected 0</key>
+			<key>selected</key>
 			<integer>0</integer>
 			<key>placeholder</key>
 			<string>Categories</string>
@@ -48,12 +48,26 @@
 			<integer>140</integer>
 			<key>tag</key>
 			<integer>3</integer>
-			<key>selected 0</key>
+			<key>selected</key>
 			<integer>0</integer>
 			<key>placeholder</key>
 			<string>Position</string>
 			<key>cellType</key>
 			<string>mapSelector</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>selected</key>
+			<string>0</string>
+			<key>placeholder</key>
+			<string>No Photo</string>
+			<key>tag</key>
+			<string>4</string>
+			<key>cellType</key>
+			<string>photoPicker</string>
+			<key>height</key>
+			<integer>80</integer>
 		</dict>
 	</array>
 </array>

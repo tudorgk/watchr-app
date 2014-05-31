@@ -11,8 +11,13 @@
 #import "TDInputTableViewCell.h"
 #import "TDMapSelectorTableViewCell.h"
 #import "TDSubmitTableViewCell.h"
-@interface TDAddEventViewController ()<HPGrowingTextViewDelegate>{
+#import "TDPhotoPickerTableViewCell.h"
+#import "CTAssetsPickerController.h"
+@interface TDAddEventViewController ()<HPGrowingTextViewDelegate,CTAssetsPickerControllerDelegate,UINavigationControllerDelegate>{
 	NSMutableArray * _addEventItems;
+	NSMutableArray * _selectedPhotos;
+	NSMutableArray * _thumbnails;
+	
 	
 	//I will instantiate the cells and keep the same reference. no dequeuing for data preservation and increased performance
 	TDInputTableViewCell * _eventNameCell;
@@ -20,11 +25,16 @@
 	UITableViewCell * _categorySelectorCell;
 	TDMapSelectorTableViewCell * _mapSelectorCell;
 	TDSubmitTableViewCell * _submitCell;
+	TDPhotoPickerTableViewCell * _photoPickerCell;
+	CTAssetsPickerController * _picker;
+
+
 }
 -(void) initialiseCells;
 -(void) configureView;
 -(void) configureTableView;
 -(void) userDidCancel:(id) sender;
+-(void) clearSelectedAssets;
 @end
 
 @implementation TDAddEventViewController
@@ -44,7 +54,10 @@
 	[self configureView];
 	[self configureTableView];
 	[self initialiseCells];
-    // Do any additional setup after loading the view.
+
+	
+	_selectedPhotos = [[NSMutableArray alloc] init];
+	_thumbnails = [[NSMutableArray alloc] init];
 }
 
 -(void) configureView{
@@ -74,6 +87,14 @@
 	
 	_addEventItems = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"AddEventInputItems" ofType:@"plist"]];
 	
+	
+	_picker = [[CTAssetsPickerController alloc] init];
+	_picker.delegate=self;
+	[_picker.navigationBar setBarTintColor:[UIColor blackColor]];
+	_picker.navigationBar.tintColor = [UIColor whiteColor];
+	NSDictionary * attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+								 [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0], NSForegroundColorAttributeName, nil];
+	_picker.navigationBar.titleTextAttributes = attributes;
 	
 
 }
@@ -106,6 +127,13 @@
 		_submitCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"submit"];
 	}
 	
+	if(_photoPickerCell == nil){
+		_photoPickerCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"photoPicker"];
+		UITapGestureRecognizer * tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped:)];
+		[_photoPickerCell.cellThumbnailsScrollView addGestureRecognizer:tapper];
+
+	}
+	
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,9 +145,17 @@
 #pragma mark - UITableViewDelegate Methods
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	
-	
-	
+	switch (indexPath.section) {
+		case 3:
+		{
+			[self presentViewController:_picker animated:YES completion:nil];
+			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+		}
+			break;
+			
+		default:
+			break;
+	}
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -148,6 +184,10 @@
 		case 2:
 			return @"Event location";
 			break;
+		case 3:
+			return @"Photo attachments";
+			break;
+			
 			
 		default:
 			return nil;
@@ -180,6 +220,9 @@
 	}
 	if ([[[[_addEventItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"cellType"] isEqualToString:@"selector"]) {
 		return _categorySelectorCell;
+	}
+	if ([[[[_addEventItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"cellType"] isEqualToString:@"photoPicker"]) {
+		return _photoPickerCell;
 	}
 	if ([[[[_addEventItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"cellType"] isEqualToString:@"mapSelector"]) {
 		return _mapSelectorCell;
@@ -234,11 +277,73 @@
 	
 }
 
+#pragma mark - CTAssetsPickerControllerDelegate
+-(void) clearSelectedAssets{
+	//set up the selected photos array for sending
+	[_selectedPhotos removeAllObjects];
+	
+	
+	//remove the thumbnails from the cell's scrollview
+	for (UIView * view in _thumbnails) {
+		[view removeFromSuperview];
+	}
+	
+	[_thumbnails removeAllObjects];
+	
+	//set the contentfor the scrollview to 0
+	[_photoPickerCell.cellThumbnailsScrollView setContentSize:CGSizeMake(0, 0)];
+	//set the label to visible
+	[_photoPickerCell.cellMessageLabel setHidden:NO];
 
+}
+
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
+
+	[self clearSelectedAssets];
+	
+	[_selectedPhotos addObjectsFromArray:assets];
+	
+	if (_selectedPhotos.count>0) {
+		
+		for (int i=0 ; i<_selectedPhotos.count;i++) {
+			ALAsset *asset = [_selectedPhotos objectAtIndex:i];
+			
+			//create a imageView for the photo
+			UIImageView *imageView= [[UIImageView alloc] initWithImage:[UIImage imageWithCGImage:asset.thumbnail]];
+			[imageView setFrame:CGRectMake(i*60+10 , 5, 50, 50)];
+			[imageView setClipsToBounds:YES];
+			[imageView setContentMode:UIViewContentModeScaleAspectFill];
+			
+			//add it to the cell's view array
+			[_thumbnails addObject:imageView];
+			
+			//add it to the scroll view
+			[_photoPickerCell.cellThumbnailsScrollView addSubview:[_thumbnails objectAtIndex:i]];
+			
+		}
+		
+		[_photoPickerCell.cellThumbnailsScrollView setContentSize:CGSizeMake(_selectedPhotos.count * 60 + 10, _photoPickerCell.cellThumbnailsScrollView.frame.size.height)];
+		
+		
+		//hide the label
+		[_photoPickerCell.cellMessageLabel setHidden:YES];
+	}
+	
+	[_picker dismissViewControllerAnimated:YES completion:^{}];
+}
+
+- (void)assetsPickerControllerDidCancel:(CTAssetsPickerController *)picker{
+	[self clearSelectedAssets];
+	[_picker dismissViewControllerAnimated:YES completion:nil];
+}
 #pragma mark - Navigation Methods
 
 -(void) userDidCancel:(id)sender{
 	[self.navigationController dismissViewControllerAnimated:YES completion:^{}];
+}
+
+-(void) scrollViewTapped:(id) sender{
+	[self.addEventTableView.delegate tableView:self.addEventTableView didSelectRowAtIndexPath: [self.addEventTableView indexPathForCell:_photoPickerCell]];
 }
 
 @end
