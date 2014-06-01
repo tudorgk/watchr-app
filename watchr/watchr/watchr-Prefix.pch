@@ -16,6 +16,8 @@
 	#import <CoreData/CoreData.h>
 	#import "UIScrollView+APParallaxHeader.h"
 	#import	"NXOAuth2.h"
+	#import	"udevCoreDataHelper.h"
+	#import	"TDWatchrAPIManager.h"
 #endif
 
 #define TDWatchrAPIAccountIdentifier @"watchrAPIAccountIdentifier"

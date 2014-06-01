@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+    <entity name="Country" representedClassName="Country" syncable="YES">
+        <attribute name="calling_code" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="cctld" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country_id" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="iso2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iso3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="long_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numcode" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="un_member" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Country" positionX="-63" positionY="-18" width="128" height="28"/>
+    </elements>
 </model>

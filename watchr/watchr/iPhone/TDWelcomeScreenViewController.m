@@ -8,6 +8,7 @@
 
 #import "TDWelcomeScreenViewController.h"
 #import "TDWatchrAPIManager.h"
+#import	"TDFirstRunManager.h"
 @interface TDWelcomeScreenViewController ()
 -(void) configureView;
 -(void) initOtherViews;
@@ -96,7 +97,9 @@
 													  //we need to get the categories for the events and the events with default settings
 													  
 													  //TODO: Testing. Need to perform a first-time setup here. Get countries, profile statuses etc.
-													  [[TDWatchrAPIManager sharedManager] getCountryListForRequestingObject:self];
+													  TDFirstRunManager * firstRunner = [TDFirstRunManager sharedManager];
+													  [NSThread detachNewThreadSelector:@selector(runFirstTimeSetUp) toTarget:firstRunner withObject:nil];
+													  //[[TDWatchrAPIManager sharedManager] getCountryListForRequestingObject:self];
 													  													  
 													  
 													  //remove the welcome screen

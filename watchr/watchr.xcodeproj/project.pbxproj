@@ -38,6 +38,9 @@
 		0541A0DE1939C85B0033F3B6 /* libOAuth2Client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0541A0DB1939C8260033F3B6 /* libOAuth2Client.a */; };
 		0541A0E01939C8DF0033F3B6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0541A0DF1939C8DF0033F3B6 /* Security.framework */; };
 		054B8526193B5F5D009051F5 /* TDWatchrAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 054B8525193B5F5D009051F5 /* TDWatchrAPIManager.m */; };
+		054B852B193B8B3B009051F5 /* TDFirstRunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 054B852A193B8B3B009051F5 /* TDFirstRunManager.m */; };
+		054B8531193B914C009051F5 /* udevCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 054B8530193B914C009051F5 /* udevCoreDataHelper.m */; };
+		054B8535193B9555009051F5 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 054B8534193B9555009051F5 /* Country.m */; };
 		054F405A192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 054F4059192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard */; };
 		054F405E192E210C00960ABE /* TDCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F405D192E210C00960ABE /* TDCarouselView.m */; };
 		054F4062192E21D500960ABE /* UIScrollView+APParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F4061192E21D500960ABE /* UIScrollView+APParallaxHeader.m */; };
@@ -225,6 +228,12 @@
 		0541A0DF1939C8DF0033F3B6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		054B8524193B5F5D009051F5 /* TDWatchrAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrAPIManager.h; sourceTree = "<group>"; };
 		054B8525193B5F5D009051F5 /* TDWatchrAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWatchrAPIManager.m; sourceTree = "<group>"; };
+		054B8529193B8B3B009051F5 /* TDFirstRunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFirstRunManager.h; sourceTree = "<group>"; };
+		054B852A193B8B3B009051F5 /* TDFirstRunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFirstRunManager.m; sourceTree = "<group>"; };
+		054B852F193B914C009051F5 /* udevCoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = udevCoreDataHelper.h; sourceTree = "<group>"; };
+		054B8530193B914C009051F5 /* udevCoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = udevCoreDataHelper.m; sourceTree = "<group>"; };
+		054B8533193B9555009051F5 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
+		054B8534193B9555009051F5 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
 		054F4059192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = EventStoryboard_iPhone.storyboard; path = iPhone/EventStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		054F405C192E210C00960ABE /* TDCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCarouselView.h; sourceTree = "<group>"; };
 		054F405D192E210C00960ABE /* TDCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCarouselView.m; sourceTree = "<group>"; };
@@ -552,10 +561,28 @@
 		054B8522193B5F37009051F5 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				054B8528193B8B11009051F5 /* First Time Setup */,
+				054B8527193B8AFF009051F5 /* Watchr API Manager (Request Engine) */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		054B8527193B8AFF009051F5 /* Watchr API Manager (Request Engine) */ = {
+			isa = PBXGroup;
+			children = (
 				054B8524193B5F5D009051F5 /* TDWatchrAPIManager.h */,
 				054B8525193B5F5D009051F5 /* TDWatchrAPIManager.m */,
 			);
-			name = Managers;
+			name = "Watchr API Manager (Request Engine)";
+			sourceTree = "<group>";
+		};
+		054B8528193B8B11009051F5 /* First Time Setup */ = {
+			isa = PBXGroup;
+			children = (
+				054B8529193B8B3B009051F5 /* TDFirstRunManager.h */,
+				054B852A193B8B3B009051F5 /* TDFirstRunManager.m */,
+			);
+			name = "First Time Setup";
 			sourceTree = "<group>";
 		};
 		054F4058192E1AA200960ABE /* Events */ = {
@@ -686,7 +713,11 @@
 		05965B941937310800B0B870 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				054B852F193B914C009051F5 /* udevCoreDataHelper.h */,
+				054B8530193B914C009051F5 /* udevCoreDataHelper.m */,
 				05965B951937312600B0B870 /* WatchrDB.xcdatamodeld */,
+				054B8533193B9555009051F5 /* Country.h */,
+				054B8534193B9555009051F5 /* Country.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -1292,14 +1323,17 @@
 				05228145192BD501000E8868 /* TDDashboardFilterButton.m in Sources */,
 				05965BA1193742C500B0B870 /* TDAddEventViewController.m in Sources */,
 				05228129192B86A6000E8868 /* UIView+Origami.m in Sources */,
+				054B8531193B914C009051F5 /* udevCoreDataHelper.m in Sources */,
 				0541A0CC1938B5CD0033F3B6 /* CTAssetsViewCell.m in Sources */,
 				054F40A7192E46E500960ABE /* HeaderInsetTableView.m in Sources */,
 				0578F9821928BDCA00F8F7B3 /* ECSlidingAnimationController.m in Sources */,
 				0541A0C91938B5CD0033F3B6 /* CTAssetsPickerConstants.m in Sources */,
 				05965B971937312600B0B870 /* WatchrDB.xcdatamodeld in Sources */,
 				05C40A77192A8018002F1F1A /* MultiFoldView.m in Sources */,
+				054B8535193B9555009051F5 /* Country.m in Sources */,
 				0541A0CF1938B5CD0033F3B6 /* NSDate+timeDescription.m in Sources */,
 				05C077A21924EC12005AB425 /* main.m in Sources */,
+				054B852B193B8B3B009051F5 /* TDFirstRunManager.m in Sources */,
 				05965BAD19376BD000B0B870 /* HPGrowingTextView.m in Sources */,
 				054F408D192E2CA600960ABE /* MKAnnotationView+WebCache.m in Sources */,
 				0541A0C61938B5CD0033F3B6 /* ALAssetsGroup+isEqual.m in Sources */,

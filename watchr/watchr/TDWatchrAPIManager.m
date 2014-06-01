@@ -17,13 +17,13 @@
 
 #pragma mark -
 #pragma mark Singleton
-static TDWatchrAPIManager * shared = nil;
+static TDWatchrAPIManager * sharedManager = nil;
 +(TDWatchrAPIManager *) sharedManager {
     @synchronized(self) {
-        if(shared == nil)
-            shared = [[self alloc] init];
+        if(sharedManager == nil)
+            sharedManager = [[self alloc] init];
     }
-    return shared;
+    return sharedManager;
 }
 
 
@@ -47,7 +47,21 @@ static TDWatchrAPIManager * shared = nil;
 				   NSLog(@"response = %@", [response description]);
 				   NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 				   NSLog(@"responseData = %@", responseString);
+				   NSLog(@"error = %@", [error userInfo]);
+				   				   
+				   NSError * JSONParsingError = [[NSError alloc] init];
+				   id JSONObject = [NSJSONSerialization
+									JSONObjectWithData:responseData
+									options:NSJSONReadingMutableContainers
+									error:&JSONParsingError];
+				   
+				   NSLog(@"%@",JSONObject);
+
                }];
+	return nil;
+}
+
+-(NSArray*) getAllActiveEventsWithFilters:(NSDictionary*)filters forRequestingObject:(id) requester{
 	return nil;
 }
 
