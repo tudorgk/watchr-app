@@ -10,6 +10,7 @@
 #import "TDEventDetailsViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "TDAddEventViewController.h"
+#import "TDWelcomeScreenViewController.h"
 typedef enum MapViewVisibility : NSInteger MapViewVisibility;
 enum MapViewVisibility : NSInteger {
 	MapViewVisibilityHidden,
@@ -19,6 +20,8 @@ enum MapViewVisibility : NSInteger {
 @interface TDDashboardViewController (){
 	MapViewVisibility _mapState;
 	MKMapView * _dashboardMap;
+	TDWelcomeScreenViewController * _welcomeScreen;
+	
 }
 -(void) configureView;
 @end
@@ -64,7 +67,18 @@ enum MapViewVisibility : NSInteger {
 {
     [super viewDidLoad];
 	[self configureView];
-
+	//	NSLog(@"accounts = %@", [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]);
+	//	for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
+	//		[[NXOAuth2AccountStore sharedStore] removeAccount:account];
+	//	}
+	
+	//present it
+	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+	[_welcomeScreen.view setBackgroundColor:[UIColor clearColor]];
+		
+	//present it
+	[self presentViewController:_welcomeScreen animated:NO completion:nil];
+		
 	
 }
 

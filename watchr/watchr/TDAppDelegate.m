@@ -7,6 +7,12 @@
 //
 
 #import "TDAppDelegate.h"
+#import "TDDashboardViewController.h"
+@interface TDAppDelegate (){
+	TDDashboardViewController * _dashboardViewController;
+}
+
+@end
 
 @implementation TDAppDelegate
 @synthesize managedObjectContext = _managedObjectContext;
@@ -23,17 +29,14 @@
 		//iPhone
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 		_rootViewController = (ECSlidingViewController *) self.window.rootViewController;
-		_rootViewController.topViewController = [[UIStoryboard storyboardWithName:@"DashboardStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+		_dashboardViewController =[[UIStoryboard storyboardWithName:@"DashboardStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+		_rootViewController.topViewController = _dashboardViewController;
 		_rootViewController.underLeftViewController = [[UIStoryboard storyboardWithName:@"SideMenuStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	
-		
-		//check if the user is logged in
-		if([[[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"] count] != 0){
-			//if there are no accounts (this means the user isn't logged in) display the user login screen
-			_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
-			[_welcomeScreen.view setFrame:_rootViewController.topViewController.view.bounds];
-			[_rootViewController.topViewController.view addSubview:_welcomeScreen.view];
-			
+		//TODO: Remove all accounts for testing purpouses
+		NSLog(@"accounts = %@", [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]);
+		for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
+			[[NXOAuth2AccountStore sharedStore] removeAccount:account];
 		}
 		
 	}
@@ -45,29 +48,11 @@
     [[NXOAuth2AccountStore sharedStore] setClientID:@"b9a498c3d5a0ba46214d1d000bad50b6"
                                              secret:@"0f9e736b70e4c093fac59ad8d567c73c"
 											  scope:[NSSet setWithObject:@"basic"]
-                                   authorizationURL:[NSURL URLWithString:@"http://192.168.1.100/oauth/authorize"]
-                                           tokenURL:[NSURL URLWithString:@"http://192.168.1.100/oauth/access_token"]
-                                        redirectURL:[NSURL URLWithString:@"http://192.168.1.100/"]
+                                   authorizationURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @"/oauth/authorize"]]
+                                           tokenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @"/oauth/access_token"]]
+                                        redirectURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @"/"]]
                                      forAccountType:@"watchrAPI"];
 		
-	
-	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification
-													  object:[NXOAuth2AccountStore sharedStore]
-													   queue:nil
-												  usingBlock:^(NSNotification *aNotification){
-													  //everything a ok
-													  NSLog(@"success = %@", [aNotification description]);
-												  }];
-	
-	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification
-													  object:[NXOAuth2AccountStore sharedStore]
-													   queue:nil
-												  usingBlock:^(NSNotification *aNotification){
-													  NSError *error = [aNotification.userInfo objectForKey:NXOAuth2AccountStoreErrorKey];
-													  //error upon request for access
-													  NSLog(@"error = %@", [error description]);
-												  }];
-
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

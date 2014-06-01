@@ -7,10 +7,11 @@
 //
 
 #import "TDWelcomeScreenViewController.h"
-
+#import "TDWatchrAPIManager.h"
 @interface TDWelcomeScreenViewController ()
 -(void) configureView;
 -(void) initOtherViews;
+-(void) setUpOAuthAccount;
 @end
 
 @implementation TDWelcomeScreenViewController
@@ -29,6 +30,18 @@
     [super viewDidLoad];
 	[self initOtherViews];
 	[self configureView];
+	[self setUpOAuthAccount];
+	
+	//check if the user is logged in
+	if([[[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"] count] == 0){
+			
+		//if there are no accounts (this means the user isn't logged in) display the user login screen
+	}else{
+		//remove the welcome screen
+		[self dismissViewControllerAnimated:YES completion:nil];
+
+	}
+	
     // Do any additional setup after loading the view.
 }
 
@@ -63,6 +76,44 @@
 	shimmeringView.shimmeringSpeed = 100.0f;
 	shimmeringView.shimmering = YES;
 	
+}
+
+-(void)setUpOAuthAccount{
+	//i think i need to move these two somewhere else
+	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification
+													  object:[NXOAuth2AccountStore sharedStore]
+													   queue:nil
+												  usingBlock:^(NSNotification *aNotification){
+													  //everything a ok
+													  NXOAuth2Account * account = [[aNotification userInfo] objectForKey:NXOAuth2AccountStoreNewAccountUserInfoKey];
+													  
+													  NSLog(@"success = %@", account.identifier);
+													  
+													  //save the account identifier to NSUserDefaults
+													  [[NSUserDefaults standardUserDefaults] setObject:account.identifier forKey:TDWatchrAPIAccountIdentifier];
+													  
+													  //we now know that the login was successful.
+													  //we need to get the categories for the events and the events with default settings
+													  
+													  //TODO: Testing. Need to perform a first-time setup here. Get countries, profile statuses etc.
+													  [[TDWatchrAPIManager sharedManager] getCountryListForRequestingObject:self];
+													  													  
+													  
+													  //remove the welcome screen
+													  [self dismissViewControllerAnimated:YES completion:nil];
+
+												  }];
+	
+	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification
+													  object:[NXOAuth2AccountStore sharedStore]
+													   queue:nil
+												  usingBlock:^(NSNotification *aNotification){
+													  NSError *error = [aNotification.userInfo objectForKey:NXOAuth2AccountStoreErrorKey];
+													  //error upon request for access
+
+													  UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[error.userInfo objectForKey:@"NSLocalizedDescription"] message:@"There was an error logging in. Please verify that you've inputed your username and password correctly" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+													  [alert show];
+												  }];
 }
 
 - (void)didReceiveMemoryWarning

@@ -37,6 +37,7 @@
 		0541A0D11938B5E60033F3B6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0541A0D01938B5E60033F3B6 /* AssetsLibrary.framework */; };
 		0541A0DE1939C85B0033F3B6 /* libOAuth2Client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0541A0DB1939C8260033F3B6 /* libOAuth2Client.a */; };
 		0541A0E01939C8DF0033F3B6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0541A0DF1939C8DF0033F3B6 /* Security.framework */; };
+		054B8526193B5F5D009051F5 /* TDWatchrAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 054B8525193B5F5D009051F5 /* TDWatchrAPIManager.m */; };
 		054F405A192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 054F4059192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard */; };
 		054F405E192E210C00960ABE /* TDCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F405D192E210C00960ABE /* TDCarouselView.m */; };
 		054F4062192E21D500960ABE /* UIScrollView+APParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F4061192E21D500960ABE /* UIScrollView+APParallaxHeader.m */; };
@@ -222,6 +223,8 @@
 		0541A0D01938B5E60033F3B6 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		0541A0D31939C8250033F3B6 /* OAuth2Client.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OAuth2Client.xcodeproj; path = OAuth2Client/OAuth2Client.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0541A0DF1939C8DF0033F3B6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		054B8524193B5F5D009051F5 /* TDWatchrAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrAPIManager.h; sourceTree = "<group>"; };
+		054B8525193B5F5D009051F5 /* TDWatchrAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWatchrAPIManager.m; sourceTree = "<group>"; };
 		054F4059192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = EventStoryboard_iPhone.storyboard; path = iPhone/EventStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		054F405C192E210C00960ABE /* TDCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCarouselView.h; sourceTree = "<group>"; };
 		054F405D192E210C00960ABE /* TDCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCarouselView.m; sourceTree = "<group>"; };
@@ -544,6 +547,15 @@
 				0541A0DB1939C8260033F3B6 /* libOAuth2Client.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		054B8522193B5F37009051F5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				054B8524193B5F5D009051F5 /* TDWatchrAPIManager.h */,
+				054B8525193B5F5D009051F5 /* TDWatchrAPIManager.m */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		054F4058192E1AA200960ABE /* Events */ = {
@@ -880,6 +892,7 @@
 		05C0779B1924EC12005AB425 /* watchr */ = {
 			isa = PBXGroup;
 			children = (
+				054B8522193B5F37009051F5 /* Managers */,
 				05965B941937310800B0B870 /* Core Data */,
 				05409D77192557B300E8544C /* Vendor */,
 				05C0782C1924FCC8005AB425 /* Assets */,
@@ -1248,6 +1261,7 @@
 				054F409B192E2CA600960ABE /* UIImageView+WebCache.m in Sources */,
 				05BB5F26192FA73100D9BE6A /* TDProfileHeaderView.m in Sources */,
 				05965BBE193776AF00B0B870 /* TDBigInputTableViewCell.m in Sources */,
+				054B8526193B5F5D009051F5 /* TDWatchrAPIManager.m in Sources */,
 				05C40A51192A4D8E002F1F1A /* MEFoldAnimationController.m in Sources */,
 				05C40A5C192A60B9002F1F1A /* TDCoreNavigationController.m in Sources */,
 				054F4096192E2CA600960ABE /* UIButton+WebCache.m in Sources */,

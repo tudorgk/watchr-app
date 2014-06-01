@@ -105,6 +105,8 @@
 	for (UITextField * textField in self.loginFormTextFields){
 		UIColor *color = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.33];
 		textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:textField.attributedPlaceholder.string attributes:@{NSForegroundColorAttributeName: color}];
+		
+		textField.delegate = self;
 	}
 	
 	//set the register scroll contentsize
@@ -134,21 +136,40 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+#pragma mark - Navigation methods
 
 - (IBAction)loginButtonPressed:(id)sender {
+	for (UITextField * textField in self.loginFormTextFields) {
+		[textField resignFirstResponder];
+	}
+
+	//attempt login
+	[[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"watchrAPI"
+															  username:_username
+															  password:_password];
+	
 }
 
 - (IBAction)backButtonPressed:(id)sender {
 	[self.delegate userPressedBackButton:sender];
 }
+
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+	
+	if (textField == self.usernameTextField) {
+		_username = [textField.text stringByReplacingCharactersInRange:range withString:string];
+	}else{
+		_password = [textField.text stringByReplacingCharactersInRange:range withString:string];
+	}
+	return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+	_username = self.usernameTextField.text;
+	_password = self.passwordTextField.text;
+}
+
+
 @end

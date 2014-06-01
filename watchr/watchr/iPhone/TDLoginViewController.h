@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "TDWelcomeNavigationDelegate.h"
 
-@interface TDLoginViewController : UIViewController
+@interface TDLoginViewController : UIViewController<UITextFieldDelegate>{
+	NSString * _username;
+	NSString * _password;
+}
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;

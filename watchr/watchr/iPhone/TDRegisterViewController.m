@@ -10,9 +10,19 @@
 
 @interface TDRegisterViewController ()
 -(void) configureView;
+-(void) genderSelected;
 @end
 
 @implementation TDRegisterViewController
+
+-(id) init{
+	self = [super init];
+	if (self) {
+		_country = 40; //TODO: Only for testing
+		_gender = 1;
+	}
+	return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,11 +33,16 @@
     return self;
 }
 
+-(void) awakeFromNib{
+	_country = 40; //TODO: Only for testing
+	_gender = 1;
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	[self configureView];
-
 }
 
 
@@ -111,6 +126,16 @@
 	//set the register scroll contentsize
 	[self.registerScrollView setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
 	
+	//set delegates
+	for (UITextField *textField in self.registerFormTextFields) {
+		[textField setDelegate:self];
+	}
+	
+	//register the segmented control
+	[self.genderSelector addTarget:self
+						 action:@selector(genderSelected)
+			   forControlEvents:UIControlEventValueChanged];
+	
 }
 
 - (void)subscribeToKeyboardEvents:(BOOL)subscribe{
@@ -135,11 +160,121 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Navigation Methods
+
+-(void) genderSelected{
+	if (self.genderSelector.selectedSegmentIndex == 0) {
+		_gender = 1;
+	}else{
+		_gender = 2;
+	}
+}
 
 - (IBAction)backButtonPressed:(id)sender {
 	[self.delegate userPressedBackButton:sender];
 }
 
 - (IBAction)registerButtonPressed:(id)sender {
+
+	for (UITextField *textField in self.registerFormTextFields) {
+		if ([textField.text isEqualToString:@""]) {
+			UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Fields empty" message:@"Please input the required fields" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+			[alert show];
+		return;
+		}
+	
+	}
+
+	//validate the passwords first
+	if (![_password isEqualToString:_confirmPassword]) {
+		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Passwords do not match" message:@"Please verify your passwords" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+		[alert show];
+		return;
+	}
+	
+	
+	
+	NSString *post = [NSString stringWithFormat:@"&username=%@&email=%@&password=%@&country=%d&gender=%d",_username,_email,_password,_country,_gender];
+	
+	NSLog(@"%@", post);
+	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;
+	[request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, TDRegisterFromURL]]];
+	[request setHTTPMethod:@"POST"];
+	[request setValue:[NSString stringWithFormat:@"%d",post.length] forHTTPHeaderField:@"Content-Length"];
+	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+	[request setHTTPBody:postData];
+	NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+	
+	if(conn)
+	{
+		NSLog(@"Connection Successful");
+	}
+	else
+	{
+		NSLog(@"Connection could not be made");
+	}
 }
+
+#pragma mark - UITextFieldDelegate methods
+
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+	
+	NSString *inputText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+	
+	if (textField == self.emailTextField) {
+		_email = inputText;
+	}else if (textField == self.usernameTextField){
+		_username = inputText;
+	}else if (textField == self.passwordTextField){
+		_password = inputText;
+	}else if (textField == self.confirmPasswordTextField){
+		_confirmPassword = inputText;
+	}
+	
+	return YES;
+}
+
+#pragma	mark - NSURLConnectionDataDelegate methods
+
+- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse*)response {
+	NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+	_responseStatusCode = [httpResponse statusCode];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data{
+	NSLog(@"success = %@" , [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+	
+	NSError * error = [[NSError alloc] init];
+	
+	id JSONObject = [NSJSONSerialization
+					 JSONObjectWithData:data
+					 options:NSJSONReadingMutableContainers
+					 error:&error];
+	
+	NSLog(@"%@",JSONObject);
+	
+	if (_responseStatusCode !=400) {
+		//everything is ok. user created. attempt login
+		[[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"watchrAPI" username:_username password:_password];
+	}else{
+		//display the errors
+		NSMutableString * responseString = [[NSMutableString alloc] init];
+		for (NSString * errorMessage in [JSONObject objectForKey:@"error"]) {
+			
+			NSLog(@"error message =%@", errorMessage);
+			[responseString appendFormat:@"%@ ",errorMessage];
+
+		}
+		
+		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+		[alert show];
+	}
+	
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+	NSLog(@"error = %@", [error description]);
+}
+
 @end
