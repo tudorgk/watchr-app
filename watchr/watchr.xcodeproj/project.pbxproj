@@ -84,6 +84,7 @@
 		05965BBB193776A300B0B870 /* TDInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BBA193776A300B0B870 /* TDInputTableViewCell.m */; };
 		05965BBE193776AF00B0B870 /* TDBigInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */; };
 		05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */; };
+		05B544CA193C80DE0081332D /* NSNull+TDJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B544C9193C80DE0081332D /* NSNull+TDJSON.m */; };
 		05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */; };
 		05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFA192F572700D9BE6A /* TDEventDescriptionView.m */; };
 		05BB5EFF192F594F00D9BE6A /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFE192F594F00D9BE6A /* FXBlurView.m */; };
@@ -314,6 +315,8 @@
 		05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBigInputTableViewCell.m; sourceTree = "<group>"; };
 		05965BC0193799D100B0B870 /* TDSubmitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDSubmitTableViewCell.h; path = iPhone/TDSubmitTableViewCell.h; sourceTree = "<group>"; };
 		05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDSubmitTableViewCell.m; path = iPhone/TDSubmitTableViewCell.m; sourceTree = "<group>"; };
+		05B544C8193C80DE0081332D /* NSNull+TDJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+TDJSON.h"; sourceTree = "<group>"; };
+		05B544C9193C80DE0081332D /* NSNull+TDJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+TDJSON.m"; sourceTree = "<group>"; };
 		05B66A1B1928ACC9009D6F1F /* TDWelcomeNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDWelcomeNavigationDelegate.h; path = iPhone/TDWelcomeNavigationDelegate.h; sourceTree = "<group>"; };
 		05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TDEventDescriptionView.xib; path = iPhone/TDEventDescriptionView.xib; sourceTree = "<group>"; };
 		05BB5EF9192F572700D9BE6A /* TDEventDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDEventDescriptionView.h; path = iPhone/TDEventDescriptionView.h; sourceTree = "<group>"; };
@@ -824,6 +827,15 @@
 			name = "Submit Cell";
 			sourceTree = "<group>";
 		};
+		05B544C6193C80C40081332D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				05B544C8193C80DE0081332D /* NSNull+TDJSON.h */,
+				05B544C9193C80DE0081332D /* NSNull+TDJSON.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		05BB5EFC192F594F00D9BE6A /* FXBlurView */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +935,7 @@
 		05C0779B1924EC12005AB425 /* watchr */ = {
 			isa = PBXGroup;
 			children = (
+				05B544C6193C80C40081332D /* Helpers */,
 				054B8522193B5F37009051F5 /* Managers */,
 				05965B941937310800B0B870 /* Core Data */,
 				05409D77192557B300E8544C /* Vendor */,
@@ -1282,6 +1295,7 @@
 				054F409A192E2CA600960ABE /* UIImageView+HighlightedWebCache.m in Sources */,
 				05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */,
 				05C40A79192A8018002F1F1A /* ShadowView.m in Sources */,
+				05B544CA193C80DE0081332D /* NSNull+TDJSON.m in Sources */,
 				0578F9831928BDCA00F8F7B3 /* ECSlidingInteractiveTransition.m in Sources */,
 				0541A0CB1938B5CD0033F3B6 /* CTAssetsSupplementaryView.m in Sources */,
 				05409D7F192557CE00E8544C /* FBShimmeringLayer.m in Sources */,

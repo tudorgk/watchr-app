@@ -98,7 +98,8 @@
 													  
 													  //TODO: Testing. Need to perform a first-time setup here. Get countries, profile statuses etc.
 													  TDFirstRunManager * firstRunner = [TDFirstRunManager sharedManager];
-													  [NSThread detachNewThreadSelector:@selector(runFirstTimeSetUp) toTarget:firstRunner withObject:nil];
+//													  [NSThread detachNewThreadSelector:@selector(runFirstTimeSetUp) toTarget:firstRunner withObject:nil];
+													  [firstRunner runFirstTimeSetUp];
 													  //[[TDWatchrAPIManager sharedManager] getCountryListForRequestingObject:self];
 													  													  
 													  

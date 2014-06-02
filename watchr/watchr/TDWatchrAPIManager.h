@@ -8,10 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol TDWatchrAPIManagerDelegate <NSObject>
+
+@optional
+-(void) WatchrAPIManagerDidFinishWithData:(NSDictionary *) data;
+-(void) WatchrAPIManagerDidFinishWithResponse:(NSURLResponse *) response;
+-(void) WatchrAPIManagerDidFinishWithError:(NSError *) error;
+
+@end
+
 @interface TDWatchrAPIManager : NSObject
 
 +(TDWatchrAPIManager *) sharedManager;
 
--(NSArray*) getAllActiveEventsWithFilters:(NSDictionary*)filters forRequestingObject:(id) requester;
--(NSArray*) getCountryListForRequestingObject:(id) requester;
+-(void) getAllActiveEventsWithFilters:(NSDictionary*)filters delegate:(id<TDWatchrAPIManagerDelegate>) delegate;
+-(void) getCountryListWithDelegate:(id<TDWatchrAPIManagerDelegate>) delegate;
 @end

@@ -35,7 +35,10 @@ static TDWatchrAPIManager * sharedManager = nil;
 	return self;
 }
 
--(NSArray* ) getCountryListForRequestingObject:(id)requester{
+-(void ) getCountryListWithDelegate:(id<TDWatchrAPIManagerDelegate>)delegate{
+	
+	__block NSArray * countryArray = nil;
+	
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/country/all"]]
 				   usingParameters:nil
@@ -44,25 +47,70 @@ static TDWatchrAPIManager * sharedManager = nil;
 				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
 			   }
                responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
-				   NSLog(@"response = %@", [response description]);
-				   NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-				   NSLog(@"responseData = %@", responseString);
-				   NSLog(@"error = %@", [error userInfo]);
-				   				   
-				   NSError * JSONParsingError = [[NSError alloc] init];
-				   id JSONObject = [NSJSONSerialization
-									JSONObjectWithData:responseData
-									options:NSJSONReadingMutableContainers
-									error:&JSONParsingError];
+//				   NSLog(@"response = %@", [response description]);
+//				   NSLog(@"error = %@", [error userInfo]);
 				   
-				   NSLog(@"%@",JSONObject);
-
+				   if (error) {
+					   [delegate WatchrAPIManagerDidFinishWithError:error];
+				   }
+				   
+				   [delegate WatchrAPIManagerDidFinishWithResponse:response];
+				   
+				   countryArray = [self getArrayForKey:@"data" fromResponseData:responseData withResponse:response andError:error];
+				   [delegate WatchrAPIManagerDidFinishWithData:@{@"country_list" : countryArray}];
                }];
-	return nil;
+	
+	
 }
 
--(NSArray*) getAllActiveEventsWithFilters:(NSDictionary*)filters forRequestingObject:(id) requester{
-	return nil;
+
+
+-(void ) getAllActiveEventsWithFilters:(NSDictionary *)filters delegate:(id<TDWatchrAPIManagerDelegate>)delegate{
+	
+	//TODO: Parameters are nil for testing
+	
+	__block NSArray * activeEventsArray = nil;
+	
+	[NXOAuth2Request performMethod:@"GET"
+						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
+				   usingParameters:nil
+					   withAccount:_defaultWatchrAccount
+			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+			   }
+				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+					   //				   NSLog(@"response = %@", [response description]);
+					   //				   NSLog(@"error = %@", [error userInfo]);
+					   
+					   if (error) {
+						   [delegate WatchrAPIManagerDidFinishWithError:error];
+					   }
+					   
+					   [delegate WatchrAPIManagerDidFinishWithResponse:response];
+					   
+					   activeEventsArray = [self getArrayForKey:@"data" fromResponseData:responseData withResponse:response andError:error];
+					   [delegate WatchrAPIManagerDidFinishWithData:@{@"active_events" : activeEventsArray}];
+				   }];
+
+
+}
+
+-(NSArray*) getArrayForKey:(NSString*) key fromResponseData:(NSData*)responseData withResponse:(NSURLResponse*) response andError:(NSError* ) error{
+	NSError * JSONParsingError = nil;
+	id JSONObject = [NSJSONSerialization
+					 JSONObjectWithData:responseData
+					 options:NSJSONReadingMutableContainers
+					 error:&JSONParsingError];
+	
+	if (JSONParsingError) {
+		return nil;
+	}else if (error){
+		//TODO: Display the error using delegate methods
+		return nil;
+	}
+	
+	return [JSONObject objectForKey:key];
+
 }
 
 @end
