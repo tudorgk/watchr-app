@@ -26,4 +26,5 @@
 
 - (BOOL)boolValue ;
 
+-(BOOL) isEqualToString:(NSString *) compare;
 @end

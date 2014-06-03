@@ -15,10 +15,10 @@
 	if (self) {
 		_filterOrderBy=@"created_at";
 		_filterOrderMode =@"DESC";
-		_filterSinceId = (NSNumber*)[NSNull null];
-		_filterSkip = (NSNumber*)[NSNull null];
-		_filterCount = (NSNumber*)[NSNull null];
-		_filterGeocode = (NSString*)[NSNull null];
+		_filterSinceId = nil;
+		_filterSkip = nil;
+		_filterCount = nil;
+		_filterGeocode = nil;
 	}
 	return self;
 }
@@ -28,20 +28,23 @@
 }
 
 -(NSDictionary*) filtersToDictionary{
-	return [NSDictionary dictionaryWithObjects:@[_filterOrderBy,
-												 _filterOrderMode,
-												 _filterSinceId,
-												 _filterSkip,
-												 _filterCount,
-												 _filterGeocode,
-												 ]
-									   forKeys:@[@"order_by",
-												 @"order_mode",
-												 @"since_id",
-												 @"skip",
-												 @"count",
-												 @"geocode"
-												 ]];
+	
+	NSMutableDictionary * filterDict = [NSMutableDictionary new];
+	
+	if(_filterOrderBy !=nil)
+		[filterDict setObject:_filterOrderBy forKey:@"order_by"];
+	if(_filterOrderMode !=nil)
+		[filterDict setObject:_filterOrderMode forKey:@"order_mode"];
+	if(_filterSinceId !=nil)
+		[filterDict setObject:_filterSinceId forKey:@"since_id"];
+	if(_filterSkip !=nil)
+		[filterDict setObject:_filterSkip forKey:@"skip"];
+	if(_filterCount !=nil)
+		[filterDict setObject:_filterCount forKey:@"count"];
+	if(_filterGeocode !=nil)
+		[filterDict setObject:_filterGeocode forKey:@"geocode"];
+
+	return filterDict;
 }
 
 @end

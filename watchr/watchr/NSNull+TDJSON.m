@@ -30,4 +30,14 @@
 
 - (BOOL)boolValue { return NO; }
 
+-(BOOL) isEqualToString:(NSString *) compare {
+	
+    if ([compare isKindOfClass:[NSNull class]] || !compare) {
+        NSLog(@"NSNull isKindOfClass called!");
+        return YES;
+    }
+	
+    return NO;
+}
+
 @end

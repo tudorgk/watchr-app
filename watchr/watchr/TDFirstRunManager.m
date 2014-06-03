@@ -8,7 +8,7 @@
 
 #import "TDFirstRunManager.h"
 #import "Country.h"
-#import "NSNull+TDJSON.h"
+
 @class TDFirstRunManager;
 
 @interface TDFirstRunManager()<TDWatchrAPIManagerDelegate>{
@@ -52,7 +52,12 @@ static TDFirstRunManager * sharedManager = nil;
 	[self initCoreDataHelper];
 	
 	[[TDWatchrAPIManager sharedManager] getCountryListWithDelegate:self];
-	[[TDWatchrAPIManager sharedManager] getAllActiveEventsWithFilters:nil delegate:self];
+	
+	//TODO: testing the filters. remove
+	TDWatchrEventFilters * filters = [[TDWatchrEventFilters alloc] init];
+	filters.filterOrderBy = @"event_rating";
+	filters.filterOrderMode = @"DESC";
+	[[TDWatchrAPIManager sharedManager] getAllActiveEventsWithFilters:filters delegate:self];
 	
 }
 

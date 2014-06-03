@@ -185,8 +185,5 @@
 	
 }
 
-#pragma mark - TDFirstTunManagerDelegate methods
-
-
 
 @end

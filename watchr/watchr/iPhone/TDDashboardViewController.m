@@ -22,6 +22,8 @@ enum MapViewVisibility : NSInteger {
 	MKMapView * _dashboardMap;
 	TDWelcomeScreenViewController * _welcomeScreen;
 	
+	NSArray * _dashboardData;
+	
 }
 -(void) configureView;
 @end
@@ -61,16 +63,14 @@ enum MapViewVisibility : NSInteger {
 
 	
 	[self.navigationItem setRightBarButtonItems:@[addButtonItem,mapButtonItem] animated:YES];
+	
+	_dashboardData = [NSArray new];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	[self configureView];
-	//	NSLog(@"accounts = %@", [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]);
-	//	for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
-	//		[[NXOAuth2AccountStore sharedStore] removeAccount:account];
-	//	}
 	
 	//present it
 	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
@@ -131,11 +131,18 @@ enum MapViewVisibility : NSInteger {
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	TDDashboardEventTableViewCell * cell = (TDDashboardEventTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"eventCell"];
+	NSDictionary * cellData =[_dashboardData objectAtIndex:indexPath.row];
+	
+	cell.cellEventTitleLabel.text = [cellData objectForKey:@"event_name"];
+	cell.cellEventDescriptionLabel.text = [cellData objectForKey:@"description"];
+	cell.cellEventDistanceLabel.text = [cellData objectForKey:@"distance"];
+	cell.cellRatingLabel.text = [cellData objectForKey:@"rating"];
+	cell.cellTimeLabel.text = [cellData objectForKey:@"created_at"];
 	return cell;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-	return 10;
+	return [_dashboardData count];
 }
 
 
@@ -182,7 +189,13 @@ enum MapViewVisibility : NSInteger {
 	}];
 }
 
+
+
+#pragma mark - TDFirstTunManagerDelegate methods
+
 -(void) managerDidFinishFirstTimeSetUpWithData:(id)data{
+	_dashboardData = data;
+	[self.dashboardTableView reloadData];
 	[_welcomeScreen dismissViewControllerAnimated:YES completion:nil];
 }
 

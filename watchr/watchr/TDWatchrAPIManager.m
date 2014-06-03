@@ -78,7 +78,7 @@ static TDWatchrAPIManager * sharedManager = nil;
 -(void ) getAllActiveEventsWithFilters:(TDWatchrEventFilters *)filters delegate:(id<TDWatchrAPIManagerDelegate>)delegate{
 
 	__block NSArray * activeEventsArray = nil;
-	
+		
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
 				   usingParameters:[filters filtersToDictionary]
