@@ -10,7 +10,7 @@
 
 @protocol TDFirstRunManagerDelegate <NSObject>
 
--(void) managerDidFinishFirstTimeSetUp;
+-(void) managerDidFinishFirstTimeSetUpWithData:(id) data;
 
 @end
 

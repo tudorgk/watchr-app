@@ -11,7 +11,7 @@
 #import "TDLoginViewController.h"
 #import "FBShimmeringView.h"
 #import "TDWelcomeNavigationDelegate.h"
-
+#import "TDFirstRunManager.h"
 typedef enum ScreenVisible : NSInteger ScreenVisible;
 enum ScreenVisible : NSInteger {
 	ScreenVisibleNone,
@@ -32,6 +32,7 @@ enum ScreenVisible : NSInteger {
 @property (weak, nonatomic) IBOutlet UIView *welcomeView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView2;
+@property (nonatomic,weak) UIViewController<TDFirstRunManagerDelegate>  *ownerViewController;
 - (IBAction)loginButtonPressed:(id)sender;
 - (IBAction)registerButtonPressed:(id)sender;
 

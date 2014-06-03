@@ -10,7 +10,7 @@
 #import "TDEventDetailsViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "TDAddEventViewController.h"
-#import "TDWelcomeScreenViewController.h"
+
 typedef enum MapViewVisibility : NSInteger MapViewVisibility;
 enum MapViewVisibility : NSInteger {
 	MapViewVisibilityHidden,
@@ -75,7 +75,7 @@ enum MapViewVisibility : NSInteger {
 	//present it
 	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	[_welcomeScreen.view setBackgroundColor:[UIColor clearColor]];
-		
+	_welcomeScreen.ownerViewController = self;
 	//present it
 	[self presentViewController:_welcomeScreen animated:NO completion:nil];
 		
@@ -180,6 +180,10 @@ enum MapViewVisibility : NSInteger {
 	[self presentViewController:addEventNavigationController animated:YES completion:^{
 		
 	}];
+}
+
+-(void) managerDidFinishFirstTimeSetUpWithData:(id)data{
+	[_welcomeScreen dismissViewControllerAnimated:YES completion:nil];
 }
 
 

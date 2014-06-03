@@ -12,7 +12,9 @@
 @class TDFirstRunManager;
 
 @interface TDFirstRunManager()<TDWatchrAPIManagerDelegate>{
-
+	BOOL _countriesFinished;
+	BOOL _activeEventsFinished;
+	NSArray *_activeEvents;
 }
 
 -(BOOL) firstSetupDidFinish;
@@ -35,7 +37,7 @@ static TDFirstRunManager * sharedManager = nil;
 -(id) init{
 	self = [super init];
 	if (self) {
-		
+		_countriesFinished = _activeEventsFinished = NO;
 	}
 	return self;
 }
@@ -86,21 +88,26 @@ static TDFirstRunManager * sharedManager = nil;
 			newCountryRecord.long_name = [country objectForKey:@"long_name"] ;
 			newCountryRecord.numcode = [NSNumber numberWithInt:[[country objectForKey:@"numcode"]intValue]];
 			newCountryRecord.un_member = [country objectForKey:@"un_member"] ;
-
+			
 		}
 		
 		[[udevCoreDataHelper sharedInstance] saveContextForCurrentThread];
-
+			
+		_countriesFinished = YES;
+		
 	}else if([key isEqualToString:kTDWatchrManagerActiveEventsKey]){
-		NSLog(@"active events = %@", data	);
+		//For active events just return them to the owner of the first run manager
+		_activeEvents = (NSArray*)data;
+		_activeEventsFinished =YES;
 	}
 	
-//	//display the core data records to check if it works.
-//	 NSArray *coreDataCountries = [[udevCoreDataHelper sharedInstance] getObjectsForEntity:@"Country" withPredicate:nil andSortDescriptors:nil];
-//	for (Country * country in coreDataCountries) {
-//		NSLog(@"country_name = %@", country.long_name);
-//	}//it works!
-	
+	if (_countriesFinished && _activeEventsFinished) {
+		if(self.delegate!=nil){
+			if([self.delegate respondsToSelector:@selector(managerDidFinishFirstTimeSetUpWithData:)])
+				[self.delegate managerDidFinishFirstTimeSetUpWithData:_activeEvents];
+		}
+
+	}
 }
 
 -(void) WatchrAPIManagerDidFinishWithError:(NSError *)error{

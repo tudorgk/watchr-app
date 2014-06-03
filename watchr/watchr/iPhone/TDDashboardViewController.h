@@ -11,7 +11,8 @@
 #import "UIView+Origami.h"
 #import "TDDashboardEventTableViewCell.h"
 #import "TDDashboardFilterButton.h"
-@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "TDWelcomeScreenViewController.h"
+@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDFirstRunManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (weak, nonatomic) IBOutlet UITableView *dashboardTableView;
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;

@@ -8,8 +8,8 @@
 
 #import "TDWelcomeScreenViewController.h"
 #import "TDWatchrAPIManager.h"
-#import	"TDFirstRunManager.h"
-@interface TDWelcomeScreenViewController ()
+
+@interface TDWelcomeScreenViewController()
 -(void) configureView;
 -(void) initOtherViews;
 -(void) setUpOAuthAccount;
@@ -98,14 +98,9 @@
 													  
 													  //TODO: Testing. Need to perform a first-time setup here. Get countries, profile statuses etc.
 													  TDFirstRunManager * firstRunner = [TDFirstRunManager sharedManager];
-//													  [NSThread detachNewThreadSelector:@selector(runFirstTimeSetUp) toTarget:firstRunner withObject:nil];
+													  firstRunner.delegate = self.ownerViewController;
 													  [firstRunner runFirstTimeSetUp];
-													  //[[TDWatchrAPIManager sharedManager] getCountryListForRequestingObject:self];
-													  													  
-													  
-													  //remove the welcome screen
-													  [self dismissViewControllerAnimated:YES completion:nil];
-
+													
 												  }];
 	
 	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification
@@ -189,5 +184,9 @@
 
 	
 }
+
+#pragma mark - TDFirstTunManagerDelegate methods
+
+
 
 @end
