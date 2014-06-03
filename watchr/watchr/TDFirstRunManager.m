@@ -68,11 +68,11 @@ static TDFirstRunManager * sharedManager = nil;
 
 #pragma mark - TDWatchrAPIManagerDelegate
 
--(void) WatchrAPIManagerDidFinishWithData:(NSDictionary *)data{
+-(void) WatchrAPIManagerDidFinishWithData:(NSArray *)data forKey:(NSString *)key{
 	//if the data has the country_list
-	if ([[data allKeys] containsObject:@"country_list"]) {
+	if ([key isEqualToString:kTDWatchrManagerCountryKey]) {
 		
-		NSArray * countryList = [data objectForKey:@"country_list"];
+		NSArray * countryList = data;
 		
 		for (NSDictionary * country in countryList) {
 			Country *newCountryRecord = (Country *)[[udevCoreDataHelper sharedInstance] insertObjectForEntity:@"Country"];
@@ -91,17 +91,24 @@ static TDFirstRunManager * sharedManager = nil;
 		
 		[[udevCoreDataHelper sharedInstance] saveContextForCurrentThread];
 
+	}else if([key isEqualToString:kTDWatchrManagerActiveEventsKey]){
+		NSLog(@"active events = %@", data	);
 	}
 	
-	//display the core data records to check if it works.
-	 NSArray *coreDataCountries = [[udevCoreDataHelper sharedInstance] getObjectsForEntity:@"Country" withPredicate:nil andSortDescriptors:nil];
-	for (Country * country in coreDataCountries) {
-		NSLog(@"country_name = %@", country.long_name);
-	}//it works!
+//	//display the core data records to check if it works.
+//	 NSArray *coreDataCountries = [[udevCoreDataHelper sharedInstance] getObjectsForEntity:@"Country" withPredicate:nil andSortDescriptors:nil];
+//	for (Country * country in coreDataCountries) {
+//		NSLog(@"country_name = %@", country.long_name);
+//	}//it works!
 	
 }
 
 -(void) WatchrAPIManagerDidFinishWithError:(NSError *)error{
+	
+	NSLog(@"error = %@ and description =%@", [error userInfo], [error description]);
+}
+
+-(void) WatchrAPIManagerDidFinishWithResponse:(NSURLResponse *) response{
 	
 }
 

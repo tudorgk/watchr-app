@@ -62,6 +62,7 @@
 		054F409B192E2CA600960ABE /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F408C192E2CA600960ABE /* UIImageView+WebCache.m */; };
 		054F40A2192E39C400960ABE /* UILabel+dynamicSizeMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F40A1192E39C400960ABE /* UILabel+dynamicSizeMe.m */; };
 		054F40A7192E46E500960ABE /* HeaderInsetTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F40A6192E46E500960ABE /* HeaderInsetTableView.m */; };
+		0554B4D6193DFD4700624138 /* TDWatchrEventFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554B4D5193DFD4700624138 /* TDWatchrEventFilters.m */; };
 		0578F9811928BDCA00F8F7B3 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0578F9751928BDCA00F8F7B3 /* ECPercentDrivenInteractiveTransition.m */; };
 		0578F9821928BDCA00F8F7B3 /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0578F9771928BDCA00F8F7B3 /* ECSlidingAnimationController.m */; };
 		0578F9831928BDCA00F8F7B3 /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0578F97A1928BDCA00F8F7B3 /* ECSlidingInteractiveTransition.m */; };
@@ -277,6 +278,8 @@
 		054F40A1192E39C400960ABE /* UILabel+dynamicSizeMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+dynamicSizeMe.m"; sourceTree = "<group>"; };
 		054F40A5192E46E500960ABE /* HeaderInsetTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderInsetTableView.h; sourceTree = "<group>"; };
 		054F40A6192E46E500960ABE /* HeaderInsetTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderInsetTableView.m; sourceTree = "<group>"; };
+		0554B4D4193DFD4700624138 /* TDWatchrEventFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrEventFilters.h; sourceTree = "<group>"; };
+		0554B4D5193DFD4700624138 /* TDWatchrEventFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWatchrEventFilters.m; sourceTree = "<group>"; };
 		0578F9741928BDCA00F8F7B3 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		0578F9751928BDCA00F8F7B3 /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		0578F9761928BDCA00F8F7B3 /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
@@ -830,8 +833,8 @@
 		05B544C6193C80C40081332D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				05B544C8193C80DE0081332D /* NSNull+TDJSON.h */,
-				05B544C9193C80DE0081332D /* NSNull+TDJSON.m */,
+				05FA1A92193E04DB0067325B /* JSON Null */,
+				05FA1A90193E04D30067325B /* Event FIlters */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1125,6 +1128,24 @@
 			name = PaperFold;
 			sourceTree = "<group>";
 		};
+		05FA1A90193E04D30067325B /* Event FIlters */ = {
+			isa = PBXGroup;
+			children = (
+				0554B4D4193DFD4700624138 /* TDWatchrEventFilters.h */,
+				0554B4D5193DFD4700624138 /* TDWatchrEventFilters.m */,
+			);
+			name = "Event FIlters";
+			sourceTree = "<group>";
+		};
+		05FA1A92193E04DB0067325B /* JSON Null */ = {
+			isa = PBXGroup;
+			children = (
+				05B544C8193C80DE0081332D /* NSNull+TDJSON.h */,
+				05B544C9193C80DE0081332D /* NSNull+TDJSON.m */,
+			);
+			name = "JSON Null";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1298,6 +1319,7 @@
 				05B544CA193C80DE0081332D /* NSNull+TDJSON.m in Sources */,
 				0578F9831928BDCA00F8F7B3 /* ECSlidingInteractiveTransition.m in Sources */,
 				0541A0CB1938B5CD0033F3B6 /* CTAssetsSupplementaryView.m in Sources */,
+				0554B4D6193DFD4700624138 /* TDWatchrEventFilters.m in Sources */,
 				05409D7F192557CE00E8544C /* FBShimmeringLayer.m in Sources */,
 				054F4062192E21D500960ABE /* UIScrollView+APParallaxHeader.m in Sources */,
 				05C40A78192A8018002F1F1A /* PaperFoldView.m in Sources */,

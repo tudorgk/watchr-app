@@ -23,3 +23,6 @@
 #define TDWatchrAPIAccountIdentifier @"watchrAPIAccountIdentifier"
 #define TDAPIBaseURL @"http://192.168.1.100"
 #define TDRegisterFromURL @"/users"
+
+#define kTDWatchrManagerCountryKey @"country_list"
+#define kTDWatchrManagerActiveEventsKey @"active_events"

@@ -7,6 +7,7 @@
 //
 
 #import "TDWatchrAPIManager.h"
+
 @class TDWatchrAPIManager;
 @interface TDWatchrAPIManager(){
 	NXOAuth2Account * _defaultWatchrAccount;
@@ -51,13 +52,22 @@ static TDWatchrAPIManager * sharedManager = nil;
 //				   NSLog(@"error = %@", [error userInfo]);
 				   
 				   if (error) {
-					   [delegate WatchrAPIManagerDidFinishWithError:error];
+					   if(delegate!=nil){
+						   if([delegate respondsToSelector:@selector(WatchrAPIManagerDidFinishWithError:)])
+							   [delegate WatchrAPIManagerDidFinishWithError:error];
+						   return ;
+					   }
 				   }
 				   
-				   [delegate WatchrAPIManagerDidFinishWithResponse:response];
-				   
-				   countryArray = [self getArrayForKey:@"data" fromResponseData:responseData withResponse:response andError:error];
-				   [delegate WatchrAPIManagerDidFinishWithData:@{@"country_list" : countryArray}];
+				   if(delegate!=nil){
+					   if([delegate respondsToSelector:@selector(WatchrAPIManagerDidFinishWithResponse:)])
+						   [delegate WatchrAPIManagerDidFinishWithResponse:response];
+				   }
+				   countryArray = [self getArrayForKey:@"data" fromResponseData:responseData ];
+				   if(delegate!=nil){
+					   if([delegate respondsToSelector:@selector(WatchrAPIManagerDidFinishWithData:forKey:)])
+						   [delegate WatchrAPIManagerDidFinishWithData:countryArray forKey:kTDWatchrManagerCountryKey];
+				   }
                }];
 	
 	
@@ -65,15 +75,13 @@ static TDWatchrAPIManager * sharedManager = nil;
 
 
 
--(void ) getAllActiveEventsWithFilters:(NSDictionary *)filters delegate:(id<TDWatchrAPIManagerDelegate>)delegate{
-	
-	//TODO: Parameters are nil for testing
-	
+-(void ) getAllActiveEventsWithFilters:(TDWatchrEventFilters *)filters delegate:(id<TDWatchrAPIManagerDelegate>)delegate{
+
 	__block NSArray * activeEventsArray = nil;
 	
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
-				   usingParameters:nil
+				   usingParameters:[filters filtersToDictionary]
 					   withAccount:_defaultWatchrAccount
 			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
@@ -82,20 +90,32 @@ static TDWatchrAPIManager * sharedManager = nil;
 					   //				   NSLog(@"response = %@", [response description]);
 					   //				   NSLog(@"error = %@", [error userInfo]);
 					   
-					   if (error) {
-						   [delegate WatchrAPIManagerDidFinishWithError:error];
+					   if(error) {
+						   if(delegate!=nil){
+							   if([delegate respondsToSelector:@selector(WatchrAPIManagerDidFinishWithError:)])
+								   [delegate WatchrAPIManagerDidFinishWithError:error];
+							   return ;
+						   }
 					   }
 					   
-					   [delegate WatchrAPIManagerDidFinishWithResponse:response];
+					   if(delegate!=nil){
+							   if([delegate respondsToSelector:@selector(WatchrAPIManagerDidFinishWithResponse:)])
+								   [delegate WatchrAPIManagerDidFinishWithResponse:response];
+					   }
 					   
-					   activeEventsArray = [self getArrayForKey:@"data" fromResponseData:responseData withResponse:response andError:error];
-					   [delegate WatchrAPIManagerDidFinishWithData:@{@"active_events" : activeEventsArray}];
+					   activeEventsArray = [self getArrayForKey:@"data" fromResponseData:responseData ];
+					   
+					   if(delegate!=nil){
+						   if([delegate respondsToSelector:@selector(WatchrAPIManagerDidFinishWithData:forKey:)])
+							   [delegate WatchrAPIManagerDidFinishWithData:activeEventsArray forKey:kTDWatchrManagerActiveEventsKey];
+					   }
+					   
 				   }];
 
 
 }
 
--(NSArray*) getArrayForKey:(NSString*) key fromResponseData:(NSData*)responseData withResponse:(NSURLResponse*) response andError:(NSError* ) error{
+-(NSArray*) getArrayForKey:(NSString*) key fromResponseData:(NSData*)responseData{
 	NSError * JSONParsingError = nil;
 	id JSONObject = [NSJSONSerialization
 					 JSONObjectWithData:responseData
@@ -103,9 +123,6 @@ static TDWatchrAPIManager * sharedManager = nil;
 					 error:&JSONParsingError];
 	
 	if (JSONParsingError) {
-		return nil;
-	}else if (error){
-		//TODO: Display the error using delegate methods
 		return nil;
 	}
 	
