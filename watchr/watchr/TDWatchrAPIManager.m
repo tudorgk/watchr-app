@@ -10,7 +10,7 @@
 
 @class TDWatchrAPIManager;
 @interface TDWatchrAPIManager(){
-	NXOAuth2Account * _defaultWatchrAccount;
+
 }
 
 @end
@@ -32,6 +32,7 @@ static TDWatchrAPIManager * sharedManager = nil;
 	self = [super init];
 	if (self) {
 		_defaultWatchrAccount = [[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ];
+		
 	}
 	return self;
 }

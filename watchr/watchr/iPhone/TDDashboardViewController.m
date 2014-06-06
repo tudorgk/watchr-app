@@ -22,10 +22,17 @@ enum MapViewVisibility : NSInteger {
 	MKMapView * _dashboardMap;
 	TDWelcomeScreenViewController * _welcomeScreen;
 	
-	NSArray * _dashboardData;
+	NSMutableArray * _dashboardData;
+	NSInteger _dashboardDataSkip;
+	NSInteger _dashboardDataCount;
+	TDWatchrEventFilters * _dashboardFilters;
 	
 }
 -(void) configureView;
+-(void) configureTableView;
+-(void) configureDataSource;
+-(void) pullToRefreshHandler;
+-(void) infiniteScrollHandler;
 @end
 
 @implementation TDDashboardViewController
@@ -64,14 +71,17 @@ enum MapViewVisibility : NSInteger {
 	
 	[self.navigationItem setRightBarButtonItems:@[addButtonItem,mapButtonItem] animated:YES];
 	
-	_dashboardData = [NSArray new];
+	_dashboardData = [NSMutableArray new];
+	_dashboardDataSkip = 0;
+	_dashboardDataCount = 20;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	[self configureView];
-	
+	[self configureTableView];
+	[self configureDataSource];
 	//present it
 	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	[_welcomeScreen.view setBackgroundColor:[UIColor clearColor]];
@@ -112,6 +122,33 @@ enum MapViewVisibility : NSInteger {
 
 }
 
+-(void) configureTableView{
+	// setup pull-to-refresh
+    [self.dashboardTableView addPullToRefreshWithActionHandler:^{
+        [self pullToRefreshHandler];
+    }];
+	
+    // setup infinite scrolling
+    [self.dashboardTableView addInfiniteScrollingWithActionHandler:^{
+        [self infiniteScrollHandler];
+    }];
+}
+
+-(void) configureDataSource{
+	
+	NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+	
+	//setup dashboard filters
+	_dashboardFilters = [[TDWatchrEventFilters alloc] init];
+	_dashboardFilters.filterOrderBy = [userDefaults objectForKey:TDDefaultOrderByKey];
+	_dashboardFilters.filterOrderMode = [userDefaults objectForKey:TDDefaultOrderModeKey];
+	_dashboardFilters.filterCount = [NSNumber numberWithInt:_dashboardDataCount];
+	_dashboardFilters.filterSkip = [NSNumber numberWithInt:_dashboardDataSkip];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+	
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -188,15 +225,68 @@ enum MapViewVisibility : NSInteger {
 		
 	}];
 }
-
-
+#pragma mark - InfiniteScroll + PullToRefresh Handlers
+-(void) infiniteScrollHandler{
+	_dashboardDataSkip +=20;
+	_dashboardFilters.filterSkip = [NSNumber numberWithInteger:_dashboardDataSkip];
+	[NXOAuth2Request performMethod:@"GET"
+						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
+				   usingParameters:[_dashboardFilters filtersToDictionary]
+					   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+			   }
+				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+					   //				   NSLog(@"response = %@", [response description]);
+					   //				   NSLog(@"error = %@", [error userInfo]);
+					   if (error) {
+						   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving events" message:[[error userInfo] description] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+						   [alert show];
+					   }else{
+						   [self.dashboardTableView beginUpdates];
+						   NSArray * data =[[TDWatchrAPIManager sharedManager] getArrayForKey:@"data" fromResponseData:responseData ];
+						   [_dashboardData addObjectsFromArray:data];
+						   
+						   NSMutableArray * reloadIndexPathsArray = [NSMutableArray new];
+						   for (int i = _dashboardData.count - data.count ; i<_dashboardData.count; i++) {
+							   [reloadIndexPathsArray addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+						   }
+						   
+						   [self.dashboardTableView insertRowsAtIndexPaths:reloadIndexPathsArray withRowAnimation:UITableViewRowAnimationTop];
+						   [self.dashboardTableView endUpdates];
+					   }
+						
+					   [self.dashboardTableView.infiniteScrollingView stopAnimating];
+					   
+				   }];
+}
+-(void) pullToRefreshHandler{
+	[[TDWatchrAPIManager sharedManager] getAllActiveEventsWithFilters:_dashboardFilters delegate:self];
+	[self.dashboardTableView.pullToRefreshView stopAnimating];
+}
 
 #pragma mark - TDFirstTunManagerDelegate methods
 
 -(void) managerDidFinishFirstTimeSetUpWithData:(id)data{
-	_dashboardData = data;
+//	[self.dashboardTableView triggerPullToRefresh];
+	[_dashboardData addObjectsFromArray:data];
 	[self.dashboardTableView reloadData];
 	[_welcomeScreen dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - TDWatchrApiManagerDelegate methods
+
+-(void) WatchrAPIManagerDidFinishWithData:(NSArray *)data forKey:(NSString *)key{
+//	NSLog(@"data=%@ and key=%@",@"data",key);
+//	[self.dashboardTableView.infiniteScrollingView stopAnimating];
+//	[self.dashboardTableView.pullToRefreshView stopAnimating];
+}
+
+-(void) WatchrAPIManagerDidFinishWithError:(NSError *)error{
+	
+}
+-(void) WatchrAPIManagerDidFinishWithResponse:(NSURLResponse *)response{
+	
 }
 
 

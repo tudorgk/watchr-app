@@ -19,15 +19,26 @@
 	#import	"udevCoreDataHelper.h"
 	#import	"TDWatchrAPIManager.h"
 	#import "NSNull+TDJSON.h"
+#import "SVPullToRefresh.h"
 #endif
 
 
 #define TDJSONNull @"0(NSNull)"
 
 #define TDWatchrAPIAccountIdentifier @"watchrAPIAccountIdentifier"
-#define TDAPIBaseURL @"http://46.108.140.147:8080"
-//#define TDAPIBaseURL @"http://192.168.1.100"
+//#define TDAPIBaseURL @"http://46.108.140.147:8080"
+#define TDAPIBaseURL @"http://192.168.1.100"
 #define TDRegisterFromURL @"/users"
 
 #define kTDWatchrManagerCountryKey @"country_list"
 #define kTDWatchrManagerActiveEventsKey @"active_events"
+
+
+#define TDDefaultOrderByValue @"rating"
+#define TDDefaultOrderModeValue @"DESC"
+#define TDDefaultCountValue	20
+#define TDDefaultSkipValue	0
+
+#define TDDefaultOrderByKey @"sorting_filter"
+#define TDDefaultOrderModeKey @"order_filter"
+#define TDDefaultRadiusKey @"radius_filter"

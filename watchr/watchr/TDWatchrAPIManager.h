@@ -17,9 +17,10 @@
 @end
 
 @interface TDWatchrAPIManager : NSObject
-
+@property (nonatomic,strong) NXOAuth2Account * defaultWatchrAccount;
 +(TDWatchrAPIManager *) sharedManager;
 
 -(void) getAllActiveEventsWithFilters:(TDWatchrEventFilters*)filters delegate:(id<TDWatchrAPIManagerDelegate>) delegate;
 -(void) getCountryListWithDelegate:(id<TDWatchrAPIManagerDelegate>) delegate;
+-(NSArray*) getArrayForKey:(NSString*) key fromResponseData:(NSData*)responseData;
 @end

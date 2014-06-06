@@ -92,7 +92,7 @@
 													  
 													  //save the account identifier to NSUserDefaults
 													  [[NSUserDefaults standardUserDefaults] setObject:account.identifier forKey:TDWatchrAPIAccountIdentifier];
-													  
+													  [[NSUserDefaults standardUserDefaults] synchronize];
 													  //we now know that the login was successful.
 													  //we need to get the categories for the events and the events with default settings
 													  

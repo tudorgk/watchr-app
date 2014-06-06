@@ -53,10 +53,21 @@ static TDFirstRunManager * sharedManager = nil;
 	
 	[[TDWatchrAPIManager sharedManager] getCountryListWithDelegate:self];
 	
-	//TODO: testing the filters. remove
+	
+	//add default values for first run to standard user defaults
+	NSDictionary * defaultFilters = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WatchrEventDefaultFilters" ofType:@"plist"]];
+
+	NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+	[userDefaults setObject:[defaultFilters objectForKey:TDDefaultOrderByKey] forKey:TDDefaultOrderByKey];
+	[userDefaults setObject:[defaultFilters objectForKey:TDDefaultOrderModeKey] forKey:TDDefaultOrderModeKey];
+	[userDefaults setObject:[defaultFilters objectForKey:TDDefaultRadiusKey] forKey:TDDefaultRadiusKey];
+	[userDefaults synchronize];
+	
 	TDWatchrEventFilters * filters = [[TDWatchrEventFilters alloc] init];
-	filters.filterOrderBy = @"event_rating";
-	filters.filterOrderMode = @"DESC";
+	filters.filterOrderBy = [defaultFilters objectForKey:TDDefaultOrderByKey];
+	filters.filterOrderMode = [defaultFilters objectForKey:TDDefaultOrderModeKey];
+	filters.filterCount = [NSNumber numberWithInt:20];
+	filters.filterSkip = [NSNumber numberWithInt:0];
 	[[TDWatchrAPIManager sharedManager] getAllActiveEventsWithFilters:filters delegate:self];
 	
 }

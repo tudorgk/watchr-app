@@ -36,11 +36,11 @@
 	if(_filterOrderMode !=nil)
 		[filterDict setObject:_filterOrderMode forKey:@"order_mode"];
 	if(_filterSinceId !=nil)
-		[filterDict setObject:_filterSinceId forKey:@"since_id"];
+		[filterDict setObject:[_filterSinceId stringValue] forKey:@"since_id"];
 	if(_filterSkip !=nil)
-		[filterDict setObject:_filterSkip forKey:@"skip"];
+		[filterDict setObject:[_filterSkip stringValue]  forKey:@"skip"];
 	if(_filterCount !=nil)
-		[filterDict setObject:_filterCount forKey:@"count"];
+		[filterDict setObject:[_filterCount stringValue] forKey:@"count"];
 	if(_filterGeocode !=nil)
 		[filterDict setObject:_filterGeocode forKey:@"geocode"];
 

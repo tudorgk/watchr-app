@@ -12,7 +12,7 @@
 #import "TDDashboardEventTableViewCell.h"
 #import "TDDashboardFilterButton.h"
 #import "TDWelcomeScreenViewController.h"
-@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDFirstRunManagerDelegate>
+@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDFirstRunManagerDelegate,TDWatchrAPIManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (weak, nonatomic) IBOutlet UITableView *dashboardTableView;
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;

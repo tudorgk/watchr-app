@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>order_filter</key>
+	<array>
+		<dict>
+			<key>label</key>
+			<string>Ascending</string>
+			<key>filter</key>
+			<string>ASC</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>Descending</string>
+			<key>filter</key>
+			<string>DESC</string>
+		</dict>
+	</array>
+	<key>sorting_filter</key>
+	<array>
+		<dict>
+			<key>filter</key>
+			<string>event_rating</string>
+			<key>label</key>
+			<string>Rating</string>
+		</dict>
+		<dict>
+			<key>filter</key>
+			<string>created_at</string>
+			<key>label</key>
+			<string>Publish Date</string>
+		</dict>
+		<dict>
+			<key>filter</key>
+			<string>distance</string>
+			<key>label</key>
+			<string>Radius</string>
+		</dict>
+	</array>
+	<key>radius_filter</key>
+	<array>
+		<string>1km</string>
+		<string>2km</string>
+		<string>5km</string>
+		<string>10km</string>
+		<string>40km</string>
+		<string>100km</string>
+	</array>
+</dict>
+</plist>

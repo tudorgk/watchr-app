@@ -72,6 +72,8 @@
 		058117621925FC6E00B79087 /* blurred-violet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 058117611925FC6E00B79087 /* blurred-violet.jpg */; };
 		058117641925FCC700B79087 /* bg-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 058117631925FCC700B79087 /* bg-yellow.png */; };
 		058117661925FD6F00B79087 /* bg-red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 058117651925FD6F00B79087 /* bg-red.jpg */; };
+		0583C3E11942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3DE1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m */; };
+		0583C3E21942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */; };
 		05965B9319372E2100B0B870 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05965B9219372E2100B0B870 /* CoreData.framework */; };
 		05965B971937312600B0B870 /* WatchrDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05965B951937312600B0B870 /* WatchrDB.xcdatamodeld */; };
 		05965B9A1937327E00B0B870 /* MenuItems.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05965B991937327E00B0B870 /* MenuItems.plist */; };
@@ -146,6 +148,8 @@
 		05C40A79192A8018002F1F1A /* ShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A6F192A8018002F1F1A /* ShadowView.m */; };
 		05C40A7A192A8018002F1F1A /* TouchThroughUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A71192A8018002F1F1A /* TouchThroughUIView.m */; };
 		05C40A7B192A8018002F1F1A /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A73192A8018002F1F1A /* UIView+Screenshot.m */; };
+		05D9AE19194227E800C3144D /* WatchrEventDefaultFilters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */; };
+		05EB294B1940AE91008C7A04 /* WatchrEventFilterOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -296,6 +300,11 @@
 		058117611925FC6E00B79087 /* blurred-violet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blurred-violet.jpg"; sourceTree = "<group>"; };
 		058117631925FCC700B79087 /* bg-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-yellow.png"; sourceTree = "<group>"; };
 		058117651925FD6F00B79087 /* bg-red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bg-red.jpg"; sourceTree = "<group>"; };
+		0583C3DC1942382900D8CCD7 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		0583C3DD1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		0583C3DE1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		0583C3DF1942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		05965B9219372E2100B0B870 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		05965B961937312600B0B870 /* WatchrDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchrDB.xcdatamodel; sourceTree = "<group>"; };
 		05965B991937327E00B0B870 /* MenuItems.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuItems.plist; sourceTree = "<group>"; };
@@ -408,6 +417,8 @@
 		05C40A72192A8018002F1F1A /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
 		05C40A73192A8018002F1F1A /* UIView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screenshot.m"; sourceTree = "<group>"; };
 		05C40A74192A8018002F1F1A /* PaperFoldConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldConstants.h; sourceTree = "<group>"; };
+		05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventDefaultFilters.plist; sourceTree = "<group>"; };
+		05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventFilterOptions.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,6 +497,7 @@
 		05409D77192557B300E8544C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0583C3E41942382E00D8CCD7 /* SVPullToRefresh */,
 				0541A0D31939C8250033F3B6 /* OAuth2Client.xcodeproj */,
 				0541A0AF1938B5CD0033F3B6 /* CTAssetsPickerController */,
 				05965BAF19376BD400B0B870 /* Growing Text View */,
@@ -714,6 +726,18 @@
 				0578F9801928BDCA00F8F7B3 /* UIViewController+ECSlidingViewController.m */,
 			);
 			path = ECSlidingViewController;
+			sourceTree = "<group>";
+		};
+		0583C3E41942382E00D8CCD7 /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				0583C3DC1942382900D8CCD7 /* SVPullToRefresh.h */,
+				0583C3DD1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.h */,
+				0583C3DE1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m */,
+				0583C3DF1942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.h */,
+				0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */,
+			);
+			name = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
 		05965B941937310800B0B870 /* Core Data */ = {
@@ -1133,6 +1157,8 @@
 			children = (
 				0554B4D4193DFD4700624138 /* TDWatchrEventFilters.h */,
 				0554B4D5193DFD4700624138 /* TDWatchrEventFilters.m */,
+				05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */,
+				05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */,
 			);
 			name = "Event FIlters";
 			sourceTree = "<group>";
@@ -1275,7 +1301,9 @@
 				05C0783F19253C6E005AB425 /* login-background@2x.png in Resources */,
 				05C0783D19253C6E005AB425 /* back-chevron.png in Resources */,
 				05BB5F30192FAC7100D9BE6A /* menu-notification-button-on@2x.png in Resources */,
+				05EB294B1940AE91008C7A04 /* WatchrEventFilterOptions.plist in Resources */,
 				05BB5F1B192F7C1800D9BE6A /* menu-spots-icon-on@2x.png in Resources */,
+				05D9AE19194227E800C3144D /* WatchrEventDefaultFilters.plist in Resources */,
 				05BB5F31192FAC7100D9BE6A /* menu-request-button-off@2x.png in Resources */,
 				05C0784019253C6E005AB425 /* login-button-clear.png in Resources */,
 				05C40A63192A7151002F1F1A /* DashboardStoryboard_iPhone.storyboard in Resources */,
@@ -1313,6 +1341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0583C3E11942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				054F409A192E2CA600960ABE /* UIImageView+HighlightedWebCache.m in Sources */,
 				05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */,
 				05C40A79192A8018002F1F1A /* ShadowView.m in Sources */,
@@ -1382,6 +1411,7 @@
 				0578F9841928BDCA00F8F7B3 /* ECSlidingSegue.m in Sources */,
 				05BB5EFF192F594F00D9BE6A /* FXBlurView.m in Sources */,
 				054F4099192E2CA600960ABE /* UIImage+WebP.m in Sources */,
+				0583C3E21942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				05BB5F20192F7DBB00D9BE6A /* TDSideMenuViewController.m in Sources */,
 				05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */,
 				0578F9851928BDCA00F8F7B3 /* ECSlidingViewController.m in Sources */,
