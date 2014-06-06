@@ -26,6 +26,12 @@ enum MapViewVisibility : NSInteger {
 	NSInteger _dashboardDataSkip;
 	NSInteger _dashboardDataCount;
 	TDWatchrEventFilters * _dashboardFilters;
+	NSDictionary * _filterPlist;
+	
+	//pickers
+	ActionSheetCustomPicker * _distancePiker ;
+	ActionSheetCustomPicker * _orderByPicker;
+	ActionSheetCustomPicker * _orderModePicker;
 	
 }
 -(void) configureView;
@@ -33,6 +39,7 @@ enum MapViewVisibility : NSInteger {
 -(void) configureDataSource;
 -(void) pullToRefreshHandler;
 -(void) infiniteScrollHandler;
+-(void) configureFilters;
 @end
 
 @implementation TDDashboardViewController
@@ -82,6 +89,7 @@ enum MapViewVisibility : NSInteger {
 	[self configureView];
 	[self configureTableView];
 	[self configureDataSource];
+	[self configureFilters];
 	//present it
 	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	[_welcomeScreen.view setBackgroundColor:[UIColor clearColor]];
@@ -146,6 +154,13 @@ enum MapViewVisibility : NSInteger {
 	_dashboardFilters.filterSkip = [NSNumber numberWithInt:_dashboardDataSkip];
 }
 
+-(void) configureFilters{
+		_filterPlist = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WatchrEventFilterOptions" ofType:@"plist"]];
+	
+	_distancePiker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select radius" delegate:self showCancelButton:YES origin:self.view ];
+	_orderByPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Order by" delegate:self showCancelButton:YES origin:self.view ];
+	_orderModePicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Sort" delegate:self showCancelButton:YES origin:self.view ];
+}
 -(void) viewDidAppear:(BOOL)animated{
 
 }
@@ -154,6 +169,58 @@ enum MapViewVisibility : NSInteger {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - Action Picker Delegate
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+	return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+	if (pickerView == _distancePiker.pickerView) {
+		//if it's the distance picker view
+		return [[_filterPlist objectForKey:TDDefaultRadiusKey] count];
+	}else if(pickerView == _orderByPicker.pickerView){
+		return [[_filterPlist objectForKey:TDDefaultOrderByKey] count];
+	}else{
+		return [[_filterPlist objectForKey:TDDefaultOrderModeKey] count];
+	}
+	return 0;
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+	if (pickerView == _distancePiker.pickerView) {
+		//if it's the distance picker view
+		return [[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:row] objectForKey:@"label"];
+	}else if(pickerView == _orderByPicker.pickerView){
+		return [[[_filterPlist objectForKey:TDDefaultOrderByKey] objectAtIndex:row] objectForKey:@"label"];
+	}else{
+		return [[[_filterPlist objectForKey:TDDefaultOrderModeKey] objectAtIndex:row] objectForKey:@"label"];
+	}
+	return @"";
+}
+
+- (void)configurePickerView:(UIPickerView *)pickerView{
+
+}
+
+- (void)actionSheetPickerDidSucceed:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin{
+		
+}
+
+- (void)actionSheetPickerDidCancel:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin{
+	
+}
+
+#pragma mark - Picker Actions
+
+- (IBAction)radiusFilterButtonPressed:(id)sender {
+	[_distancePiker showActionSheetPicker];
+}
+
+- (IBAction)orderByButtonPressed:(id)sender {
+	[_orderByPicker showActionSheetPicker];
+}
+
+- (IBAction)orderModeButtonPressed:(id)sender {
+	[_orderModePicker showActionSheetPicker];
 }
 
 #pragma mark - UITableViewDelegate Methods

@@ -107,6 +107,9 @@
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="radiusFilterButtonPressed:" destination="Ss5-L8-GVy" eventType="touchUpInside" id="IOg-mr-sSV"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="8Ng-9o-nP9"/>
@@ -117,6 +120,9 @@
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="orderByButtonPressed:" destination="Ss5-L8-GVy" eventType="touchUpInside" id="coj-Tm-62g"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="oCr-Uh-1uX"/>
@@ -127,6 +133,9 @@
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="orderModeButtonPressed:" destination="Ss5-L8-GVy" eventType="touchUpInside" id="Q1W-RO-P7s"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                 </items>

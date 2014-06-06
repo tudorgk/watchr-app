@@ -74,6 +74,12 @@
 		058117661925FD6F00B79087 /* bg-red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 058117651925FD6F00B79087 /* bg-red.jpg */; };
 		0583C3E11942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3DE1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m */; };
 		0583C3E21942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */; };
+		0583C3F31942520300D8CCD7 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3E71942520300D8CCD7 /* AbstractActionSheetPicker.m */; };
+		0583C3F41942520300D8CCD7 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3E91942520300D8CCD7 /* ActionSheetCustomPicker.m */; };
+		0583C3F51942520300D8CCD7 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3EC1942520300D8CCD7 /* ActionSheetDatePicker.m */; };
+		0583C3F61942520300D8CCD7 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3EE1942520300D8CCD7 /* ActionSheetDistancePicker.m */; };
+		0583C3F71942520300D8CCD7 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3F01942520300D8CCD7 /* ActionSheetStringPicker.m */; };
+		0583C3F81942520300D8CCD7 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3F21942520300D8CCD7 /* DistancePickerView.m */; };
 		05965B9319372E2100B0B870 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05965B9219372E2100B0B870 /* CoreData.framework */; };
 		05965B971937312600B0B870 /* WatchrDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05965B951937312600B0B870 /* WatchrDB.xcdatamodeld */; };
 		05965B9A1937327E00B0B870 /* MenuItems.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05965B991937327E00B0B870 /* MenuItems.plist */; };
@@ -305,6 +311,19 @@
 		0583C3DE1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		0583C3DF1942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
 		0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		0583C3E61942520300D8CCD7 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		0583C3E71942520300D8CCD7 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		0583C3E81942520300D8CCD7 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
+		0583C3E91942520300D8CCD7 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
+		0583C3EA1942520300D8CCD7 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
+		0583C3EB1942520300D8CCD7 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		0583C3EC1942520300D8CCD7 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		0583C3ED1942520300D8CCD7 /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		0583C3EE1942520300D8CCD7 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		0583C3EF1942520300D8CCD7 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		0583C3F01942520300D8CCD7 /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		0583C3F11942520300D8CCD7 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
+		0583C3F21942520300D8CCD7 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
 		05965B9219372E2100B0B870 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		05965B961937312600B0B870 /* WatchrDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchrDB.xcdatamodel; sourceTree = "<group>"; };
 		05965B991937327E00B0B870 /* MenuItems.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuItems.plist; sourceTree = "<group>"; };
@@ -497,6 +516,7 @@
 		05409D77192557B300E8544C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0583C3E51942520200D8CCD7 /* Pickers */,
 				0583C3E41942382E00D8CCD7 /* SVPullToRefresh */,
 				0541A0D31939C8250033F3B6 /* OAuth2Client.xcodeproj */,
 				0541A0AF1938B5CD0033F3B6 /* CTAssetsPickerController */,
@@ -738,6 +758,26 @@
 				0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */,
 			);
 			name = SVPullToRefresh;
+			sourceTree = "<group>";
+		};
+		0583C3E51942520200D8CCD7 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				0583C3E61942520300D8CCD7 /* AbstractActionSheetPicker.h */,
+				0583C3E71942520300D8CCD7 /* AbstractActionSheetPicker.m */,
+				0583C3E81942520300D8CCD7 /* ActionSheetCustomPicker.h */,
+				0583C3E91942520300D8CCD7 /* ActionSheetCustomPicker.m */,
+				0583C3EA1942520300D8CCD7 /* ActionSheetCustomPickerDelegate.h */,
+				0583C3EB1942520300D8CCD7 /* ActionSheetDatePicker.h */,
+				0583C3EC1942520300D8CCD7 /* ActionSheetDatePicker.m */,
+				0583C3ED1942520300D8CCD7 /* ActionSheetDistancePicker.h */,
+				0583C3EE1942520300D8CCD7 /* ActionSheetDistancePicker.m */,
+				0583C3EF1942520300D8CCD7 /* ActionSheetStringPicker.h */,
+				0583C3F01942520300D8CCD7 /* ActionSheetStringPicker.m */,
+				0583C3F11942520300D8CCD7 /* DistancePickerView.h */,
+				0583C3F21942520300D8CCD7 /* DistancePickerView.m */,
+			);
+			path = Pickers;
 			sourceTree = "<group>";
 		};
 		05965B941937310800B0B870 /* Core Data */ = {
@@ -1341,6 +1381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0583C3F61942520300D8CCD7 /* ActionSheetDistancePicker.m in Sources */,
 				0583C3E11942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				054F409A192E2CA600960ABE /* UIImageView+HighlightedWebCache.m in Sources */,
 				05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */,
@@ -1356,6 +1397,7 @@
 				0541A0C81938B5CD0033F3B6 /* CTAssetsGroupViewController.m in Sources */,
 				054F409B192E2CA600960ABE /* UIImageView+WebCache.m in Sources */,
 				05BB5F26192FA73100D9BE6A /* TDProfileHeaderView.m in Sources */,
+				0583C3F31942520300D8CCD7 /* AbstractActionSheetPicker.m in Sources */,
 				05965BBE193776AF00B0B870 /* TDBigInputTableViewCell.m in Sources */,
 				054B8526193B5F5D009051F5 /* TDWatchrAPIManager.m in Sources */,
 				05C40A51192A4D8E002F1F1A /* MEFoldAnimationController.m in Sources */,
@@ -1389,16 +1431,20 @@
 				05965BA1193742C500B0B870 /* TDAddEventViewController.m in Sources */,
 				05228129192B86A6000E8868 /* UIView+Origami.m in Sources */,
 				054B8531193B914C009051F5 /* udevCoreDataHelper.m in Sources */,
+				0583C3F51942520300D8CCD7 /* ActionSheetDatePicker.m in Sources */,
 				0541A0CC1938B5CD0033F3B6 /* CTAssetsViewCell.m in Sources */,
 				054F40A7192E46E500960ABE /* HeaderInsetTableView.m in Sources */,
+				0583C3F41942520300D8CCD7 /* ActionSheetCustomPicker.m in Sources */,
 				0578F9821928BDCA00F8F7B3 /* ECSlidingAnimationController.m in Sources */,
 				0541A0C91938B5CD0033F3B6 /* CTAssetsPickerConstants.m in Sources */,
+				0583C3F71942520300D8CCD7 /* ActionSheetStringPicker.m in Sources */,
 				05965B971937312600B0B870 /* WatchrDB.xcdatamodeld in Sources */,
 				05C40A77192A8018002F1F1A /* MultiFoldView.m in Sources */,
 				054B8535193B9555009051F5 /* Country.m in Sources */,
 				0541A0CF1938B5CD0033F3B6 /* NSDate+timeDescription.m in Sources */,
 				05C077A21924EC12005AB425 /* main.m in Sources */,
 				054B852B193B8B3B009051F5 /* TDFirstRunManager.m in Sources */,
+				0583C3F81942520300D8CCD7 /* DistancePickerView.m in Sources */,
 				05965BAD19376BD000B0B870 /* HPGrowingTextView.m in Sources */,
 				054F408D192E2CA600960ABE /* MKAnnotationView+WebCache.m in Sources */,
 				0541A0C61938B5CD0033F3B6 /* ALAssetsGroup+isEqual.m in Sources */,

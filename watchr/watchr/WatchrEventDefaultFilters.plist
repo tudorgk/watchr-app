@@ -7,6 +7,6 @@
 	<key>sorting_filter</key>
 	<string>event_rating</string>
 	<key>radius_filter</key>
-	<string>2km</string>
+	<string>2</string>
 </dict>
 </plist>

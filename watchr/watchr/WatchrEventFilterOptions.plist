@@ -40,12 +40,36 @@
 	</array>
 	<key>radius_filter</key>
 	<array>
-		<string>1km</string>
-		<string>2km</string>
-		<string>5km</string>
-		<string>10km</string>
-		<string>40km</string>
-		<string>100km</string>
+		<dict>
+			<key>label</key>
+			<string>20km</string>
+			<key>filter</key>
+			<string>20</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>10km</string>
+			<key>filter</key>
+			<string>10</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>5km</string>
+			<key>filter</key>
+			<string>5</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>2km</string>
+			<key>filter</key>
+			<string>2</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>1km</string>
+			<key>filter</key>
+			<string>1</string>
+		</dict>
 	</array>
 </dict>
 </plist>
