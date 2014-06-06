@@ -68,7 +68,7 @@ static TDFirstRunManager * sharedManager = nil;
 	filters.filterOrderMode = [defaultFilters objectForKey:TDDefaultOrderModeKey];
 	filters.filterCount = [NSNumber numberWithInt:20];
 	filters.filterSkip = [NSNumber numberWithInt:0];
-	[[TDWatchrAPIManager sharedManager] getAllActiveEventsWithFilters:filters delegate:self];
+	//[[TDWatchrAPIManager sharedManager] getAllActiveEventsWithFilters:filters delegate:self];
 	
 }
 
@@ -111,16 +111,17 @@ static TDFirstRunManager * sharedManager = nil;
 			
 		_countriesFinished = YES;
 		
-	}else if([key isEqualToString:kTDWatchrManagerActiveEventsKey]){
-		//For active events just return them to the owner of the first run manager
-		_activeEvents = (NSArray*)data;
-		_activeEventsFinished =YES;
 	}
-	
-	if (_countriesFinished && _activeEventsFinished) {
+//	else if([key isEqualToString:kTDWatchrManagerActiveEventsKey]){
+//		//For active events just return them to the owner of the first run manager
+//		_activeEvents = (NSArray*)data;
+//		_activeEventsFinished =YES;
+//	}
+//	
+	if (_countriesFinished) {
 		if(self.delegate!=nil){
 			if([self.delegate respondsToSelector:@selector(managerDidFinishFirstTimeSetUpWithData:)])
-				[self.delegate managerDidFinishFirstTimeSetUpWithData:_activeEvents];
+				[self.delegate managerDidFinishFirstTimeSetUpWithData:nil];
 		}
 
 	}

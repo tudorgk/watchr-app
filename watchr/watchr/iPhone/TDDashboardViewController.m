@@ -147,7 +147,7 @@ enum MapViewVisibility : NSInteger {
 }
 
 -(void) viewDidAppear:(BOOL)animated{
-	
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -261,25 +261,50 @@ enum MapViewVisibility : NSInteger {
 				   }];
 }
 -(void) pullToRefreshHandler{
-	[[TDWatchrAPIManager sharedManager] getAllActiveEventsWithFilters:_dashboardFilters delegate:self];
-	[self.dashboardTableView.pullToRefreshView stopAnimating];
+	
+	//reset skip
+	_dashboardDataSkip = 0;
+	_dashboardFilters.filterSkip= [NSNumber numberWithInt:_dashboardDataSkip];
+	
+	[NXOAuth2Request performMethod:@"GET"
+						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
+				   usingParameters:[_dashboardFilters filtersToDictionary]
+					   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+			   }
+				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+					   //				   NSLog(@"response = %@", [response description]);
+					   //				   NSLog(@"error = %@", [error userInfo]);
+					   if (error) {
+						   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving events" message:[[error userInfo] description] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+						   [alert show];
+					   }else{
+
+						   [_dashboardData removeAllObjects];
+						   NSArray * data =[[TDWatchrAPIManager sharedManager] getArrayForKey:@"data" fromResponseData:responseData ];
+						   [_dashboardData addObjectsFromArray:data];
+						   [self.dashboardTableView reloadData];
+
+					   }
+					   
+					   [self.dashboardTableView.pullToRefreshView stopAnimating];
+					   
+				   }];
+
 }
 
 #pragma mark - TDFirstTunManagerDelegate methods
 
 -(void) managerDidFinishFirstTimeSetUpWithData:(id)data{
-//	[self.dashboardTableView triggerPullToRefresh];
-	[_dashboardData addObjectsFromArray:data];
-	[self.dashboardTableView reloadData];
+	[self.dashboardTableView triggerPullToRefresh];
 	[_welcomeScreen dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - TDWatchrApiManagerDelegate methods
 
 -(void) WatchrAPIManagerDidFinishWithData:(NSArray *)data forKey:(NSString *)key{
-//	NSLog(@"data=%@ and key=%@",@"data",key);
-//	[self.dashboardTableView.infiniteScrollingView stopAnimating];
-//	[self.dashboardTableView.pullToRefreshView stopAnimating];
+
 }
 
 -(void) WatchrAPIManagerDidFinishWithError:(NSError *)error{
