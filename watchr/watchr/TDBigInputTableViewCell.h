@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HPGrowingTextView.h"
+
 @interface TDBigInputTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet HPGrowingTextView *cellBigInputField;
+@property (weak, nonatomic) IBOutlet UITextView *cellBigInputField;
 
 @end

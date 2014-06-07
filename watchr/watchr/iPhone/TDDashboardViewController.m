@@ -160,7 +160,7 @@ enum MapViewVisibility : NSInteger {
         [self infiniteScrollHandler];
     }];
 	
-	self.dashboardTableView.showsInfiniteScrolling = NO;
+	self.dashboardTableView.showsInfiniteScrolling = YES;
 }
 
 -(void) configureDataSource{
@@ -171,8 +171,8 @@ enum MapViewVisibility : NSInteger {
 	_dashboardFilters = [[TDWatchrEventFilters alloc] init];
 	_dashboardFilters.filterOrderBy = [userDefaults objectForKey:TDDefaultOrderByKey];
 	_dashboardFilters.filterOrderMode = [userDefaults objectForKey:TDDefaultOrderModeKey];
-	_dashboardFilters.filterCount = [NSNumber numberWithInt:_dashboardDataCount];
-	_dashboardFilters.filterSkip = [NSNumber numberWithInt:_dashboardDataSkip];
+	_dashboardFilters.filterCount = [NSNumber numberWithInteger:_dashboardDataCount];
+	_dashboardFilters.filterSkip = [NSNumber numberWithInteger:_dashboardDataSkip];
 	
 }
 

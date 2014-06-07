@@ -13,7 +13,10 @@
 #import "TDSubmitTableViewCell.h"
 #import "TDPhotoPickerTableViewCell.h"
 #import "CTAssetsPickerController.h"
-@interface TDAddEventViewController ()<HPGrowingTextViewDelegate,CTAssetsPickerControllerDelegate,UINavigationControllerDelegate>{
+
+#define kFontSize 17.0 // fontsize
+#define kTextViewWidth 193
+@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate>{
 	NSMutableArray * _addEventItems;
 	NSMutableArray * _selectedPhotos;
 	NSMutableArray * _thumbnails;
@@ -27,6 +30,9 @@
 	TDSubmitTableViewCell * _submitCell;
 	TDPhotoPickerTableViewCell * _photoPickerCell;
 	CTAssetsPickerController * _picker;
+	
+	//Data for creating the request
+	NSString * _eventDescriptionString;
 
 
 }
@@ -107,9 +113,21 @@
 	if(_eventDescriptionCell == nil){
 		_eventDescriptionCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"bigInput"];
 		[_eventDescriptionCell.cellBigInputField setFont:[UIFont systemFontOfSize:17.0f]];
-		[_eventDescriptionCell.cellBigInputField setPlaceholder:@"Event description"];
 		[_eventDescriptionCell.cellBigInputField setDelegate:self];
-		[_eventDescriptionCell.cellBigInputField setMaxNumberOfLines:2];
+		
+		// set the model
+		_eventDescriptionString = @"";
+		
+		// create a rect for the text view so it's the right size coming out of IB. Size it to something that is form fitting to the string in the model.
+		float height = [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString];
+		CGRect textViewRect = CGRectMake(107, 4, kTextViewWidth, height);
+		
+		_eventDescriptionCell.cellBigInputField.frame = textViewRect;
+		
+		// now that we've resized the frame properly, let's run this through again to get proper dimensions for the contentSize.
+		_eventDescriptionCell.cellBigInputField.contentSize = CGSizeMake(kTextViewWidth, [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString]);
+		
+		_eventDescriptionCell.cellBigInputField.text = _eventDescriptionString;
 	}
 	
 	if (_categorySelectorCell == nil) {
@@ -142,6 +160,39 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITextViewDelegate methods
+
+- (void) textViewDidChange:(UITextView *)textView
+{
+    
+}
+
+-(BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+	
+	_eventDescriptionString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+
+    [self.addEventTableView beginUpdates];
+    [self.addEventTableView endUpdates];
+	return YES;
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView
+{
+    if (textView == _eventDescriptionCell.cellBigInputField) {
+        _eventDescriptionString = textView.text;
+    }
+}
+
+- (CGFloat)heightForTextView:(UITextView*)textView containingString:(NSString*)string
+{
+    float horizontalPadding = 24.0f;
+    float verticalPadding = 16.0f;
+    float widthOfTextView = kTextViewWidth;
+    float height = [string sizeWithFont:[UIFont systemFontOfSize:kFontSize] constrainedToSize:CGSizeMake(widthOfTextView, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
+    
+    return height;
+}
+
 #pragma mark - UITableViewDelegate Methods
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -163,9 +214,11 @@
 	if (indexPath.section < [_addEventItems count] && indexPath.section != 0 && indexPath.row !=1) {
 		return [[[[_addEventItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"height"] intValue];
 	}else if(indexPath.section == 0 && indexPath.row ==1){
-		NSLog(@"height on refresh = %lf", _eventDescriptionCell.cellBigInputField.bounds.size.height );
-		NSLog(@"frame = %@", NSStringFromCGRect(_eventDescriptionCell.cellBigInputField.bounds));
-		return _eventDescriptionCell.cellBigInputField.bounds.size.height + 10;
+		
+		NSLog(@"bounds = %@", NSStringFromCGSize(_eventDescriptionCell.cellBigInputField.contentSize));
+		
+		float height = [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString];
+        return height + 8; // a little extra padding is needed
 	}else{
 		return 44.0f;
 	}
@@ -244,38 +297,6 @@
 }
 
 #pragma mark - FPGrowingTextView Delegate Methods
-
--(void)growingTextViewDidBeginEditing:(HPGrowingTextView *)growingTextView{
-	
-}
--(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView{
-	
-}
-
-
--(void)growingTextViewDidChange:(HPGrowingTextView *)growingTextView{
-	
-}
-
-// Called WITHIN animation block!
--(void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height{
-	NSLog(@"height = %lf", height);
-	UITableViewCell * cell = [self.addEventTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] ;
-	[cell setFrame:CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, height + 10)];
-	
-
-	[_eventDescriptionCell.cellBigInputField becomeFirstResponder];
-
-}
-
-// Called after animation
--(void)growingTextView:(HPGrowingTextView *)growingTextView didChangeHeight:(float)height{
-	
-}
-
--(void)growingTextViewDidChangeSelection:(HPGrowingTextView *)growingTextView{
-	
-}
 
 #pragma mark - CTAssetsPickerControllerDelegate
 -(void) clearSelectedAssets{

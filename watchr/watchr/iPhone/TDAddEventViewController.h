@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDAddEventViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface TDAddEventViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *addEventTableView;
 
 @end
