@@ -29,9 +29,14 @@ enum MapViewVisibility : NSInteger {
 	NSDictionary * _filterPlist;
 	
 	//pickers
-	ActionSheetCustomPicker * _distancePiker ;
+	ActionSheetCustomPicker * _distancePicker ;
 	ActionSheetCustomPicker * _orderByPicker;
 	ActionSheetCustomPicker * _orderModePicker;
+	NSUInteger _distancePickerIndex;
+	NSUInteger _orderByPickerIndex;
+	NSUInteger _orderModePickerIndex;
+	
+	CLLocation * _currentLocation;
 	
 }
 -(void) configureView;
@@ -40,6 +45,9 @@ enum MapViewVisibility : NSInteger {
 -(void) pullToRefreshHandler;
 -(void) infiniteScrollHandler;
 -(void) configureFilters;
+-(void) configureLocationManager;
+-(void) resetFilterBarButtons;
+-(void) refreshDashboardFilters;
 @end
 
 @implementation TDDashboardViewController
@@ -50,7 +58,7 @@ enum MapViewVisibility : NSInteger {
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-		_mapState= MapViewVisibilityHidden;
+		
 		
 				
     }
@@ -59,6 +67,9 @@ enum MapViewVisibility : NSInteger {
 
 -(void)awakeFromNib{
 	 self.title = @"Dashboard";
+	
+	_mapState= MapViewVisibilityHidden;
+	
 	//add multiple bar button items to navigation bar
 	
 	//map button
@@ -87,9 +98,11 @@ enum MapViewVisibility : NSInteger {
 {
     [super viewDidLoad];
 	[self configureView];
-	[self configureTableView];
 	[self configureDataSource];
+	[self configureTableView];
 	[self configureFilters];
+	[self configureLocationManager];
+	[self refreshDashboardFilters];
 	//present it
 	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	[_welcomeScreen.view setBackgroundColor:[UIColor clearColor]];
@@ -114,6 +127,8 @@ enum MapViewVisibility : NSInteger {
 	UIImage * radiusImage = [UIImage imageNamed:@"user-location-small-icon.png"];
 	[self.radiusFilterButton setImage:radiusImage forState:UIControlStateNormal];
 	[self.radiusFilterButton setCustomTitle:@"2km" forControlState:UIControlStateNormal];
+
+	
 	
 //	//sort button
 	UIImage * sortImage = [UIImage imageNamed:@"sort-small-icon.png"];
@@ -124,13 +139,17 @@ enum MapViewVisibility : NSInteger {
 //	//tags button
 	UIImage * tagsImage = [UIImage imageNamed:@"tags-small-icon.png"];
 	[self.tagFilterButton setImage:tagsImage forState:UIControlStateNormal];
-	[self.tagFilterButton setCustomTitle:@"Accid." forControlState:UIControlStateNormal];
+	[self.tagFilterButton setCustomTitle:@"Desc." forControlState:UIControlStateNormal];
+	
+	
+	
 
 	
 
 }
 
 -(void) configureTableView{
+	
 	// setup pull-to-refresh
     [self.dashboardTableView addPullToRefreshWithActionHandler:^{
         [self pullToRefreshHandler];
@@ -140,6 +159,8 @@ enum MapViewVisibility : NSInteger {
     [self.dashboardTableView addInfiniteScrollingWithActionHandler:^{
         [self infiniteScrollHandler];
     }];
+	
+	self.dashboardTableView.showsInfiniteScrolling = NO;
 }
 
 -(void) configureDataSource{
@@ -152,17 +173,45 @@ enum MapViewVisibility : NSInteger {
 	_dashboardFilters.filterOrderMode = [userDefaults objectForKey:TDDefaultOrderModeKey];
 	_dashboardFilters.filterCount = [NSNumber numberWithInt:_dashboardDataCount];
 	_dashboardFilters.filterSkip = [NSNumber numberWithInt:_dashboardDataSkip];
+	
 }
 
 -(void) configureFilters{
-		_filterPlist = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WatchrEventFilterOptions" ofType:@"plist"]];
+	_distancePickerIndex = 0;
+	_orderByPickerIndex =0;
+	_orderModePickerIndex = 0;
 	
-	_distancePiker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select radius" delegate:self showCancelButton:YES origin:self.view ];
-	_orderByPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Order by" delegate:self showCancelButton:YES origin:self.view ];
-	_orderModePicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Sort" delegate:self showCancelButton:YES origin:self.view ];
+	_filterPlist = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WatchrEventFilterOptions" ofType:@"plist"]];
+	
+	_distancePicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select radius" delegate:self showCancelButton:NO origin:self.view ];
+	_orderByPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Order by" delegate:self showCancelButton:NO origin:self.view ];
+	_orderModePicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Sort" delegate:self showCancelButton:NO origin:self.view ];
+	[self resetFilterBarButtons];
 }
--(void) viewDidAppear:(BOOL)animated{
 
+-(void) configureLocationManager{
+	[[TDWatchrLocationManager sharedManager] setDelegate:self];
+}
+
+-(void) refreshDashboardFilters{
+	//sets up the filters
+	_dashboardFilters.filterOrderBy	= [[[_filterPlist objectForKey:TDDefaultOrderByKey] objectAtIndex:_orderByPickerIndex] objectForKey:@"filter"];
+	_dashboardFilters.filterOrderMode = [[[_filterPlist objectForKey:TDDefaultOrderModeKey] objectAtIndex:_orderModePickerIndex] objectForKey:@"filter"];
+	if ([TDWatchrLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
+		//set the geocode as well
+		[_dashboardFilters setFilterGeocodeWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude andRadius:[[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"filter"] doubleValue]];
+	}else{
+		_dashboardFilters.filterGeocode = nil;
+	}
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+	//check if the Location Manager has permission
+//	if ([TDWatchrLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+//		[self.radiusFilterButton setEnabled:NO];
+//	}else{
+//		[[TDWatchrLocationManager sharedManager] startUpdatingLocation];
+//	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,12 +219,28 @@ enum MapViewVisibility : NSInteger {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - CLLocationManagerDelegate Methods
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+	if (status == kCLAuthorizationStatusAuthorized) {
+		[self.radiusFilterButton setEnabled:YES];
+		[[TDWatchrLocationManager sharedManager] startUpdatingLocation];
+	}else{
+		[self.radiusFilterButton setEnabled:NO];
+	}
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+	_currentLocation = [locations lastObject];
+	[_dashboardFilters setFilterGeocodeWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude andRadius:[[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"filter"] doubleValue]];
+}
+
 #pragma mark - Action Picker Delegate
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
 	return 1;
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-	if (pickerView == _distancePiker.pickerView) {
+	if (pickerView == _distancePicker.pickerView) {
 		//if it's the distance picker view
 		return [[_filterPlist objectForKey:TDDefaultRadiusKey] count];
 	}else if(pickerView == _orderByPicker.pickerView){
@@ -186,7 +251,7 @@ enum MapViewVisibility : NSInteger {
 	return 0;
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-	if (pickerView == _distancePiker.pickerView) {
+	if (pickerView == _distancePicker.pickerView) {
 		//if it's the distance picker view
 		return [[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:row] objectForKey:@"label"];
 	}else if(pickerView == _orderByPicker.pickerView){
@@ -198,28 +263,62 @@ enum MapViewVisibility : NSInteger {
 }
 
 - (void)configurePickerView:(UIPickerView *)pickerView{
-
-}
-
-- (void)actionSheetPickerDidSucceed:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin{
-		
-}
-
-- (void)actionSheetPickerDidCancel:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin{
+	pickerView.delegate =self;
+	pickerView.dataSource =self;
+	
 	
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+	if (pickerView == _distancePicker.pickerView) {
+		//if it's the distance picker view
+		_distancePickerIndex = row;
+	}else if(pickerView == _orderByPicker.pickerView){
+		_orderByPickerIndex = row;
+	}else{
+		_orderModePickerIndex = row;
+	}
+	
+	NSLog(@"distance = %d, order by = %d, order mode = %d",_distancePickerIndex,_orderByPickerIndex,_orderModePickerIndex);
+}
+
+
+- (void)actionSheetPickerDidSucceed:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin{
+	[self resetFilterBarButtons];
+	
+	[self refreshDashboardFilters];
+	
+	//trigger the refresh
+	[self.dashboardTableView triggerPullToRefresh];
+}
+
+- (void)actionSheetPickerDidCancel:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin{
+	//does nothing really
+	
+	[self resetFilterBarButtons];
+	
+	//get the data with fitlers set
+}
+
 #pragma mark - Picker Actions
+-(void) resetFilterBarButtons{
+	[self.tagFilterButton setCustomTitle:[[[_filterPlist objectForKey:TDDefaultOrderByKey] objectAtIndex:_orderByPickerIndex] objectForKey:@"label"] forControlState:UIControlStateNormal];
+	[self.radiusFilterButton setCustomTitle:[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"label"] forControlState:UIControlStateNormal];
+	[self.sortingFilterButton setCustomTitle:[[[_filterPlist objectForKey:TDDefaultOrderModeKey] objectAtIndex:_orderModePickerIndex] objectForKey:@"label"] forControlState:UIControlStateNormal];
+}
 
 - (IBAction)radiusFilterButtonPressed:(id)sender {
-	[_distancePiker showActionSheetPicker];
+	_distancePickerIndex = 0;
+	[_distancePicker showActionSheetPicker];
 }
 
 - (IBAction)orderByButtonPressed:(id)sender {
+	_orderByPickerIndex = 0;
 	[_orderByPicker showActionSheetPicker];
 }
 
 - (IBAction)orderModeButtonPressed:(id)sender {
+	_orderModePickerIndex = 0;
 	[_orderModePicker showActionSheetPicker];
 }
 
@@ -239,7 +338,7 @@ enum MapViewVisibility : NSInteger {
 	
 	cell.cellEventTitleLabel.text = [cellData objectForKey:@"event_name"];
 	cell.cellEventDescriptionLabel.text = [cellData objectForKey:@"description"];
-	cell.cellEventDistanceLabel.text = [cellData objectForKey:@"distance"];
+	cell.cellEventDistanceLabel.text = [[cellData objectForKey:@"distance"] stringValue];
 	cell.cellRatingLabel.text = [cellData objectForKey:@"rating"];
 	cell.cellTimeLabel.text = [cellData objectForKey:@"created_at"];
 	return cell;
@@ -332,6 +431,8 @@ enum MapViewVisibility : NSInteger {
 	//reset skip
 	_dashboardDataSkip = 0;
 	_dashboardFilters.filterSkip= [NSNumber numberWithInt:_dashboardDataSkip];
+	
+	NSLog(@"filters = %@", [_dashboardFilters filtersToDictionary]);
 	
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]

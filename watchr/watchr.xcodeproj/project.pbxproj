@@ -156,6 +156,7 @@
 		05C40A7B192A8018002F1F1A /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A73192A8018002F1F1A /* UIView+Screenshot.m */; };
 		05D9AE19194227E800C3144D /* WatchrEventDefaultFilters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */; };
 		05EB294B1940AE91008C7A04 /* WatchrEventFilterOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */; };
+		05F5620319430A6900607E6F /* TDWatchrLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5620219430A6900607E6F /* TDWatchrLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -438,6 +439,8 @@
 		05C40A74192A8018002F1F1A /* PaperFoldConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldConstants.h; sourceTree = "<group>"; };
 		05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventDefaultFilters.plist; sourceTree = "<group>"; };
 		05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventFilterOptions.plist; sourceTree = "<group>"; };
+		05F5620119430A6900607E6F /* TDWatchrLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrLocationManager.h; sourceTree = "<group>"; };
+		05F5620219430A6900607E6F /* TDWatchrLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWatchrLocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -599,6 +602,7 @@
 		054B8522193B5F37009051F5 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				05F561FF19430A3300607E6F /* Location Manager */,
 				054B8528193B8B11009051F5 /* First Time Setup */,
 				054B8527193B8AFF009051F5 /* Watchr API Manager (Request Engine) */,
 			);
@@ -1192,6 +1196,15 @@
 			name = PaperFold;
 			sourceTree = "<group>";
 		};
+		05F561FF19430A3300607E6F /* Location Manager */ = {
+			isa = PBXGroup;
+			children = (
+				05F5620119430A6900607E6F /* TDWatchrLocationManager.h */,
+				05F5620219430A6900607E6F /* TDWatchrLocationManager.m */,
+			);
+			name = "Location Manager";
+			sourceTree = "<group>";
+		};
 		05FA1A90193E04D30067325B /* Event FIlters */ = {
 			isa = PBXGroup;
 			children = (
@@ -1408,6 +1421,7 @@
 				05C077A61924EC12005AB425 /* TDAppDelegate.m in Sources */,
 				05C40A53192A4D8E002F1F1A /* MEDynamicTransition.m in Sources */,
 				05C40A75192A8018002F1F1A /* FacingView.m in Sources */,
+				05F5620319430A6900607E6F /* TDWatchrLocationManager.m in Sources */,
 				0541A0C51938B5CD0033F3B6 /* ALAsset+isEqual.m in Sources */,
 				054F4097192E2CA600960ABE /* UIImage+GIF.m in Sources */,
 				054F4095192E2CA600960ABE /* SDWebImagePrefetcher.m in Sources */,

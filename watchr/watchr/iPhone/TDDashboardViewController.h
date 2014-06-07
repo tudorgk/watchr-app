@@ -13,7 +13,11 @@
 #import "TDDashboardFilterButton.h"
 #import "TDWelcomeScreenViewController.h"
 #import "ActionSheetCustomPicker.h"
-@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDFirstRunManagerDelegate,TDWatchrAPIManagerDelegate,ActionSheetCustomPickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+#import "TDWatchrLocationManager.h"
+@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDFirstRunManagerDelegate,TDWatchrAPIManagerDelegate,ActionSheetCustomPickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLLocationManagerDelegate>{
+	
+	TDWatchrLocationManager * _locationManager;
+}
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (weak, nonatomic) IBOutlet UITableView *dashboardTableView;
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;

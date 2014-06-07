@@ -101,7 +101,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" id="9Lo-7I-NNe">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KD8-kO-1zH" customClass="TDDashboardFilterButton">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" id="KD8-kO-1zH" customClass="TDDashboardFilterButton">
                                             <rect key="frame" x="16" y="6" width="80" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button">
@@ -114,7 +114,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="8Ng-9o-nP9"/>
                                     <barButtonItem style="plain" id="O8z-de-xz5">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HU5-fN-cfa" customClass="TDDashboardFilterButton">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" id="HU5-fN-cfa" customClass="TDDashboardFilterButton">
                                             <rect key="frame" x="120" y="6" width="80" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button">
@@ -127,7 +127,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="oCr-Uh-1uX"/>
                                     <barButtonItem style="plain" id="S3I-7s-P15">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8qr-5c-XAh" customClass="TDDashboardFilterButton">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" id="8qr-5c-XAh" customClass="TDDashboardFilterButton">
                                             <rect key="frame" x="224" y="6" width="80" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button">
@@ -177,8 +177,8 @@
                         <outlet property="mapButton" destination="CpH-Ej-8kC" id="yKG-rD-BJM"/>
                         <outlet property="menuButton" destination="rem-M4-iff" id="T6r-D8-zPV"/>
                         <outlet property="radiusFilterButton" destination="KD8-kO-1zH" id="WGX-B9-7Ma"/>
-                        <outlet property="sortingFilterButton" destination="HU5-fN-cfa" id="tc5-qZ-CeO"/>
-                        <outlet property="tagFilterButton" destination="8qr-5c-XAh" id="hFD-CF-tGY"/>
+                        <outlet property="sortingFilterButton" destination="8qr-5c-XAh" id="YwS-ll-cMd"/>
+                        <outlet property="tagFilterButton" destination="HU5-fN-cfa" id="0WQ-Za-50h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lsD-Jh-IYY" userLabel="First Responder" sceneMemberID="firstResponder"/>

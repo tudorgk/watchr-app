@@ -6,15 +6,15 @@
 	<array>
 		<dict>
 			<key>label</key>
-			<string>Ascending</string>
-			<key>filter</key>
-			<string>ASC</string>
-		</dict>
-		<dict>
-			<key>label</key>
 			<string>Descending</string>
 			<key>filter</key>
 			<string>DESC</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>Ascending</string>
+			<key>filter</key>
+			<string>ASC</string>
 		</dict>
 	</array>
 	<key>sorting_filter</key>
@@ -42,21 +42,9 @@
 	<array>
 		<dict>
 			<key>label</key>
-			<string>20km</string>
+			<string>1km</string>
 			<key>filter</key>
-			<string>20</string>
-		</dict>
-		<dict>
-			<key>label</key>
-			<string>10km</string>
-			<key>filter</key>
-			<string>10</string>
-		</dict>
-		<dict>
-			<key>label</key>
-			<string>5km</string>
-			<key>filter</key>
-			<string>5</string>
+			<string>1</string>
 		</dict>
 		<dict>
 			<key>label</key>
@@ -66,9 +54,21 @@
 		</dict>
 		<dict>
 			<key>label</key>
-			<string>1km</string>
+			<string>5km</string>
 			<key>filter</key>
-			<string>1</string>
+			<string>5</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>10km</string>
+			<key>filter</key>
+			<string>10</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>20km</string>
+			<key>filter</key>
+			<string>20</string>
 		</dict>
 	</array>
 </dict>
