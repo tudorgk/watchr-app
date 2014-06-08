@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TDAddEventViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
+#import <MapKit/MapKit.h>
+@interface TDAddEventViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>{
+	MKPointAnnotation * _watchrEventPoint;
+}
 @property (weak, nonatomic) IBOutlet UITableView *addEventTableView;
 
 @end

@@ -15,8 +15,8 @@
 #import "CTAssetsPickerController.h"
 
 #define kFontSize 17.0 // fontsize
-#define kTextViewWidth 200
-@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate>{
+#define kTextViewWidth 193
+@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate>{
 	NSMutableArray * _addEventItems;
 	NSMutableArray * _selectedPhotos;
 	NSMutableArray * _thumbnails;
@@ -41,6 +41,7 @@
 -(void) configureTableView;
 -(void) userDidCancel:(id) sender;
 -(void) clearSelectedAssets;
+-(void) configureDefaultValues;
 @end
 
 @implementation TDAddEventViewController
@@ -60,10 +61,8 @@
 	[self configureView];
 	[self configureTableView];
 	[self initialiseCells];
-
+	[self configureDefaultValues];
 	
-	_selectedPhotos = [[NSMutableArray alloc] init];
-	_thumbnails = [[NSMutableArray alloc] init];
 }
 
 -(void) configureView{
@@ -136,9 +135,7 @@
 	
 	if (_mapSelectorCell == nil) {
 		_mapSelectorCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"mapSelector"];
-		CLLocationCoordinate2D userLocation = _mapSelectorCell.cellPreviewMap.userLocation.location.coordinate;
-		MKCoordinateRegion adjustedRegion = [_mapSelectorCell.cellPreviewMap regionThatFits:MKCoordinateRegionMakeWithDistance(userLocation, 200, 200)];
-		[_mapSelectorCell.cellPreviewMap setRegion:adjustedRegion animated:YES];
+		_mapSelectorCell.delegate = self;
 	}
 	
 	if(_submitCell == nil){
@@ -154,10 +151,42 @@
 	
 }
 
+-(void) configureDefaultValues{
+	_selectedPhotos = [[NSMutableArray alloc] init];
+	_thumbnails = [[NSMutableArray alloc] init];
+	
+	if (_watchrEventPoint == nil) {
+		_watchrEventPoint = [[MKPointAnnotation alloc] init];
+		CLLocationCoordinate2D userLocation = _mapSelectorCell.cellPreviewMap.userLocation.location.coordinate;
+		_watchrEventPoint.coordinate = userLocation;
+//		_watchrEventPoint.title = @"Where am I?";
+		
+		[_mapSelectorCell.cellPreviewMap addAnnotation:_watchrEventPoint];
+	}
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - TDMapSelectorTableViewCellDelegate methods
+-(void) mapSelectorCell:(TDMapSelectorTableViewCell*) mapCell myLocationButtonPressed:(id) sender{
+	NSLog(@"map selector delegate my location button pressed");
+	
+	//TODO: set the location to be the same with the user's location. animate preview map
+	_watchrEventPoint.coordinate = _mapSelectorCell.cellPreviewMap.userLocation.coordinate;
+	[_mapSelectorCell.cellPreviewMap addAnnotation:_watchrEventPoint];
+
+	//TODO: Reverse geocode the position and write the address in cellTitleLabel
+	
+	//TODO: change the button's icon
+	
+	//TODO:
+}
+-(void) mapSelectorCell:(TDMapSelectorTableViewCell*) mapCell mapTapped:(id)sender{
+	
 }
 
 #pragma mark - UITextViewDelegate methods
@@ -187,11 +216,9 @@
 {
 	
 	CGSize maximumLabelSize = CGSizeMake(kTextViewWidth, FLT_MAX);
-	
-//	NSDictionary *stringAttributes = [NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:kFontSize] forKey: NSFontAttributeName];
-	
+		
 	NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	[style setLineBreakMode:NSLineBreakByCharWrapping];
 	
 	NSDictionary * stringAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:kFontSize],
 										NSParagraphStyleAttributeName: style};
@@ -201,11 +228,7 @@
 												  attributes:stringAttributes context:nil].size;
 	
 	
-//    float horizontalPadding = 24.0f;
     float verticalPadding = 17.0f;
-//    float widthOfTextView = kTextViewWidth;
-//    float height = [string sizeWithFont:[UIFont systemFontOfSize:kFontSize] constrainedToSize:CGSizeMake(widthOfTextView, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
-//    
     return textViewSize.height + verticalPadding;
 }
 
@@ -311,8 +334,6 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
 	return [_addEventItems count] + 1;
 }
-
-#pragma mark - FPGrowingTextView Delegate Methods
 
 #pragma mark - CTAssetsPickerControllerDelegate
 -(void) clearSelectedAssets{

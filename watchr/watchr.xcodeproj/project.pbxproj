@@ -154,6 +154,11 @@
 		05C40A79192A8018002F1F1A /* ShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A6F192A8018002F1F1A /* ShadowView.m */; };
 		05C40A7A192A8018002F1F1A /* TouchThroughUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A71192A8018002F1F1A /* TouchThroughUIView.m */; };
 		05C40A7B192A8018002F1F1A /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C40A73192A8018002F1F1A /* UIView+Screenshot.m */; };
+		05C6AFB5194452BD007E68AC /* user-location-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB1194452BD007E68AC /* user-location-off.png */; };
+		05C6AFB6194452BD007E68AC /* user-location-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB2194452BD007E68AC /* user-location-off@2x.png */; };
+		05C6AFB7194452BD007E68AC /* user-location-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB3194452BD007E68AC /* user-location-on.png */; };
+		05C6AFB8194452BD007E68AC /* user-location-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB4194452BD007E68AC /* user-location-on@2x.png */; };
+		05C6AFBC19445BBF007E68AC /* TDMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C6AFBB19445BBF007E68AC /* TDMapPin.m */; };
 		05D9AE19194227E800C3144D /* WatchrEventDefaultFilters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */; };
 		05EB294B1940AE91008C7A04 /* WatchrEventFilterOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */; };
 		05F5620319430A6900607E6F /* TDWatchrLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5620219430A6900607E6F /* TDWatchrLocationManager.m */; };
@@ -437,6 +442,12 @@
 		05C40A72192A8018002F1F1A /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
 		05C40A73192A8018002F1F1A /* UIView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screenshot.m"; sourceTree = "<group>"; };
 		05C40A74192A8018002F1F1A /* PaperFoldConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldConstants.h; sourceTree = "<group>"; };
+		05C6AFB1194452BD007E68AC /* user-location-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-off.png"; sourceTree = "<group>"; };
+		05C6AFB2194452BD007E68AC /* user-location-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-off@2x.png"; sourceTree = "<group>"; };
+		05C6AFB3194452BD007E68AC /* user-location-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-on.png"; sourceTree = "<group>"; };
+		05C6AFB4194452BD007E68AC /* user-location-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-on@2x.png"; sourceTree = "<group>"; };
+		05C6AFBA19445BBF007E68AC /* TDMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDMapPin.h; sourceTree = "<group>"; };
+		05C6AFBB19445BBF007E68AC /* TDMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDMapPin.m; sourceTree = "<group>"; };
 		05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventDefaultFilters.plist; sourceTree = "<group>"; };
 		05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventFilterOptions.plist; sourceTree = "<group>"; };
 		05F5620119430A6900607E6F /* TDWatchrLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrLocationManager.h; sourceTree = "<group>"; };
@@ -630,6 +641,7 @@
 		054F4058192E1AA200960ABE /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				05C6AFB919445B9C007E68AC /* Map Pin */,
 				054F4059192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard */,
 				05965B9E1937428C00B0B870 /* Add Event View Controller */,
 				054F4069192E292900960ABE /* Event Details View Controller */,
@@ -1106,6 +1118,7 @@
 		05C0782C1924FCC8005AB425 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				05C6AFAF194452A0007E68AC /* Add Event */,
 				05BB5F04192F7BF000D9BE6A /* Menu */,
 				05228136192BB0B8000E8868 /* Dashboard */,
 				05C0782D1924FCD4005AB425 /* Intro */,
@@ -1194,6 +1207,26 @@
 				05C40A74192A8018002F1F1A /* PaperFoldConstants.h */,
 			);
 			name = PaperFold;
+			sourceTree = "<group>";
+		};
+		05C6AFAF194452A0007E68AC /* Add Event */ = {
+			isa = PBXGroup;
+			children = (
+				05C6AFB1194452BD007E68AC /* user-location-off.png */,
+				05C6AFB2194452BD007E68AC /* user-location-off@2x.png */,
+				05C6AFB3194452BD007E68AC /* user-location-on.png */,
+				05C6AFB4194452BD007E68AC /* user-location-on@2x.png */,
+			);
+			name = "Add Event";
+			sourceTree = "<group>";
+		};
+		05C6AFB919445B9C007E68AC /* Map Pin */ = {
+			isa = PBXGroup;
+			children = (
+				05C6AFBA19445BBF007E68AC /* TDMapPin.h */,
+				05C6AFBB19445BBF007E68AC /* TDMapPin.m */,
+			);
+			name = "Map Pin";
 			sourceTree = "<group>";
 		};
 		05F561FF19430A3300607E6F /* Location Manager */ = {
@@ -1343,6 +1376,7 @@
 				05BB5F22192F7E6E00D9BE6A /* SideMenuStoryboard_iPhone.storyboard in Resources */,
 				05C077B41924EC12005AB425 /* Images.xcassets in Resources */,
 				05228140192BC3F5000E8868 /* tags-small-icon@2x.png in Resources */,
+				05C6AFB7194452BD007E68AC /* user-location-on.png in Resources */,
 				058117621925FC6E00B79087 /* blurred-violet.jpg in Resources */,
 				05C077A91924EC12005AB425 /* Main_iPhone.storyboard in Resources */,
 				05228134192BB0B6000E8868 /* pin-small-icon.png in Resources */,
@@ -1350,9 +1384,11 @@
 				05C0783E19253C6E005AB425 /* back-chevron@2x.png in Resources */,
 				05BB5F12192F7C1800D9BE6A /* menu-feed-icon-on@2x.png in Resources */,
 				05BB5F19192F7C1800D9BE6A /* menu-settings-icon-on@2x.png in Resources */,
+				05C6AFB5194452BD007E68AC /* user-location-off.png in Resources */,
 				05C077A01924EC12005AB425 /* InfoPlist.strings in Resources */,
 				05C0783F19253C6E005AB425 /* login-background@2x.png in Resources */,
 				05C0783D19253C6E005AB425 /* back-chevron.png in Resources */,
+				05C6AFB8194452BD007E68AC /* user-location-on@2x.png in Resources */,
 				05BB5F30192FAC7100D9BE6A /* menu-notification-button-on@2x.png in Resources */,
 				05EB294B1940AE91008C7A04 /* WatchrEventFilterOptions.plist in Resources */,
 				05BB5F1B192F7C1800D9BE6A /* menu-spots-icon-on@2x.png in Resources */,
@@ -1376,6 +1412,7 @@
 				0522813E192BC3F5000E8868 /* sort-small-icon@2x.png in Resources */,
 				05BB5F11192F7C1800D9BE6A /* menu-feed-icon-off@2x.png in Resources */,
 				05228133192BB0B6000E8868 /* importance-icon@2x.png in Resources */,
+				05C6AFB6194452BD007E68AC /* user-location-off@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1421,6 +1458,7 @@
 				05C077A61924EC12005AB425 /* TDAppDelegate.m in Sources */,
 				05C40A53192A4D8E002F1F1A /* MEDynamicTransition.m in Sources */,
 				05C40A75192A8018002F1F1A /* FacingView.m in Sources */,
+				05C6AFBC19445BBF007E68AC /* TDMapPin.m in Sources */,
 				05F5620319430A6900607E6F /* TDWatchrLocationManager.m in Sources */,
 				0541A0C51938B5CD0033F3B6 /* ALAsset+isEqual.m in Sources */,
 				054F4097192E2CA600960ABE /* UIImage+GIF.m in Sources */,
