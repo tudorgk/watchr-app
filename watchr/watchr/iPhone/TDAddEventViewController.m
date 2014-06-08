@@ -15,7 +15,7 @@
 #import "CTAssetsPickerController.h"
 
 #define kFontSize 17.0 // fontsize
-#define kTextViewWidth 193
+#define kTextViewWidth 200
 @interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate>{
 	NSMutableArray * _addEventItems;
 	NSMutableArray * _selectedPhotos;
@@ -185,12 +185,28 @@
 
 - (CGFloat)heightForTextView:(UITextView*)textView containingString:(NSString*)string
 {
-    float horizontalPadding = 24.0f;
-    float verticalPadding = 16.0f;
-    float widthOfTextView = kTextViewWidth;
-    float height = [string sizeWithFont:[UIFont systemFontOfSize:kFontSize] constrainedToSize:CGSizeMake(widthOfTextView, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
-    
-    return height;
+	
+	CGSize maximumLabelSize = CGSizeMake(kTextViewWidth, FLT_MAX);
+	
+//	NSDictionary *stringAttributes = [NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:kFontSize] forKey: NSFontAttributeName];
+	
+	NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[style setLineBreakMode:NSLineBreakByWordWrapping];
+	
+	NSDictionary * stringAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:kFontSize],
+										NSParagraphStyleAttributeName: style};
+	
+	CGSize textViewSize = [string boundingRectWithSize:maximumLabelSize
+													 options:NSStringDrawingUsesLineFragmentOrigin
+												  attributes:stringAttributes context:nil].size;
+	
+	
+//    float horizontalPadding = 24.0f;
+    float verticalPadding = 17.0f;
+//    float widthOfTextView = kTextViewWidth;
+//    float height = [string sizeWithFont:[UIFont systemFontOfSize:kFontSize] constrainedToSize:CGSizeMake(widthOfTextView, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
+//    
+    return textViewSize.height + verticalPadding;
 }
 
 #pragma mark - UITableViewDelegate Methods
@@ -218,7 +234,7 @@
 		NSLog(@"bounds = %@", NSStringFromCGSize(_eventDescriptionCell.cellBigInputField.contentSize));
 		
 		float height = [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString];
-        return height + 8; // a little extra padding is needed
+        return height + 17; // a little extra padding is needed
 	}else{
 		return 44.0f;
 	}
