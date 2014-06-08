@@ -107,8 +107,17 @@ enum MapViewVisibility : NSInteger {
 	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	[_welcomeScreen.view setBackgroundColor:[UIColor clearColor]];
 	_welcomeScreen.ownerViewController = self;
-	//present it
-	[self presentViewController:_welcomeScreen animated:NO completion:nil];
+	//present it if there are no accounts registered
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] == nil) {
+		//this means that the app has no login info
+		for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
+			[[NXOAuth2AccountStore sharedStore] removeAccount:account];
+		}
+		[self presentViewController:_welcomeScreen animated:NO completion:nil];
+	}else{
+		[self.dashboardTableView triggerPullToRefresh];
+	}
+
 		
 	
 }

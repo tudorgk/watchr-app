@@ -17,7 +17,11 @@
 #define kFontSize 17.0 // fontsize
 #define kTextViewWidth 193
 @interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate>{
+	//the form
 	NSMutableArray * _addEventItems;
+	
+	
+	//photos
 	NSMutableArray * _selectedPhotos;
 	NSMutableArray * _thumbnails;
 	
@@ -33,6 +37,10 @@
 	
 	//Data for creating the request
 	NSString * _eventDescriptionString;
+	NSString * _eventNameString;
+	
+	UITapGestureRecognizer * _dismissKeyboardTapper;
+	id _activeInputField;
 
 
 }
@@ -84,6 +92,8 @@
 	UIBarButtonItem * dismissButtonItem = [[UIBarButtonItem alloc] initWithCustomView:dismissButton];
 	
 	[self.navigationItem setLeftBarButtonItem:dismissButtonItem];
+	
+	
 }
 
 -(void) configureTableView{
@@ -100,6 +110,11 @@
 	NSDictionary * attributes = [NSDictionary dictionaryWithObjectsAndKeys:
 								 [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0], NSForegroundColorAttributeName, nil];
 	_picker.navigationBar.titleTextAttributes = attributes;
+
+	_activeInputField = nil;
+	//add a tap gesture recognizer to dismiss the keyboard
+	_dismissKeyboardTapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+	[self.addEventTableView addGestureRecognizer:_dismissKeyboardTapper];
 	
 
 }
@@ -107,6 +122,8 @@
 -(void) initialiseCells{
 	if(_eventNameCell == nil){
 		_eventNameCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"input"];
+		_eventNameCell.cellInputField.delegate = self;
+		_eventNameString = @"";
 	}
 	
 	if(_eventDescriptionCell == nil){
@@ -131,6 +148,7 @@
 	
 	if (_categorySelectorCell == nil) {
 		_categorySelectorCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"selector"];
+		_categorySelectorCell.detailTextLabel.text = @"None";
 	}
 	
 	if (_mapSelectorCell == nil) {
@@ -140,13 +158,14 @@
 	
 	if(_submitCell == nil){
 		_submitCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"submit"];
+		UITapGestureRecognizer * tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(submitButtonTapped:)];
+		[_submitCell.cellSubmitLabel addGestureRecognizer:tapper];
 	}
 	
 	if(_photoPickerCell == nil){
 		_photoPickerCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"photoPicker"];
 		UITapGestureRecognizer * tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped:)];
 		[_photoPickerCell.cellThumbnailsScrollView addGestureRecognizer:tapper];
-
 	}
 	
 }
@@ -159,7 +178,14 @@
 		_watchrEventPoint = [[MKPointAnnotation alloc] init];
 		CLLocationCoordinate2D userLocation = _mapSelectorCell.cellPreviewMap.userLocation.location.coordinate;
 		_watchrEventPoint.coordinate = userLocation;
-//		_watchrEventPoint.title = @"Where am I?";
+		
+		
+		//setup the label
+		CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+		[geoCoder reverseGeocodeLocation:_mapSelectorCell.cellPreviewMap.userLocation.location completionHandler:^(NSArray *placemarks, NSError *error) {
+			CLPlacemark * placemark = [placemarks firstObject];
+			_mapSelectorCell.cellTitleLabel.text = placemark.name;
+		}];
 		
 		[_mapSelectorCell.cellPreviewMap addAnnotation:_watchrEventPoint];
 	}
@@ -170,6 +196,106 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)viewDidAppear:(BOOL)animated{
+	[self subscribeToKeyboardEvents:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [self subscribeToKeyboardEvents:NO];
+}
+
+
+
+
+#pragma maek - Keyboard handlers
+
+-(void) dismissKeyboard:(id)sender{
+	if (_activeInputField!=nil) {
+		if ([_activeInputField respondsToSelector:@selector(resignFirstResponder)]) {
+			[_activeInputField resignFirstResponder];
+			_activeInputField = nil;
+		}
+	}
+}
+
+- (void)subscribeToKeyboardEvents:(BOOL)subscribe{
+	
+    if(subscribe){
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardDidShow:)
+                                                     name:UIKeyboardDidShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification object:nil];
+    }else{
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+	
+}
+
+- (void) keyboardDidShow:(NSNotification *)nsNotification {
+	
+    NSDictionary * userInfo = [nsNotification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+	
+    CGRect newFrame = [self.addEventTableView frame];
+	
+    CGFloat kHeight = kbSize.height;
+	
+    if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)){
+        kHeight = kbSize.width;
+    }
+	
+    newFrame.size.height -= kHeight;
+	
+    [self.addEventTableView setFrame:newFrame];
+	
+}
+
+- (void) keyboardWillHide:(NSNotification *)nsNotification {
+	
+    NSDictionary * userInfo = [nsNotification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    CGRect newFrame = [self.addEventTableView frame];
+	
+    CGFloat kHeight = kbSize.height;
+	
+    if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)){
+        kHeight = kbSize.width;
+    }
+	
+    newFrame.size.height += kHeight;
+	
+    // save the content offset before the frame change
+    CGPoint contentOffsetBefore = self.addEventTableView.contentOffset;
+	
+    [self.addEventTableView setHidden:YES];
+	
+    // set the new frame
+    [self.addEventTableView setFrame:newFrame];
+	
+    // get the content offset after the frame change
+    CGPoint contentOffsetAfter =  self.addEventTableView.contentOffset;
+	
+    // content offset initial state
+    [self.addEventTableView setContentOffset:contentOffsetBefore];
+	
+    [self.addEventTableView setHidden:NO];
+	
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         [self.addEventTableView setContentOffset:contentOffsetAfter];
+                     }
+                     completion:^(BOOL finished){
+                         // do nothing for the time being...
+                     }
+     ];
+	
+}
+
+
+
 
 #pragma mark - TDMapSelectorTableViewCellDelegate methods
 -(void) mapSelectorCell:(TDMapSelectorTableViewCell*) mapCell myLocationButtonPressed:(id) sender{
@@ -180,20 +306,54 @@
 	[_mapSelectorCell.cellPreviewMap addAnnotation:_watchrEventPoint];
 
 	//TODO: Reverse geocode the position and write the address in cellTitleLabel
+	CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+	[geoCoder reverseGeocodeLocation:_mapSelectorCell.cellPreviewMap.userLocation.location completionHandler:^(NSArray *placemarks, NSError *error) {
+		if (error) {
+			UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error updating location" message:@"Check if you have location services turned om" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+			[alert show	];
+			_mapSelectorCell.cellTitleLabel.text = @"";
+		}else{
+		CLPlacemark * placemark = [placemarks firstObject];
+			_mapSelectorCell.cellTitleLabel.text = placemark.name;
+		}
+	}];
 	
 	//TODO: change the button's icon
+	[_mapSelectorCell.cellMyLocationButton setImage:[UIImage imageNamed:@"user-location-on.png"] forState:UIControlStateNormal];
 	
-	//TODO:
+
 }
 -(void) mapSelectorCell:(TDMapSelectorTableViewCell*) mapCell mapTapped:(id)sender{
 	
+}
+
+
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+	
+	_eventNameString =[textField.text stringByReplacingCharactersInRange:range withString:string];
+	
+	return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+	_eventNameString =textField.text;
+}
+
+-(void) textFieldDidBeginEditing:(UITextField *)textField{
+	_activeInputField = textField;
 }
 
 #pragma mark - UITextViewDelegate methods
 
 - (void) textViewDidChange:(UITextView *)textView
 {
-    
+    _eventDescriptionString	 = textView.text;
+}
+
+-(void) textViewDidBeginEditing:(UITextView *)textView{
+	_activeInputField = textView;
 }
 
 -(BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
@@ -228,7 +388,7 @@
 												  attributes:stringAttributes context:nil].size;
 	
 	
-    float verticalPadding = 17.0f;
+    float verticalPadding = kFontSize;
     return textViewSize.height + verticalPadding;
 }
 
@@ -239,13 +399,21 @@
 		case 3:
 		{
 			[self presentViewController:_picker animated:YES completion:nil];
-			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			
+		}
+			break;
+		case 4:
+		{
+			//submit
+			[self submitWatchrEventToServer];
 		}
 			break;
 			
 		default:
 			break;
 	}
+	
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -253,11 +421,8 @@
 	if (indexPath.section < [_addEventItems count] && indexPath.section != 0 && indexPath.row !=1) {
 		return [[[[_addEventItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"height"] intValue];
 	}else if(indexPath.section == 0 && indexPath.row ==1){
-		
-		NSLog(@"bounds = %@", NSStringFromCGSize(_eventDescriptionCell.cellBigInputField.contentSize));
-		
 		float height = [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString];
-        return height + 17; // a little extra padding is needed
+        return height + kFontSize; // a little extra padding is needed
 	}else{
 		return 44.0f;
 	}
@@ -394,14 +559,65 @@
 	[self clearSelectedAssets];
 	[_picker dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma mark - Watchr API handlers
+
+-(void) submitWatchrEventToServer{
+	
+	
+	if ([_selectedPhotos count]!=0) {
+		//if we post an event with w/ media
+
+	}else{
+		//if we post an event with w/o media
+		
+		//setup the parameters
+		/*
+		 'event_name' => 'required|max:100',
+		 'event_description' => 'max:400',
+		 'categories' => 'required|array', //don't need to send categories (if it's empty, category is unknown(5))
+		 'latitude' => 'required|numeric',
+		 'longitude' => 'required|numeric'
+		 */
+		
+		
+		
+		//send the request
+		[NXOAuth2Request performMethod:@"POST"
+							onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/new"]]
+					   usingParameters:nil
+						   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+				   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+					   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+				   }
+					   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+						   NSString * responseString =[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+						   NSLog(@"responseData = %@", responseString );
+						   NSLog(@"response = %@", [response description]);
+						   NSLog(@"error = %@", [error userInfo]);
+						   
+						   //if error
+						   if (error) {
+							   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:error.localizedDescription  message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+							   [alert show];
+							   return;
+						   }
+						   
+					   }];
+	}
+}
+
 #pragma mark - Navigation Methods
 
 -(void) userDidCancel:(id)sender{
-	[self.navigationController dismissViewControllerAnimated:YES completion:^{}];
+	[self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 -(void) scrollViewTapped:(id) sender{
 	[self.addEventTableView.delegate tableView:self.addEventTableView didSelectRowAtIndexPath: [self.addEventTableView indexPathForCell:_photoPickerCell]];
+}
+
+-(void) submitButtonTapped:(id) sender{
+	[self.addEventTableView.delegate tableView:self.addEventTableView didSelectRowAtIndexPath: [self.addEventTableView indexPathForCell:_submitCell]];
 }
 
 @end

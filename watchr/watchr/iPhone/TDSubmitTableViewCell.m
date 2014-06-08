@@ -31,7 +31,5 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)submitButtonPressed:(id)sender {
-	NSLog(@"submit pressed");
-}
+
 @end

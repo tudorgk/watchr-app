@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-@interface TDAddEventViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>{
+@interface TDAddEventViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>{
 	MKPointAnnotation * _watchrEventPoint;
 }
 @property (weak, nonatomic) IBOutlet UITableView *addEventTableView;
 
+-(void) dismissKeyboard:(id)sender;
+-(void) submitWatchrEventToServer;
 @end

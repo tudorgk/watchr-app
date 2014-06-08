@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TDSubmitTableViewCell : UITableViewCell
-- (IBAction)submitButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *cellSubmitLabel;
+
 
 @end

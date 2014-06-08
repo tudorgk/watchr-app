@@ -33,9 +33,9 @@
 	
 		//TODO: Remove all accounts for testing purpouses
 		NSLog(@"accounts = %@", [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]);
-		for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
-			[[NXOAuth2AccountStore sharedStore] removeAccount:account];
-		}
+//		for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
+//			[[NXOAuth2AccountStore sharedStore] removeAccount:account];
+//		}
 		
 	}
     return YES;
