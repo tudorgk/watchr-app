@@ -419,6 +419,7 @@
 		case 4:
 		{
 			//submit
+			[_activeInputField resignFirstResponder];
 			[self submitWatchrEventToServer];
 		}
 			break;
@@ -578,7 +579,7 @@
 -(void) submitWatchrEventToServer{
 	
 	// Block whole window
-	MRProgressOverlayView * progressVIew = [MRProgressOverlayView showOverlayAddedTo:self.navigationController.view title:@"Posting event" mode:MRProgressOverlayViewModeDeterminateHorizontalBar animated:YES];
+	MRProgressOverlayView * progressView = [MRProgressOverlayView showOverlayAddedTo:self.navigationController.view title:@"Posting event" mode:MRProgressOverlayViewModeDeterminateHorizontalBar animated:YES];
 	
 	NSMutableDictionary * parameters = [NSMutableDictionary new];
 	
@@ -627,7 +628,7 @@
 					   double total = bytesTotal;
 					   float ratio = sent/total;
 					   
-					   [progressVIew setProgress:ratio animated:YES];
+					   [progressView setProgress:ratio animated:YES];
 				   }
 					   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
 						   NSString * responseString =[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
@@ -635,17 +636,34 @@
 						   NSLog(@"response = %@", [response description]);
 						   NSLog(@"error = %@", [error userInfo]);
 						   
-						   //Dismiss
-						   [MRProgressOverlayView dismissOverlayForView:self.navigationController.view animated:YES];
-						   
 						   //if error
 						   if (error) {
-							   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:error.localizedDescription  message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-							   [alert show];
+							   //Dismiss
+							   progressView.mode = MRProgressOverlayViewModeCross;
+							   progressView.titleLabelText = @"Failed to post event";
+							   [TDHelperClass performBlock:^{
+								   [MRProgressOverlayView dismissOverlayForView:self.navigationController.view animated:YES ];
+								   if (_delegate) {
+									   if ([_delegate respondsToSelector:@selector(controller:didPostEventSuccessfully:)]) {
+										   [_delegate controller:self didPostEventSuccessfully:NO];
+									   }
+								   }
+							   } afterDelay:1.0];
+
 							   return;
 						   }
-						   
-						   //TODO: dismiss this view controller and notify the delegate that the event was added
+						   //Dismiss
+						   progressView.mode = MRProgressOverlayViewModeCheckmark;
+						   progressView.titleLabelText = @"Event posted";
+						   [TDHelperClass performBlock:^{
+							   [MRProgressOverlayView dismissOverlayForView:self.navigationController.view animated:YES ];
+							   //TODO: dismiss this view controller and notify the delegate that the event was added
+							   if (_delegate) {
+								   if ([_delegate respondsToSelector:@selector(controller:didPostEventSuccessfully:)]) {
+									   [_delegate controller:self didPostEventSuccessfully:YES];
+								   }
+							   }
+						   } afterDelay:1.0];
 						
 					   }];
 	
@@ -659,9 +677,7 @@
 		 'latitude' => 'required|numeric',
 		 'longitude' => 'required|numeric'
 		 */
-		
-		
-				
+			
 		//send the request
 		[NXOAuth2Request performMethod:@"POST"
 							onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/new"]]
@@ -674,7 +690,7 @@
 					   double total = bytesTotal;
 					   float ratio = sent/total;
 					   
-					   [progressVIew setProgress:ratio animated:YES];
+					   [progressView setProgress:ratio animated:YES];
 				   }
 					   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
 						   NSString * responseString =[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
@@ -682,17 +698,39 @@
 						   NSLog(@"response = %@", [response description]);
 						   NSLog(@"error = %@", [error userInfo]);
 						   
-						   //Dismiss
-						   [MRProgressOverlayView dismissOverlayForView:self.navigationController.view animated:YES];
+						   
 						   
 						   //if error
 						   if (error) {
-							   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:error.localizedDescription  message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-							   [alert show];
-							   return;
+							   //Dismiss
+							   
+							   progressView.mode = MRProgressOverlayViewModeCross;
+							   progressView.titleLabelText = @"Failed to post event";
+							   [TDHelperClass performBlock:^{
+								   [MRProgressOverlayView dismissOverlayForView:self.navigationController.view animated:YES ];
+								   if (_delegate) {
+									   if ([_delegate respondsToSelector:@selector(controller:didPostEventSuccessfully:)]) {
+										   [_delegate controller:self didPostEventSuccessfully:NO];
+									   }
+								   }
+							   } afterDelay:1.0];
+							   
+  							   return;
 						   }
 						   
-  						   //TODO: dismiss this view controller and notify the delegate that the event was added
+						   //Dismiss
+						   progressView.mode = MRProgressOverlayViewModeCheckmark;
+						   progressView.titleLabelText = @"Event posted";
+						   [TDHelperClass performBlock:^{
+							   [MRProgressOverlayView dismissOverlayForView:self.navigationController.view animated:YES ];
+							    //TODO: dismiss this view controller and notify the delegate that the event was added
+							   if (_delegate) {
+								   if ([_delegate respondsToSelector:@selector(controller:didPostEventSuccessfully:)]) {
+									   [_delegate controller:self didPostEventSuccessfully:YES];
+								   }
+							   }
+						   } afterDelay:1.0];
+  						  
 					   }];
 	}
 }
@@ -744,5 +782,7 @@
 	[self.navigationController popViewControllerAnimated:YES];
 
 }
+
+
 
 @end

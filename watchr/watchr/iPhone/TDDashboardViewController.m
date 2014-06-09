@@ -395,7 +395,10 @@ enum MapViewVisibility : NSInteger {
 -(IBAction)addButtonPressed:(id)sender
 {
 	UINavigationController * addEventNavigationController  = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"addEventNavigationController"];
+	//set the delegate for add event view controller. it must be the first view controller in the stack to refresh the list
+	((TDAddEventViewController*)addEventNavigationController.viewControllers[0]).delegate =self;
 	
+	//present it
 	[self presentViewController:addEventNavigationController animated:YES completion:^{
 		
 	}];
@@ -478,6 +481,16 @@ enum MapViewVisibility : NSInteger {
 	[self.dashboardTableView triggerPullToRefresh];
 	[_welcomeScreen dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - TDAddEventViewControllerDelegate methods
+
+-(void) controller:(TDAddEventViewController *)addEventViewController didPostEventSuccessfully:(BOOL)success{
+	if (success) {
+		[self.dashboardTableView triggerPullToRefresh];
+		[self dismissViewControllerAnimated:YES completion:nil];
+	}
+}
+
 
 #pragma mark - TDWatchrApiManagerDelegate methods
 

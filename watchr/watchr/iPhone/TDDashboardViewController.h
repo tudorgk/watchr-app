@@ -14,7 +14,8 @@
 #import "TDWelcomeScreenViewController.h"
 #import "ActionSheetCustomPicker.h"
 #import "TDWatchrLocationManager.h"
-@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDFirstRunManagerDelegate,TDWatchrAPIManagerDelegate,ActionSheetCustomPickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLLocationManagerDelegate>{
+#import	"TDAddEventViewController.h"
+@interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDFirstRunManagerDelegate,TDWatchrAPIManagerDelegate,ActionSheetCustomPickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLLocationManagerDelegate,TDAddEventViewControllerDelegate>{
 	
 	TDWatchrLocationManager * _locationManager;
 }

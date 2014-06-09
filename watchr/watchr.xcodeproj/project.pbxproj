@@ -157,6 +157,7 @@
 		05C6AFB6194452BD007E68AC /* user-location-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB2194452BD007E68AC /* user-location-off@2x.png */; };
 		05C6AFB7194452BD007E68AC /* user-location-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB3194452BD007E68AC /* user-location-on.png */; };
 		05C6AFB8194452BD007E68AC /* user-location-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB4194452BD007E68AC /* user-location-on@2x.png */; };
+		05D4C41F1946368000A4E307 /* TDHelperClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D4C41E1946368000A4E307 /* TDHelperClass.m */; };
 		05D9AE19194227E800C3144D /* WatchrEventDefaultFilters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */; };
 		05E6A2181945B9600061E2BB /* TDSelectLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6A2171945B9600061E2BB /* TDSelectLocationViewController.m */; };
 		05E6A21B1945C0D70061E2BB /* TDAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6A21A1945C0D70061E2BB /* TDAnnotation.m */; };
@@ -458,6 +459,8 @@
 		05C6AFB2194452BD007E68AC /* user-location-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-off@2x.png"; sourceTree = "<group>"; };
 		05C6AFB3194452BD007E68AC /* user-location-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-on.png"; sourceTree = "<group>"; };
 		05C6AFB4194452BD007E68AC /* user-location-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-on@2x.png"; sourceTree = "<group>"; };
+		05D4C41D1946368000A4E307 /* TDHelperClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDHelperClass.h; sourceTree = "<group>"; };
+		05D4C41E1946368000A4E307 /* TDHelperClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDHelperClass.m; sourceTree = "<group>"; };
 		05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventDefaultFilters.plist; sourceTree = "<group>"; };
 		05E6A2161945B9600061E2BB /* TDSelectLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDSelectLocationViewController.h; path = iPhone/TDSelectLocationViewController.h; sourceTree = "<group>"; };
 		05E6A2171945B9600061E2BB /* TDSelectLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDSelectLocationViewController.m; path = iPhone/TDSelectLocationViewController.m; sourceTree = "<group>"; };
@@ -961,6 +964,7 @@
 			children = (
 				05FA1A92193E04DB0067325B /* JSON Null */,
 				05FA1A90193E04D30067325B /* Event FIlters */,
+				05D4C4201946369A00A4E307 /* Helper Class */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1257,6 +1261,15 @@
 				05C6AFB4194452BD007E68AC /* user-location-on@2x.png */,
 			);
 			name = "Add Event";
+			sourceTree = "<group>";
+		};
+		05D4C4201946369A00A4E307 /* Helper Class */ = {
+			isa = PBXGroup;
+			children = (
+				05D4C41D1946368000A4E307 /* TDHelperClass.h */,
+				05D4C41E1946368000A4E307 /* TDHelperClass.m */,
+			);
+			name = "Helper Class";
 			sourceTree = "<group>";
 		};
 		05E6A2151945B9330061E2BB /* Select Location View Controller */ = {
@@ -1564,6 +1577,7 @@
 				05C40A78192A8018002F1F1A /* PaperFoldView.m in Sources */,
 				05965BA71937581500B0B870 /* WYPopoverController.m in Sources */,
 				0541A0C81938B5CD0033F3B6 /* CTAssetsGroupViewController.m in Sources */,
+				05D4C41F1946368000A4E307 /* TDHelperClass.m in Sources */,
 				054F409B192E2CA600960ABE /* UIImageView+WebCache.m in Sources */,
 				05BB5F26192FA73100D9BE6A /* TDProfileHeaderView.m in Sources */,
 				05E6A21B1945C0D70061E2BB /* TDAnnotation.m in Sources */,
