@@ -16,6 +16,14 @@
 #import "TDSelectLocationViewController.h"
 #define kFontSize 17.0 // fontsize
 #define kTextViewWidth 193
+
+#define kTDWatchrEventNameKey @"event_name"
+#define kTDWatchrEventDescriptionKey @"event_description"
+#define kTDWatchrEventCategoriesKey @"categories"
+#define kTDWatchrEventLatitudeKey @"latitude"
+#define kTDWatchrEventLongitudeKey @"longitude"
+#define kTDWatchrEventMediaArrayKey @"media[]"
+
 @interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate,TDSelectLocationViewControllerDelegate>{
 	//the form
 	NSMutableArray * _addEventItems;
@@ -93,7 +101,7 @@
 	
 	[self.navigationItem setLeftBarButtonItem:dismissButtonItem];
 	
-	
+	_window = [[[UIApplication sharedApplication] delegate] window];
 }
 
 -(void) configureTableView{
@@ -569,13 +577,80 @@
 
 -(void) submitWatchrEventToServer{
 	
+	// Block whole window
+	MRProgressOverlayView * progressVIew = [MRProgressOverlayView showOverlayAddedTo:self.navigationController.view title:@"Posting event" mode:MRProgressOverlayViewModeDeterminateHorizontalBar animated:YES];
+	
+	NSMutableDictionary * parameters = [NSMutableDictionary new];
+	
+	[parameters setObject:_eventNameString forKey:kTDWatchrEventNameKey];
+	[parameters setObject:_eventDescriptionString forKey:kTDWatchrEventDescriptionKey];
+	[parameters setObject:[NSNumber numberWithDouble:_watchrEventPoint.coordinate.latitude] forKey:kTDWatchrEventLatitudeKey];
+	[parameters setObject:[NSNumber numberWithDouble:_watchrEventPoint.coordinate.longitude] forKey:kTDWatchrEventLongitudeKey];
+	
 	
 	if ([_selectedPhotos count]!=0) {
 		//if we post an event with w/ media
 
+		//setup the parameters
+		/*
+		 'event_name' => 'required|max:100',
+		 'event_description' => 'max:400',
+		 'categories' => 'required|array', //don't need to send categories (if it's empty, category is unknown(5))
+		 'latitude' => 'required|numeric',
+		 'longitude' => 'required|numeric'
+		 'media' => 'array|required'
+		 */
+		//send the request
+		NSMutableArray * mediaArray = [NSMutableArray new];
+		
+		for (ALAsset * assetIter in _selectedPhotos) {
+			UIImage * image = [[UIImage alloc] initWithCGImage:[[assetIter defaultRepresentation] fullResolutionImage]];
+			NSData *imgData = UIImageJPEGRepresentation(image, 1);
+			NSInputStream * inputStream = [[NSInputStream alloc] initWithData:imgData];
+			NSLog(@"Size of Image(bytes):%d",[imgData length]);
+			
+			NXOAuth2FileStreamWrapper * file = [NXOAuth2FileStreamWrapper wrapperWithStream:inputStream contentLength:[imgData length] fileName:[[assetIter defaultRepresentation] filename]];
+			[mediaArray addObject:file];
+			
+			
+		}
+		[parameters setObject:mediaArray forKey:kTDWatchrEventMediaArrayKey];
+		
+		[NXOAuth2Request performMethod:@"POST"
+							onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/new_with_media"]]
+					   usingParameters:parameters
+						   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+				   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+					   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+					   
+					   double sent = bytesSend;
+					   double total = bytesTotal;
+					   float ratio = sent/total;
+					   
+					   [progressVIew setProgress:ratio animated:YES];
+				   }
+					   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+						   NSString * responseString =[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+						   NSLog(@"responseData = %@", responseString );
+						   NSLog(@"response = %@", [response description]);
+						   NSLog(@"error = %@", [error userInfo]);
+						   
+						   //Dismiss
+						   [MRProgressOverlayView dismissOverlayForView:self.navigationController.view animated:YES];
+						   
+						   //if error
+						   if (error) {
+							   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:error.localizedDescription  message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+							   [alert show];
+							   return;
+						   }
+						   
+						   //TODO: dismiss this view controller and notify the delegate that the event was added
+						
+					   }];
+	
 	}else{
 		//if we post an event with w/o media
-		
 		//setup the parameters
 		/*
 		 'event_name' => 'required|max:100',
@@ -586,20 +661,29 @@
 		 */
 		
 		
-		
+				
 		//send the request
 		[NXOAuth2Request performMethod:@"POST"
 							onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/new"]]
-					   usingParameters:nil
+					   usingParameters:parameters
 						   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
 				   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 					   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+   					   
+					   double sent = bytesSend;
+					   double total = bytesTotal;
+					   float ratio = sent/total;
+					   
+					   [progressVIew setProgress:ratio animated:YES];
 				   }
 					   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
 						   NSString * responseString =[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 						   NSLog(@"responseData = %@", responseString );
 						   NSLog(@"response = %@", [response description]);
 						   NSLog(@"error = %@", [error userInfo]);
+						   
+						   //Dismiss
+						   [MRProgressOverlayView dismissOverlayForView:self.navigationController.view animated:YES];
 						   
 						   //if error
 						   if (error) {
@@ -608,6 +692,7 @@
 							   return;
 						   }
 						   
+  						   //TODO: dismiss this view controller and notify the delegate that the event was added
 					   }];
 	}
 }

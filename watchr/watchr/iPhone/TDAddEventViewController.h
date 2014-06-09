@@ -11,6 +11,9 @@
 @interface TDAddEventViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>{
 	MKPointAnnotation * _watchrEventPoint;
 	CLGeocoder * _geocoder;
+	
+//	MRProgressOverlayView *_progressView;
+	UIWindow * _window;
 }
 @property (weak, nonatomic) IBOutlet UITableView *addEventTableView;
 

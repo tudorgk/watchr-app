@@ -8,6 +8,7 @@
 
 #import "TDAppDelegate.h"
 #import "TDDashboardViewController.h"
+
 @interface TDAppDelegate (){
 	TDDashboardViewController * _dashboardViewController;
 }
@@ -15,7 +16,7 @@
 @end
 
 @implementation TDAppDelegate
-
+@synthesize rootViewController=_rootViewController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);

@@ -21,6 +21,7 @@
 	#import "NSNull+TDJSON.h"
 #import "SVPullToRefresh.h"
 #import	"TDWatchrLocationManager.h"
+#import	"MRProgress.h"
 #endif
 
 

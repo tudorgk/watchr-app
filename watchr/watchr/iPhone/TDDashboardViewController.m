@@ -460,6 +460,7 @@ enum MapViewVisibility : NSInteger {
 
 						   [_dashboardData removeAllObjects];
 						   NSArray * data =[[TDWatchrAPIManager sharedManager] getArrayForKey:@"data" fromResponseData:responseData ];
+						   NSLog(@"data = %@", data);
 						   [_dashboardData addObjectsFromArray:data];
 						   [self.dashboardTableView reloadData];
 
