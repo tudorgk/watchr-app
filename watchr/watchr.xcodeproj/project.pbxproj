@@ -96,7 +96,6 @@
 		05B544CA193C80DE0081332D /* NSNull+TDJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B544C9193C80DE0081332D /* NSNull+TDJSON.m */; };
 		05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */; };
 		05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFA192F572700D9BE6A /* TDEventDescriptionView.m */; };
-		05BB5EFF192F594F00D9BE6A /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFE192F594F00D9BE6A /* FXBlurView.m */; };
 		05BB5F02192F59C100D9BE6A /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5F01192F59C100D9BE6A /* ILTranslucentView.m */; };
 		05BB5F11192F7C1800D9BE6A /* menu-feed-icon-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F05192F7C1800D9BE6A /* menu-feed-icon-off@2x.png */; };
 		05BB5F12192F7C1800D9BE6A /* menu-feed-icon-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5F06192F7C1800D9BE6A /* menu-feed-icon-on@2x.png */; };
@@ -158,8 +157,13 @@
 		05C6AFB6194452BD007E68AC /* user-location-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB2194452BD007E68AC /* user-location-off@2x.png */; };
 		05C6AFB7194452BD007E68AC /* user-location-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB3194452BD007E68AC /* user-location-on.png */; };
 		05C6AFB8194452BD007E68AC /* user-location-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6AFB4194452BD007E68AC /* user-location-on@2x.png */; };
-		05C6AFBC19445BBF007E68AC /* TDMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C6AFBB19445BBF007E68AC /* TDMapPin.m */; };
 		05D9AE19194227E800C3144D /* WatchrEventDefaultFilters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */; };
+		05E6A2181945B9600061E2BB /* TDSelectLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6A2171945B9600061E2BB /* TDSelectLocationViewController.m */; };
+		05E6A21B1945C0D70061E2BB /* TDAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6A21A1945C0D70061E2BB /* TDAnnotation.m */; };
+		05E6A2231945D34F0061E2BB /* LFDisplayBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6A21F1945D34F0061E2BB /* LFDisplayBridge.m */; };
+		05E6A2241945D34F0061E2BB /* LFGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6A2211945D34F0061E2BB /* LFGlassView.m */; };
+		05E6A2271945D8700061E2BB /* search-small-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6A2251945D8700061E2BB /* search-small-icon.png */; };
+		05E6A2281945D8700061E2BB /* search-small-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6A2261945D8700061E2BB /* search-small-icon@2x.png */; };
 		05EB294B1940AE91008C7A04 /* WatchrEventFilterOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */; };
 		05F5620319430A6900607E6F /* TDWatchrLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5620219430A6900607E6F /* TDWatchrLocationManager.m */; };
 /* End PBXBuildFile section */
@@ -358,8 +362,6 @@
 		05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TDEventDescriptionView.xib; path = iPhone/TDEventDescriptionView.xib; sourceTree = "<group>"; };
 		05BB5EF9192F572700D9BE6A /* TDEventDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDEventDescriptionView.h; path = iPhone/TDEventDescriptionView.h; sourceTree = "<group>"; };
 		05BB5EFA192F572700D9BE6A /* TDEventDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDEventDescriptionView.m; path = iPhone/TDEventDescriptionView.m; sourceTree = "<group>"; };
-		05BB5EFD192F594F00D9BE6A /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
-		05BB5EFE192F594F00D9BE6A /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
 		05BB5F00192F59C100D9BE6A /* ILTranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILTranslucentView.h; sourceTree = "<group>"; };
 		05BB5F01192F59C100D9BE6A /* ILTranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILTranslucentView.m; sourceTree = "<group>"; };
 		05BB5F05192F7C1800D9BE6A /* menu-feed-icon-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-feed-icon-off@2x.png"; sourceTree = "<group>"; };
@@ -446,9 +448,18 @@
 		05C6AFB2194452BD007E68AC /* user-location-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-off@2x.png"; sourceTree = "<group>"; };
 		05C6AFB3194452BD007E68AC /* user-location-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-on.png"; sourceTree = "<group>"; };
 		05C6AFB4194452BD007E68AC /* user-location-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-on@2x.png"; sourceTree = "<group>"; };
-		05C6AFBA19445BBF007E68AC /* TDMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDMapPin.h; sourceTree = "<group>"; };
-		05C6AFBB19445BBF007E68AC /* TDMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDMapPin.m; sourceTree = "<group>"; };
 		05D9AE18194227E800C3144D /* WatchrEventDefaultFilters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventDefaultFilters.plist; sourceTree = "<group>"; };
+		05E6A2161945B9600061E2BB /* TDSelectLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDSelectLocationViewController.h; path = iPhone/TDSelectLocationViewController.h; sourceTree = "<group>"; };
+		05E6A2171945B9600061E2BB /* TDSelectLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDSelectLocationViewController.m; path = iPhone/TDSelectLocationViewController.m; sourceTree = "<group>"; };
+		05E6A2191945C0D70061E2BB /* TDAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAnnotation.h; sourceTree = "<group>"; };
+		05E6A21A1945C0D70061E2BB /* TDAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAnnotation.m; sourceTree = "<group>"; };
+		05E6A21E1945D34F0061E2BB /* LFDisplayBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFDisplayBridge.h; sourceTree = "<group>"; };
+		05E6A21F1945D34F0061E2BB /* LFDisplayBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFDisplayBridge.m; sourceTree = "<group>"; };
+		05E6A2201945D34F0061E2BB /* LFGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFGlassView.h; sourceTree = "<group>"; };
+		05E6A2211945D34F0061E2BB /* LFGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFGlassView.m; sourceTree = "<group>"; };
+		05E6A2221945D34F0061E2BB /* LiveFrost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveFrost.h; sourceTree = "<group>"; };
+		05E6A2251945D8700061E2BB /* search-small-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-small-icon.png"; sourceTree = "<group>"; };
+		05E6A2261945D8700061E2BB /* search-small-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-small-icon@2x.png"; sourceTree = "<group>"; };
 		05EB294A1940AE91008C7A04 /* WatchrEventFilterOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WatchrEventFilterOptions.plist; sourceTree = "<group>"; };
 		05F5620119430A6900607E6F /* TDWatchrLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrLocationManager.h; sourceTree = "<group>"; };
 		05F5620219430A6900607E6F /* TDWatchrLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWatchrLocationManager.m; sourceTree = "<group>"; };
@@ -530,6 +541,7 @@
 		05409D77192557B300E8544C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				05E6A21D1945D34F0061E2BB /* LiveFrost */,
 				0583C3E51942520200D8CCD7 /* Pickers */,
 				0583C3E41942382E00D8CCD7 /* SVPullToRefresh */,
 				0541A0D31939C8250033F3B6 /* OAuth2Client.xcodeproj */,
@@ -537,7 +549,6 @@
 				05965BAF19376BD400B0B870 /* Growing Text View */,
 				05965BA21937581500B0B870 /* WYPopoverController */,
 				05BB5F03192F5A6600D9BE6A /* ILTranslucentView */,
-				05BB5EFC192F594F00D9BE6A /* FXBlurView */,
 				054F40A4192E46C300960ABE /* Header Inset TableView */,
 				054F40A3192E39C800960ABE /* Dynamic Size Label */,
 				054F406D192E2CA600960ABE /* SDWebImage */,
@@ -641,7 +652,6 @@
 		054F4058192E1AA200960ABE /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				05C6AFB919445B9C007E68AC /* Map Pin */,
 				054F4059192E1ACA00960ABE /* EventStoryboard_iPhone.storyboard */,
 				05965B9E1937428C00B0B870 /* Add Event View Controller */,
 				054F4069192E292900960ABE /* Event Details View Controller */,
@@ -832,9 +842,11 @@
 		05965B9E1937428C00B0B870 /* Add Event View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				05E6A21C1945C0DD0061E2BB /* Custom Annotation */,
 				05965B9F193742C500B0B870 /* TDAddEventViewController.h */,
 				05965BA0193742C500B0B870 /* TDAddEventViewController.m */,
 				05965BB019376CC700B0B870 /* AddEventInputItems.plist */,
+				05E6A2151945B9330061E2BB /* Select Location View Controller */,
 				05965BB2193774A600B0B870 /* Custom Cells */,
 			);
 			name = "Add Event View Controller";
@@ -917,15 +929,6 @@
 				05FA1A90193E04D30067325B /* Event FIlters */,
 			);
 			name = Helpers;
-			sourceTree = "<group>";
-		};
-		05BB5EFC192F594F00D9BE6A /* FXBlurView */ = {
-			isa = PBXGroup;
-			children = (
-				05BB5EFD192F594F00D9BE6A /* FXBlurView.h */,
-				05BB5EFE192F594F00D9BE6A /* FXBlurView.m */,
-			);
-			path = FXBlurView;
 			sourceTree = "<group>";
 		};
 		05BB5F03192F5A6600D9BE6A /* ILTranslucentView */ = {
@@ -1212,6 +1215,8 @@
 		05C6AFAF194452A0007E68AC /* Add Event */ = {
 			isa = PBXGroup;
 			children = (
+				05E6A2251945D8700061E2BB /* search-small-icon.png */,
+				05E6A2261945D8700061E2BB /* search-small-icon@2x.png */,
 				05C6AFB1194452BD007E68AC /* user-location-off.png */,
 				05C6AFB2194452BD007E68AC /* user-location-off@2x.png */,
 				05C6AFB3194452BD007E68AC /* user-location-on.png */,
@@ -1220,13 +1225,34 @@
 			name = "Add Event";
 			sourceTree = "<group>";
 		};
-		05C6AFB919445B9C007E68AC /* Map Pin */ = {
+		05E6A2151945B9330061E2BB /* Select Location View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				05C6AFBA19445BBF007E68AC /* TDMapPin.h */,
-				05C6AFBB19445BBF007E68AC /* TDMapPin.m */,
+				05E6A2161945B9600061E2BB /* TDSelectLocationViewController.h */,
+				05E6A2171945B9600061E2BB /* TDSelectLocationViewController.m */,
 			);
-			name = "Map Pin";
+			name = "Select Location View Controller";
+			sourceTree = "<group>";
+		};
+		05E6A21C1945C0DD0061E2BB /* Custom Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				05E6A2191945C0D70061E2BB /* TDAnnotation.h */,
+				05E6A21A1945C0D70061E2BB /* TDAnnotation.m */,
+			);
+			name = "Custom Annotation";
+			sourceTree = "<group>";
+		};
+		05E6A21D1945D34F0061E2BB /* LiveFrost */ = {
+			isa = PBXGroup;
+			children = (
+				05E6A21E1945D34F0061E2BB /* LFDisplayBridge.h */,
+				05E6A21F1945D34F0061E2BB /* LFDisplayBridge.m */,
+				05E6A2201945D34F0061E2BB /* LFGlassView.h */,
+				05E6A2211945D34F0061E2BB /* LFGlassView.m */,
+				05E6A2221945D34F0061E2BB /* LiveFrost.h */,
+			);
+			path = LiveFrost;
 			sourceTree = "<group>";
 		};
 		05F561FF19430A3300607E6F /* Location Manager */ = {
@@ -1381,9 +1407,11 @@
 				05C077A91924EC12005AB425 /* Main_iPhone.storyboard in Resources */,
 				05228134192BB0B6000E8868 /* pin-small-icon.png in Resources */,
 				05965B9A1937327E00B0B870 /* MenuItems.plist in Resources */,
+				05E6A2281945D8700061E2BB /* search-small-icon@2x.png in Resources */,
 				05C0783E19253C6E005AB425 /* back-chevron@2x.png in Resources */,
 				05BB5F12192F7C1800D9BE6A /* menu-feed-icon-on@2x.png in Resources */,
 				05BB5F19192F7C1800D9BE6A /* menu-settings-icon-on@2x.png in Resources */,
+				05E6A2271945D8700061E2BB /* search-small-icon.png in Resources */,
 				05C6AFB5194452BD007E68AC /* user-location-off.png in Resources */,
 				05C077A01924EC12005AB425 /* InfoPlist.strings in Resources */,
 				05C0783F19253C6E005AB425 /* login-background@2x.png in Resources */,
@@ -1447,6 +1475,7 @@
 				0541A0C81938B5CD0033F3B6 /* CTAssetsGroupViewController.m in Sources */,
 				054F409B192E2CA600960ABE /* UIImageView+WebCache.m in Sources */,
 				05BB5F26192FA73100D9BE6A /* TDProfileHeaderView.m in Sources */,
+				05E6A21B1945C0D70061E2BB /* TDAnnotation.m in Sources */,
 				0583C3F31942520300D8CCD7 /* AbstractActionSheetPicker.m in Sources */,
 				05965BBE193776AF00B0B870 /* TDBigInputTableViewCell.m in Sources */,
 				054B8526193B5F5D009051F5 /* TDWatchrAPIManager.m in Sources */,
@@ -1458,7 +1487,6 @@
 				05C077A61924EC12005AB425 /* TDAppDelegate.m in Sources */,
 				05C40A53192A4D8E002F1F1A /* MEDynamicTransition.m in Sources */,
 				05C40A75192A8018002F1F1A /* FacingView.m in Sources */,
-				05C6AFBC19445BBF007E68AC /* TDMapPin.m in Sources */,
 				05F5620319430A6900607E6F /* TDWatchrLocationManager.m in Sources */,
 				0541A0C51938B5CD0033F3B6 /* ALAsset+isEqual.m in Sources */,
 				054F4097192E2CA600960ABE /* UIImage+GIF.m in Sources */,
@@ -1473,10 +1501,12 @@
 				05BB5F02192F59C100D9BE6A /* ILTranslucentView.m in Sources */,
 				05965BAE19376BD000B0B870 /* HPTextViewInternal.m in Sources */,
 				054F4091192E2CA600960ABE /* SDWebImageDecoder.m in Sources */,
+				05E6A2181945B9600061E2BB /* TDSelectLocationViewController.m in Sources */,
 				054F4094192E2CA600960ABE /* SDWebImageManager.m in Sources */,
 				05409D80192557CE00E8544C /* FBShimmeringView.m in Sources */,
 				05C0783719253B73005AB425 /* TDRegisterViewController.m in Sources */,
 				05C40A57192A4E30002F1F1A /* METransitions.m in Sources */,
+				05E6A2241945D34F0061E2BB /* LFGlassView.m in Sources */,
 				05C0783419253B63005AB425 /* TDLoginViewController.m in Sources */,
 				054F405E192E210C00960ABE /* TDCarouselView.m in Sources */,
 				05228145192BD501000E8868 /* TDDashboardFilterButton.m in Sources */,
@@ -1507,11 +1537,11 @@
 				054F406C192E294600960ABE /* TDEventDetailsViewController.m in Sources */,
 				054F408E192E2CA600960ABE /* NSData+ImageContentType.m in Sources */,
 				0578F9841928BDCA00F8F7B3 /* ECSlidingSegue.m in Sources */,
-				05BB5EFF192F594F00D9BE6A /* FXBlurView.m in Sources */,
 				054F4099192E2CA600960ABE /* UIImage+WebP.m in Sources */,
 				0583C3E21942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				05BB5F20192F7DBB00D9BE6A /* TDSideMenuViewController.m in Sources */,
 				05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */,
+				05E6A2231945D34F0061E2BB /* LFDisplayBridge.m in Sources */,
 				0578F9851928BDCA00F8F7B3 /* ECSlidingViewController.m in Sources */,
 				0522812C192BAD82000E8868 /* TDDashboardEventTableViewCell.m in Sources */,
 				05965BBB193776A300B0B870 /* TDInputTableViewCell.m in Sources */,

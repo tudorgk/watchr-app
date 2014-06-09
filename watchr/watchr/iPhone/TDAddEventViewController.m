@@ -13,10 +13,10 @@
 #import "TDSubmitTableViewCell.h"
 #import "TDPhotoPickerTableViewCell.h"
 #import "CTAssetsPickerController.h"
-
+#import "TDSelectLocationViewController.h"
 #define kFontSize 17.0 // fontsize
 #define kTextViewWidth 193
-@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate>{
+@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate,TDSelectLocationViewControllerDelegate>{
 	//the form
 	NSMutableArray * _addEventItems;
 	
@@ -171,6 +171,8 @@
 }
 
 -(void) configureDefaultValues{
+	_geocoder = [[CLGeocoder alloc] init];
+	
 	_selectedPhotos = [[NSMutableArray alloc] init];
 	_thumbnails = [[NSMutableArray alloc] init];
 	
@@ -181,8 +183,7 @@
 		
 		
 		//setup the label
-		CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
-		[geoCoder reverseGeocodeLocation:_mapSelectorCell.cellPreviewMap.userLocation.location completionHandler:^(NSArray *placemarks, NSError *error) {
+		[_geocoder reverseGeocodeLocation:_mapSelectorCell.cellPreviewMap.userLocation.location completionHandler:^(NSArray *placemarks, NSError *error) {
 			CLPlacemark * placemark = [placemarks firstObject];
 			_mapSelectorCell.cellTitleLabel.text = placemark.name;
 		}];
@@ -301,13 +302,15 @@
 -(void) mapSelectorCell:(TDMapSelectorTableViewCell*) mapCell myLocationButtonPressed:(id) sender{
 	NSLog(@"map selector delegate my location button pressed");
 	
-	//TODO: set the location to be the same with the user's location. animate preview map
+	//set the location to be the same with the user's location. animate preview map
 	_watchrEventPoint.coordinate = _mapSelectorCell.cellPreviewMap.userLocation.coordinate;
 	[_mapSelectorCell.cellPreviewMap addAnnotation:_watchrEventPoint];
+	MKCoordinateRegion adjustedRegion = [_mapSelectorCell.cellPreviewMap regionThatFits:MKCoordinateRegionMakeWithDistance(_watchrEventPoint.coordinate, 200, 200)];
+	[_mapSelectorCell.cellPreviewMap setRegion:adjustedRegion animated:YES];
 
-	//TODO: Reverse geocode the position and write the address in cellTitleLabel
-	CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
-	[geoCoder reverseGeocodeLocation:_mapSelectorCell.cellPreviewMap.userLocation.location completionHandler:^(NSArray *placemarks, NSError *error) {
+
+	//Reverse geocode the position and write the address in cellTitleLabel
+	[_geocoder reverseGeocodeLocation:_mapSelectorCell.cellPreviewMap.userLocation.location completionHandler:^(NSArray *placemarks, NSError *error) {
 		if (error) {
 			UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error updating location" message:@"Check if you have location services turned om" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
 			[alert show	];
@@ -318,13 +321,16 @@
 		}
 	}];
 	
-	//TODO: change the button's icon
+	//change the button's icon
 	[_mapSelectorCell.cellMyLocationButton setImage:[UIImage imageNamed:@"user-location-on.png"] forState:UIControlStateNormal];
 	
 
 }
 -(void) mapSelectorCell:(TDMapSelectorTableViewCell*) mapCell mapTapped:(id)sender{
-	
+	//TODO: push the point selector view controller
+	TDSelectLocationViewController * selectLocation = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"selectLocation"];
+	selectLocation.delegate = self;
+	[self.navigationController pushViewController:selectLocation animated:YES];
 }
 
 
@@ -375,7 +381,7 @@
 - (CGFloat)heightForTextView:(UITextView*)textView containingString:(NSString*)string
 {
 	
-	CGSize maximumLabelSize = CGSizeMake(kTextViewWidth, FLT_MAX);
+	CGSize maximumLabelSize = CGSizeMake(kTextViewWidth - 10, FLT_MAX);
 		
 	NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[style setLineBreakMode:NSLineBreakByCharWrapping];
@@ -618,6 +624,40 @@
 
 -(void) submitButtonTapped:(id) sender{
 	[self.addEventTableView.delegate tableView:self.addEventTableView didSelectRowAtIndexPath: [self.addEventTableView indexPathForCell:_submitCell]];
+}
+
+#pragma mark - TDSelectLocationViewControllerDelegate methods
+-(void) controller:(TDSelectLocationViewController *)selectionController diSelectAnnotation:(TDAnnotation *)annotation sameAsUserLocation:(BOOL)sameAsUserLocation{
+	
+	_watchrEventPoint.coordinate = annotation.coordinate;
+	
+	if (sameAsUserLocation) {
+		[_mapSelectorCell.cellMyLocationButton setImage:[UIImage imageNamed:@"user-location-on.png"] forState:UIControlStateNormal];
+	}else{
+		[_mapSelectorCell.cellMyLocationButton setImage:[UIImage imageNamed:@"user-location-off.png"] forState:UIControlStateNormal];
+	}
+	
+	[_mapSelectorCell.cellPreviewMap addAnnotation:_watchrEventPoint];
+	MKCoordinateRegion adjustedRegion = [_mapSelectorCell.cellPreviewMap regionThatFits:MKCoordinateRegionMakeWithDistance(_watchrEventPoint.coordinate, 200, 200)];
+	[_mapSelectorCell.cellPreviewMap setRegion:adjustedRegion animated:NO];
+	
+	
+	//Reverse geocode the position and write the address in cellTitleLabel
+	CLLocation * selectedLocation = [[CLLocation alloc] initWithLatitude:_watchrEventPoint.coordinate.latitude longitude:_watchrEventPoint.coordinate.longitude];
+	[_geocoder reverseGeocodeLocation:selectedLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+		if (error) {
+			UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error updating location" message:@"Check if you have location services turned om" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+			[alert show	];
+			_mapSelectorCell.cellTitleLabel.text = @"";
+		}else{
+			CLPlacemark * placemark = [placemarks firstObject];
+			_mapSelectorCell.cellTitleLabel.text = placemark.name;
+		}
+	}];
+	
+	//pop the select location view controller
+	[self.navigationController popViewControllerAnimated:YES];
+
 }
 
 @end

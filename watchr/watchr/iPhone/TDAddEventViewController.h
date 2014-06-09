@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 @interface TDAddEventViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>{
 	MKPointAnnotation * _watchrEventPoint;
+	CLGeocoder * _geocoder;
 }
 @property (weak, nonatomic) IBOutlet UITableView *addEventTableView;
 
