@@ -24,7 +24,7 @@
 #define kTDWatchrEventLongitudeKey @"longitude"
 #define kTDWatchrEventMediaArrayKey @"media[]"
 
-@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate,TDSelectLocationViewControllerDelegate>{
+@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate,TDSelectLocationViewControllerDelegate,CLLocationManagerDelegate>{
 	//the form
 	NSMutableArray * _addEventItems;
 	
@@ -49,6 +49,10 @@
 	
 	UITapGestureRecognizer * _dismissKeyboardTapper;
 	id _activeInputField;
+	
+	//Add CLLocation manager
+	CLLocationManager * _addLocationManager;
+	CLLocation * _currentLocation;
 
 
 }
@@ -57,7 +61,8 @@
 -(void) configureTableView;
 -(void) userDidCancel:(id) sender;
 -(void) clearSelectedAssets;
--(void) configureDefaultValues;
+-(void) configureMapCellDefaultValues;
+-(void) configureLocationManager;
 @end
 
 @implementation TDAddEventViewController
@@ -74,11 +79,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+	_selectedPhotos = [[NSMutableArray alloc] init];
+	_thumbnails = [[NSMutableArray alloc] init];
+
 	[self configureView];
 	[self configureTableView];
 	[self initialiseCells];
-	[self configureDefaultValues];
-	
+	[self configureLocationManager];
 }
 
 -(void) configureView{
@@ -162,6 +170,10 @@
 	if (_mapSelectorCell == nil) {
 		_mapSelectorCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"mapSelector"];
 		_mapSelectorCell.delegate = self;
+		
+		CLLocationCoordinate2D defaultCoordonate = CLLocationCoordinate2DMake(44.428565, 26.103902);
+		MKCoordinateRegion adjustedRegion = [_mapSelectorCell.cellPreviewMap regionThatFits:MKCoordinateRegionMakeWithDistance(defaultCoordonate, 200, 200)];
+		[_mapSelectorCell.cellPreviewMap setRegion:adjustedRegion animated:YES];
 	}
 	
 	if(_submitCell == nil){
@@ -178,26 +190,33 @@
 	
 }
 
--(void) configureDefaultValues{
+-(void) configureMapCellDefaultValues{
 	_geocoder = [[CLGeocoder alloc] init];
-	
-	_selectedPhotos = [[NSMutableArray alloc] init];
-	_thumbnails = [[NSMutableArray alloc] init];
-	
+		
 	if (_watchrEventPoint == nil) {
 		_watchrEventPoint = [[MKPointAnnotation alloc] init];
-		CLLocationCoordinate2D userLocation = _mapSelectorCell.cellPreviewMap.userLocation.location.coordinate;
+		CLLocationCoordinate2D userLocation = _currentLocation.coordinate;
 		_watchrEventPoint.coordinate = userLocation;
 		
+		MKCoordinateRegion adjustedRegion = [_mapSelectorCell.cellPreviewMap regionThatFits:MKCoordinateRegionMakeWithDistance(_watchrEventPoint.coordinate, 200, 200)];
+		[_mapSelectorCell.cellPreviewMap setRegion:adjustedRegion animated:YES];
 		
 		//setup the label
-		[_geocoder reverseGeocodeLocation:_mapSelectorCell.cellPreviewMap.userLocation.location completionHandler:^(NSArray *placemarks, NSError *error) {
+		[_geocoder reverseGeocodeLocation:_currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
 			CLPlacemark * placemark = [placemarks firstObject];
 			_mapSelectorCell.cellTitleLabel.text = placemark.name;
 		}];
 		
 		[_mapSelectorCell.cellPreviewMap addAnnotation:_watchrEventPoint];
 	}
+}
+
+-(void) configureLocationManager{
+	_addLocationManager = [[CLLocationManager alloc] init];
+	_addLocationManager.delegate = self;
+    _addLocationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [_addLocationManager startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -213,7 +232,19 @@
     [self subscribeToKeyboardEvents:NO];
 }
 
+#pragma mark - CLLocationManagerDelegate Methods
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+	if (status == kCLAuthorizationStatusAuthorized) {
+		[[TDWatchrLocationManager sharedManager] startUpdatingLocation];
+	}else{
 
+	}
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+	_currentLocation = [locations lastObject];
+	[self configureMapCellDefaultValues];
+}
 
 
 #pragma maek - Keyboard handlers

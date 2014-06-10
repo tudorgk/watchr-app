@@ -30,12 +30,7 @@
 	if (_mapTapGestureRecognizer == nil) {
 		_mapTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(previewMapTapped:)];
 		[self.cellPreviewMap addGestureRecognizer:_mapTapGestureRecognizer];
-	}
-	
-	CLLocationCoordinate2D userLocation = self.cellPreviewMap.userLocation.location.coordinate;
-	MKCoordinateRegion adjustedRegion = [self.cellPreviewMap regionThatFits:MKCoordinateRegionMakeWithDistance(userLocation, 200, 200)];
-	[self.cellPreviewMap setRegion:adjustedRegion animated:YES];
-	
+	}	
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

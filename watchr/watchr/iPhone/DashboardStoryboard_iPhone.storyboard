@@ -157,11 +157,11 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="rOK-kB-J2s">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CpH-Ej-8kC">
-                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CpH-Ej-8kC">
+                                <rect key="frame" x="279" y="9" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Map">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="dashboard-map-icon.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -187,6 +187,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="dashboard-map-icon.png" width="25" height="25"/>
         <image name="importance-icon.png" width="25" height="25"/>
         <image name="pin-small-icon.png" width="7" height="14"/>
         <image name="watchr-menu-button.png" width="24" height="15"/>

@@ -80,7 +80,8 @@ enum MapViewVisibility : NSInteger {
 	//map button
 	UIButton * mapButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
 	self.mapButton =mapButton;
-	[self.mapButton setTitle:@"Map" forState:UIControlStateNormal];
+	[self.mapButton setImage:[UIImage imageNamed:@"dashboard-map-icon.png"] forState:UIControlStateNormal];
+	[[self.mapButton imageView] setContentMode:UIViewContentModeCenter];
     self.mapButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 	self.mapButton.titleLabel.textColor = [UIColor whiteColor];
 	[self.mapButton addTarget:self action:@selector(mapButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -121,7 +122,7 @@ enum MapViewVisibility : NSInteger {
 		}
 		[self presentViewController:_welcomeScreen animated:NO completion:nil];
 	}else{
-		[self.dashboardTableView triggerPullToRefresh];
+//		[self.dashboardTableView triggerPullToRefresh];
 	}
 
 		
@@ -260,6 +261,14 @@ enum MapViewVisibility : NSInteger {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+	if (_currentLocation == nil) {
+		//first load
+		_currentLocation = [locations lastObject];
+		[_dashboardFilters setFilterGeocodeWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude andRadius:[[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"filter"] doubleValue]];
+		[self.dashboardTableView triggerPullToRefresh];
+		return;
+	}
+	
 	_currentLocation = [locations lastObject];
 	[_dashboardFilters setFilterGeocodeWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude andRadius:[[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"filter"] doubleValue]];
 }
@@ -435,8 +444,11 @@ enum MapViewVisibility : NSInteger {
 }
 #pragma mark - InfiniteScroll + PullToRefresh Handlers
 -(void) infiniteScrollHandler{
-	_dashboardDataSkip +=20;
+	_dashboardDataSkip =[_dashboardData count];
 	_dashboardFilters.filterSkip = [NSNumber numberWithInteger:_dashboardDataSkip];
+	
+	NSLog(@"_infiniteScroll: SKIP = %d ; COUNT = %d", [_dashboardFilters.filterSkip intValue], [_dashboardFilters.filterCount intValue] );
+	
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
 				   usingParameters:[_dashboardFilters filtersToDictionary]
@@ -463,7 +475,14 @@ enum MapViewVisibility : NSInteger {
 						   [self.dashboardTableView insertRowsAtIndexPaths:reloadIndexPathsArray withRowAnimation:UITableViewRowAnimationTop];
 						   [self.dashboardTableView endUpdates];
 						   
-						    [NSThread detachNewThreadSelector:@selector(buildTreeWithArray:) toTarget:self.coordinateQuadTree withObject:_dashboardData];
+//						    [NSThread detachNewThreadSelector:@selector(buildTreeWithArray:) toTarget:self.coordinateQuadTree withObject:_dashboardData];
+						   [self.coordinateQuadTree performSelector:@selector(buildTreeWithArray:) withObject:_dashboardData];
+						   [[NSOperationQueue new] addOperationWithBlock:^{
+							   double scale = _dashboardMap.bounds.size.width / _dashboardMap.visibleMapRect.size.width;
+							   NSArray *annotations = [self.coordinateQuadTree clusteredAnnotationsWithinMapRect:_dashboardMap.visibleMapRect withZoomScale:scale];
+							   
+							   [self updateMapViewAnnotationsWithAnnotations:annotations];
+						   }];
 					   }
 						
 					   [self.dashboardTableView.infiniteScrollingView stopAnimating];
@@ -472,9 +491,12 @@ enum MapViewVisibility : NSInteger {
 }
 -(void) pullToRefreshHandler{
 	
-	//reset skip
+	//reset skip and get all refresh the last
+	_dashboardFilters.filterCount = [NSNumber numberWithInt:_dashboardDataSkip+_dashboardDataCount];
 	_dashboardDataSkip = 0;
 	_dashboardFilters.filterSkip= [NSNumber numberWithInt:_dashboardDataSkip];
+	
+	NSLog(@"_pullToRefresh: SKIP = %d ; COUNT = %d", [_dashboardFilters.filterSkip intValue], [_dashboardFilters.filterCount intValue] );
 	
 	NSLog(@"filters = %@", [_dashboardFilters filtersToDictionary]);
 	
@@ -502,7 +524,15 @@ enum MapViewVisibility : NSInteger {
 						   [_dashboardData addObjectsFromArray:data];
 						   [self.dashboardTableView reloadData];
 						   
-						   [NSThread detachNewThreadSelector:@selector(buildTreeWithArray:) toTarget:self.coordinateQuadTree withObject:_dashboardData];
+//						   [NSThread detachNewThreadSelector:@selector(buildTreeWithArray:) toTarget:self.coordinateQuadTree withObject:_dashboardData];
+						   [self.coordinateQuadTree performSelector:@selector(buildTreeWithArray:) withObject:_dashboardData];
+						   [[NSOperationQueue new] addOperationWithBlock:^{
+							   double scale = _dashboardMap.bounds.size.width / _dashboardMap.visibleMapRect.size.width;
+							   NSArray *annotations = [self.coordinateQuadTree clusteredAnnotationsWithinMapRect:_dashboardMap.visibleMapRect withZoomScale:scale];
+							   
+							   [self updateMapViewAnnotationsWithAnnotations:annotations];
+						   }];
+
 					   }
 					   
 					   [self.dashboardTableView.pullToRefreshView stopAnimating];
@@ -514,7 +544,7 @@ enum MapViewVisibility : NSInteger {
 #pragma mark - TDFirstTunManagerDelegate methods
 
 -(void) managerDidFinishFirstTimeSetUpWithData:(id)data{
-	[self.dashboardTableView triggerPullToRefresh];
+//	[self.dashboardTableView triggerPullToRefresh];
 	[_welcomeScreen dismissViewControllerAnimated:YES completion:nil];
 }
 
