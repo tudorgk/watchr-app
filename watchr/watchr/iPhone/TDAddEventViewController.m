@@ -15,7 +15,7 @@
 #import "CTAssetsPickerController.h"
 #import "TDSelectLocationViewController.h"
 #define kFontSize 17.0 // fontsize
-#define kTextViewWidth 193
+#define kTextViewWidth 302
 
 #define kTDWatchrEventNameKey @"event_name"
 #define kTDWatchrEventDescriptionKey @"event_description"
@@ -144,7 +144,7 @@
 		
 		// create a rect for the text view so it's the right size coming out of IB. Size it to something that is form fitting to the string in the model.
 		float height = [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString];
-		CGRect textViewRect = CGRectMake(107, 4, kTextViewWidth, height);
+		CGRect textViewRect = CGRectMake(10, 2, kTextViewWidth, height);
 		
 		_eventDescriptionCell.cellBigInputField.frame = textViewRect;
 		
@@ -374,6 +374,12 @@
 	
 	_eventDescriptionString = [textView.text stringByReplacingCharactersInRange:range withString:text];
 
+	if ([_eventDescriptionString isEqualToString:@""]) {
+		[_eventDescriptionCell.cellPlaceholderLabel setHidden:NO];
+	}else{
+		[_eventDescriptionCell.cellPlaceholderLabel setHidden:YES];
+	}
+	
     [self.addEventTableView beginUpdates];
     [self.addEventTableView endUpdates];
 	return YES;

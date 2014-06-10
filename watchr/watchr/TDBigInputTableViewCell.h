@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TDBigInputTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *cellPlaceholderLabel;
 @property (weak, nonatomic) IBOutlet UITextView *cellBigInputField;
 
 @end

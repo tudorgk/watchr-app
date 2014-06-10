@@ -176,6 +176,11 @@
 		05EEAEF619462399002B26C2 /* MRStopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EEAEE719462399002B26C2 /* MRStopButton.m */; };
 		05EEAEF719462399002B26C2 /* MRMessageInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EEAEEB19462399002B26C2 /* MRMessageInterceptor.m */; };
 		05EEAEF819462399002B26C2 /* MRWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EEAEEE19462399002B26C2 /* MRWeakProxy.m */; };
+		05F5501119471AD7009B9135 /* TBClusterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5500A19471AD7009B9135 /* TBClusterAnnotation.m */; };
+		05F5501219471AD7009B9135 /* TBClusterAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5500C19471AD7009B9135 /* TBClusterAnnotationView.m */; };
+		05F5501319471AD7009B9135 /* TBCoordinateQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5500E19471AD7009B9135 /* TBCoordinateQuadTree.m */; };
+		05F5501419471AD7009B9135 /* TBQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5501019471AD7009B9135 /* TBQuadTree.m */; };
+		05F5501619471DD8009B9135 /* USA-HotelMotel.csv in Resources */ = {isa = PBXBuildFile; fileRef = 05F5501519471DD8009B9135 /* USA-HotelMotel.csv */; };
 		05F5620319430A6900607E6F /* TDWatchrLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5620219430A6900607E6F /* TDWatchrLocationManager.m */; };
 /* End PBXBuildFile section */
 
@@ -497,6 +502,15 @@
 		05EEAEEC19462399002B26C2 /* MRProgressHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProgressHelper.h; sourceTree = "<group>"; };
 		05EEAEED19462399002B26C2 /* MRWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRWeakProxy.h; sourceTree = "<group>"; };
 		05EEAEEE19462399002B26C2 /* MRWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRWeakProxy.m; sourceTree = "<group>"; };
+		05F5500919471AD7009B9135 /* TBClusterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBClusterAnnotation.h; sourceTree = "<group>"; };
+		05F5500A19471AD7009B9135 /* TBClusterAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBClusterAnnotation.m; sourceTree = "<group>"; };
+		05F5500B19471AD7009B9135 /* TBClusterAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBClusterAnnotationView.h; sourceTree = "<group>"; };
+		05F5500C19471AD7009B9135 /* TBClusterAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBClusterAnnotationView.m; sourceTree = "<group>"; };
+		05F5500D19471AD7009B9135 /* TBCoordinateQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCoordinateQuadTree.h; sourceTree = "<group>"; };
+		05F5500E19471AD7009B9135 /* TBCoordinateQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCoordinateQuadTree.m; sourceTree = "<group>"; };
+		05F5500F19471AD7009B9135 /* TBQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBQuadTree.h; sourceTree = "<group>"; };
+		05F5501019471AD7009B9135 /* TBQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBQuadTree.m; sourceTree = "<group>"; };
+		05F5501519471DD8009B9135 /* USA-HotelMotel.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "USA-HotelMotel.csv"; sourceTree = "<group>"; };
 		05F5620119430A6900607E6F /* TDWatchrLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrLocationManager.h; sourceTree = "<group>"; };
 		05F5620219430A6900607E6F /* TDWatchrLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWatchrLocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -577,6 +591,7 @@
 		05409D77192557B300E8544C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				05F5500719471AC6009B9135 /* Annotation Clustering */,
 				05EEAED419462399002B26C2 /* MRProgress */,
 				05E6A21D1945D34F0061E2BB /* LiveFrost */,
 				0583C3E51942520200D8CCD7 /* Pickers */,
@@ -1357,6 +1372,22 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		05F5500719471AC6009B9135 /* Annotation Clustering */ = {
+			isa = PBXGroup;
+			children = (
+				05F5500919471AD7009B9135 /* TBClusterAnnotation.h */,
+				05F5500A19471AD7009B9135 /* TBClusterAnnotation.m */,
+				05F5500B19471AD7009B9135 /* TBClusterAnnotationView.h */,
+				05F5500C19471AD7009B9135 /* TBClusterAnnotationView.m */,
+				05F5500D19471AD7009B9135 /* TBCoordinateQuadTree.h */,
+				05F5500E19471AD7009B9135 /* TBCoordinateQuadTree.m */,
+				05F5500F19471AD7009B9135 /* TBQuadTree.h */,
+				05F5501019471AD7009B9135 /* TBQuadTree.m */,
+				05F5501519471DD8009B9135 /* USA-HotelMotel.csv */,
+			);
+			name = "Annotation Clustering";
+			sourceTree = "<group>";
+		};
 		05F561FF19430A3300607E6F /* Location Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1541,6 +1572,7 @@
 				05BB5F13192F7C1800D9BE6A /* menu-friends-icon-off@2x.png in Resources */,
 				0522813E192BC3F5000E8868 /* sort-small-icon@2x.png in Resources */,
 				05BB5F11192F7C1800D9BE6A /* menu-feed-icon-off@2x.png in Resources */,
+				05F5501619471DD8009B9135 /* USA-HotelMotel.csv in Resources */,
 				05228133192BB0B6000E8868 /* importance-icon@2x.png in Resources */,
 				05C6AFB6194452BD007E68AC /* user-location-off@2x.png in Resources */,
 			);
@@ -1599,6 +1631,7 @@
 				054F4097192E2CA600960ABE /* UIImage+GIF.m in Sources */,
 				054F4095192E2CA600960ABE /* SDWebImagePrefetcher.m in Sources */,
 				05C40A76192A8018002F1F1A /* FoldView.m in Sources */,
+				05F5501119471AD7009B9135 /* TBClusterAnnotation.m in Sources */,
 				05C40A52192A4D8E002F1F1A /* MEZoomAnimationController.m in Sources */,
 				0578F9811928BDCA00F8F7B3 /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				0541A0C71938B5CD0033F3B6 /* CTAssetsGroupViewCell.m in Sources */,
@@ -1620,6 +1653,7 @@
 				05228145192BD501000E8868 /* TDDashboardFilterButton.m in Sources */,
 				05965BA1193742C500B0B870 /* TDAddEventViewController.m in Sources */,
 				05228129192B86A6000E8868 /* UIView+Origami.m in Sources */,
+				05F5501419471AD7009B9135 /* TBQuadTree.m in Sources */,
 				054B8531193B914C009051F5 /* udevCoreDataHelper.m in Sources */,
 				0583C3F51942520300D8CCD7 /* ActionSheetDatePicker.m in Sources */,
 				0541A0CC1938B5CD0033F3B6 /* CTAssetsViewCell.m in Sources */,
@@ -1657,7 +1691,9 @@
 				05EEAEF219462399002B26C2 /* MRCircularProgressView.m in Sources */,
 				05965BBB193776A300B0B870 /* TDInputTableViewCell.m in Sources */,
 				0541A0CA1938B5CD0033F3B6 /* CTAssetsPickerController.m in Sources */,
+				05F5501319471AD7009B9135 /* TBCoordinateQuadTree.m in Sources */,
 				05C40A7B192A8018002F1F1A /* UIView+Screenshot.m in Sources */,
+				05F5501219471AD7009B9135 /* TBClusterAnnotationView.m in Sources */,
 				05EEAEF819462399002B26C2 /* MRWeakProxy.m in Sources */,
 				05C40A7A192A8018002F1F1A /* TouchThroughUIView.m in Sources */,
 				0541A0AE1938B2870033F3B6 /* TDPhotoPickerTableViewCell.m in Sources */,

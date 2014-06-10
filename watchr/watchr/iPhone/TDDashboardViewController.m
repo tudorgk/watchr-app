@@ -10,14 +10,16 @@
 #import "TDEventDetailsViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "TDAddEventViewController.h"
-
+#import "TBCoordinateQuadTree.h"
+#import "TBClusterAnnotationView.h"
+#import "TBClusterAnnotation.h"
 typedef enum MapViewVisibility : NSInteger MapViewVisibility;
 enum MapViewVisibility : NSInteger {
 	MapViewVisibilityHidden,
 	MapViewVisibilityShown
 };
 
-@interface TDDashboardViewController (){
+@interface TDDashboardViewController ()<MKMapViewDelegate>{
 	MapViewVisibility _mapState;
 	MKMapView * _dashboardMap;
 	TDWelcomeScreenViewController * _welcomeScreen;
@@ -39,6 +41,8 @@ enum MapViewVisibility : NSInteger {
 	CLLocation * _currentLocation;
 	
 }
+@property (strong, nonatomic) TBCoordinateQuadTree *coordinateQuadTree;
+
 -(void) configureView;
 -(void) configureTableView;
 -(void) configureDataSource;
@@ -48,6 +52,7 @@ enum MapViewVisibility : NSInteger {
 -(void) configureLocationManager;
 -(void) resetFilterBarButtons;
 -(void) refreshDashboardFilters;
+-(void) configureQuadTree;
 @end
 
 @implementation TDDashboardViewController
@@ -103,6 +108,7 @@ enum MapViewVisibility : NSInteger {
 	[self configureFilters];
 	[self configureLocationManager];
 	[self refreshDashboardFilters];
+	[self configureQuadTree];
 	//present it
 	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	[_welcomeScreen.view setBackgroundColor:[UIColor clearColor]];
@@ -125,7 +131,15 @@ enum MapViewVisibility : NSInteger {
 -(void) configureView{
 	//initialize the mapview
 	_dashboardMap = [[MKMapView alloc] initWithFrame:self.view.bounds];
-	[_dashboardMap setShowsUserLocation:YES];
+	//TODO: Fix user lcoation annotation
+	[_dashboardMap setShowsUserLocation:NO];
+	[_dashboardMap setDelegate:self];
+	MKCoordinateRegion region = _dashboardMap.region;
+	region.center = CLLocationCoordinate2DMake(44.428565, 26.103902);
+	region.span.longitudeDelta /= 200; // Bigger the value, closer the map view
+	region.span.latitudeDelta /= 200;
+	[_dashboardMap setRegion:region animated:NO]; // Choose if you want animate or not
+
 	
 	//set the delegate and datasource
 	[self.dashboardTableView setDelegate:self];
@@ -214,13 +228,19 @@ enum MapViewVisibility : NSInteger {
 	}
 }
 
+-(void) configureQuadTree{
+	self.coordinateQuadTree = [[TBCoordinateQuadTree alloc] init];
+    self.coordinateQuadTree.mapView = _dashboardMap;
+	[NSThread detachNewThreadSelector:@selector(buildTreeWithArray:) toTarget:self.coordinateQuadTree withObject:_dashboardData];
+}
+
 -(void) viewDidAppear:(BOOL)animated{
 	//check if the Location Manager has permission
-//	if ([TDWatchrLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-//		[self.radiusFilterButton setEnabled:NO];
-//	}else{
-//		[[TDWatchrLocationManager sharedManager] startUpdatingLocation];
-//	}
+	if ([TDWatchrLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+		[self.radiusFilterButton setEnabled:NO];
+	}else{
+		[[TDWatchrLocationManager sharedManager] startUpdatingLocation];
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -367,9 +387,19 @@ enum MapViewVisibility : NSInteger {
 												  Duration:0.5
 												 Direction:XYOrigamiDirectionFromTop
 												completion:^(BOOL finished) {
-													CLLocationCoordinate2D userLocation = _dashboardMap.userLocation.location.coordinate;
-													MKCoordinateRegion adjustedRegion = [_dashboardMap regionThatFits:MKCoordinateRegionMakeWithDistance(userLocation, 200, 200)];
-													[_dashboardMap setRegion:adjustedRegion animated:YES];
+													
+													if (_dashboardMap.userLocationVisible) {
+														CLLocationCoordinate2D userLocation = _dashboardMap.userLocation.location.coordinate;
+														MKCoordinateRegion adjustedRegion = [_dashboardMap regionThatFits:MKCoordinateRegionMakeWithDistance(userLocation, 200, 200)];
+														[_dashboardMap setRegion:adjustedRegion animated:YES];
+													}
+													
+													[[NSOperationQueue new] addOperationWithBlock:^{
+														double scale = _dashboardMap.bounds.size.width / _dashboardMap.visibleMapRect.size.width;
+														NSArray *annotations = [self.coordinateQuadTree clusteredAnnotationsWithinMapRect:_dashboardMap.visibleMapRect withZoomScale:scale];
+														
+														[self updateMapViewAnnotationsWithAnnotations:annotations];
+													}];
 												}];
 		
 		
@@ -432,6 +462,8 @@ enum MapViewVisibility : NSInteger {
 						   
 						   [self.dashboardTableView insertRowsAtIndexPaths:reloadIndexPathsArray withRowAnimation:UITableViewRowAnimationTop];
 						   [self.dashboardTableView endUpdates];
+						   
+						    [NSThread detachNewThreadSelector:@selector(buildTreeWithArray:) toTarget:self.coordinateQuadTree withObject:_dashboardData];
 					   }
 						
 					   [self.dashboardTableView.infiniteScrollingView stopAnimating];
@@ -463,10 +495,11 @@ enum MapViewVisibility : NSInteger {
 
 						   [_dashboardData removeAllObjects];
 						   NSArray * data =[[TDWatchrAPIManager sharedManager] getArrayForKey:@"data" fromResponseData:responseData ];
-						   NSLog(@"data = %@", data);
+						   //NSLog(@"data = %@", data);
 						   [_dashboardData addObjectsFromArray:data];
 						   [self.dashboardTableView reloadData];
-
+						   
+						   [NSThread detachNewThreadSelector:@selector(buildTreeWithArray:) toTarget:self.coordinateQuadTree withObject:_dashboardData];
 					   }
 					   
 					   [self.dashboardTableView.pullToRefreshView stopAnimating];
@@ -503,6 +536,95 @@ enum MapViewVisibility : NSInteger {
 }
 -(void) WatchrAPIManagerDidFinishWithResponse:(NSURLResponse *)response{
 	
+}
+#pragma mark - Annotation Methods
+
+- (void)addBounceAnnimationToView:(UIView *)view
+{
+    CAKeyframeAnimation *bounceAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+	
+    bounceAnimation.values = @[@(0.05), @(1.1), @(0.9), @(1)];
+	
+    bounceAnimation.duration = 0.6;
+    NSMutableArray *timingFunctions = [[NSMutableArray alloc] initWithCapacity:bounceAnimation.values.count];
+    for (NSUInteger i = 0; i < bounceAnimation.values.count; i++) {
+        [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    }
+    [bounceAnimation setTimingFunctions:timingFunctions.copy];
+    bounceAnimation.removedOnCompletion = NO;
+	
+    [view.layer addAnimation:bounceAnimation forKey:@"bounce"];
+}
+
+- (void)updateMapViewAnnotationsWithAnnotations:(NSArray *)annotations
+{
+    NSMutableSet *before = [NSMutableSet setWithArray:_dashboardMap.annotations];
+	[before removeObject:[_dashboardMap userLocation]];
+    NSSet *after = [NSSet setWithArray:annotations];
+	
+    NSMutableSet *toKeep = [NSMutableSet setWithSet:before];
+    [toKeep intersectSet:after];
+	
+    NSMutableSet *toAdd = [NSMutableSet setWithSet:after];
+    [toAdd minusSet:toKeep];
+	
+    NSMutableSet *toRemove = [NSMutableSet setWithSet:before];
+    [toRemove minusSet:after];
+	
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [_dashboardMap addAnnotations:[toAdd allObjects]];
+        [_dashboardMap removeAnnotations:[toRemove allObjects]];
+    }];
+
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    [[NSOperationQueue new] addOperationWithBlock:^{
+        double scale = _dashboardMap.bounds.size.width / _dashboardMap.visibleMapRect.size.width;
+        NSArray *annotations = [self.coordinateQuadTree clusteredAnnotationsWithinMapRect:mapView.visibleMapRect withZoomScale:scale];
+		
+        [self updateMapViewAnnotationsWithAnnotations:annotations];
+    }];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    
+	if ([annotation isKindOfClass:[MKUserLocation class]]){
+		return nil;
+	}else{
+		static NSString *const TBAnnotatioViewReuseID = @"TBAnnotatioViewReuseID";
+		
+		TBClusterAnnotationView *annotationView = (TBClusterAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:TBAnnotatioViewReuseID];
+		
+		if (!annotationView) {
+			annotationView = [[TBClusterAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:TBAnnotatioViewReuseID];
+		}
+		
+		annotationView.canShowCallout = YES;
+		if ([annotation isKindOfClass:[TBClusterAnnotation class]]) {
+			annotationView.count = [(TBClusterAnnotation *)annotation count];
+			if (annotationView.count == 1) {
+				annotationView.countLabel.hidden = YES;
+			}else{
+				annotationView.countLabel.hidden = NO;
+			}
+		}
+		
+		return annotationView;
+
+	}
+	
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    for (UIView *view in views) {
+        [self addBounceAnnimationToView:view];
+    }
 }
 
 

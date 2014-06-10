@@ -14,15 +14,16 @@
 	#import <UIKit/UIKit.h>
 	#import <Foundation/Foundation.h>
 	#import <CoreData/CoreData.h>
+	#import <MapKit/MapKit.h>
 	#import "UIScrollView+APParallaxHeader.h"
 	#import	"NXOAuth2.h"
 	#import	"udevCoreDataHelper.h"
 	#import	"TDWatchrAPIManager.h"
 	#import "NSNull+TDJSON.h"
-#import "SVPullToRefresh.h"
-#import	"TDWatchrLocationManager.h"
-#import	"MRProgress.h"
-#import "TDHelperClass.h"
+	#import "SVPullToRefresh.h"
+	#import	"TDWatchrLocationManager.h"
+	#import	"MRProgress.h"
+	#import "TDHelperClass.h"
 #endif
 
 
