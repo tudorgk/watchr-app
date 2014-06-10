@@ -90,7 +90,7 @@ static TDWatchrAPIManager * sharedManager = nil;
 				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
 					   //				   NSLog(@"response = %@", [response description]);
 					   //				   NSLog(@"error = %@", [error userInfo]);
-					   
+					   					   
 					   if(error) {
 						   if(delegate!=nil){
 							   if([delegate respondsToSelector:@selector(WatchrAPIManagerDidFinishWithError:)])
@@ -122,6 +122,7 @@ static TDWatchrAPIManager * sharedManager = nil;
 					 JSONObjectWithData:responseData
 					 options:NSJSONReadingMutableContainers
 					 error:&JSONParsingError];
+
 	
 	if (JSONParsingError) {
 		return nil;

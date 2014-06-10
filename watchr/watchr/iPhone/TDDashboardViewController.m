@@ -488,14 +488,17 @@ enum MapViewVisibility : NSInteger {
 				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
 					   //				   NSLog(@"response = %@", [response description]);
 					   //				   NSLog(@"error = %@", [error userInfo]);
+					   
+//					   NSString * responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding	];
+//					   NSLog(@"%@", responseString);
+					   
 					   if (error) {
 						   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving events" message:[[error userInfo] description] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
 						   [alert show];
 					   }else{
-
 						   [_dashboardData removeAllObjects];
 						   NSArray * data =[[TDWatchrAPIManager sharedManager] getArrayForKey:@"data" fromResponseData:responseData ];
-						   //NSLog(@"data = %@", data);
+//						   NSLog(@"data = %@", data);
 						   [_dashboardData addObjectsFromArray:data];
 						   [self.dashboardTableView reloadData];
 						   
