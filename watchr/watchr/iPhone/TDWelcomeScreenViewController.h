@@ -33,7 +33,13 @@ enum ScreenVisible : NSInteger {
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView2;
 @property (nonatomic,weak) UIViewController<TDFirstRunManagerDelegate>  *ownerViewController;
+
++(TDWelcomeScreenViewController*) sharedWelcomeScreen;
+
 - (IBAction)loginButtonPressed:(id)sender;
 - (IBAction)registerButtonPressed:(id)sender;
+
+-(void) presentWelcomeScreen:(id)sender animated:(BOOL) animated;
+-(void) dismissWelcomeScreen:(id)sender animated:(BOOL) animated;
 
 @end

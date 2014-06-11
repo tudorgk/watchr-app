@@ -46,3 +46,6 @@
 #define TDDefaultOrderByKey @"sorting_filter"
 #define TDDefaultOrderModeKey @"order_filter"
 #define TDDefaultRadiusKey @"radius_filter"
+
+#define TDWelcomeScreenPresented @"welcome_screen_presented"
+#define TDWelcomeScreenDismissed @"welcome_screen_dismissed"

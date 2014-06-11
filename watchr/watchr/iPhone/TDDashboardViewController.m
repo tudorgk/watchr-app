@@ -43,6 +43,7 @@ enum MapViewVisibility : NSInteger {
 }
 @property (strong, nonatomic) TBCoordinateQuadTree *coordinateQuadTree;
 
+-(void) registerForNotifications;
 -(void) configureView;
 -(void) configureTableView;
 -(void) configureDataSource;
@@ -53,6 +54,9 @@ enum MapViewVisibility : NSInteger {
 -(void) resetFilterBarButtons;
 -(void) refreshDashboardFilters;
 -(void) configureQuadTree;
+
+-(void) welcomeScreenDismissed;
+
 @end
 
 @implementation TDDashboardViewController
@@ -72,7 +76,7 @@ enum MapViewVisibility : NSInteger {
 
 -(void)awakeFromNib{
 	 self.title = @"Dashboard";
-	
+
 	_mapState= MapViewVisibilityHidden;
 	
 	//add multiple bar button items to navigation bar
@@ -110,19 +114,16 @@ enum MapViewVisibility : NSInteger {
 	[self configureLocationManager];
 	[self refreshDashboardFilters];
 	[self configureQuadTree];
-	//present it
-	_welcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
-	[_welcomeScreen.view setBackgroundColor:[UIColor clearColor]];
-	_welcomeScreen.ownerViewController = self;
+	[self registerForNotifications];
 	//present it if there are no accounts registered
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] == nil) {
 		//this means that the app has no login info
 		for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
 			[[NXOAuth2AccountStore sharedStore] removeAccount:account];
 		}
-		[self presentViewController:_welcomeScreen animated:NO completion:nil];
+		[[TDWelcomeScreenViewController sharedWelcomeScreen] presentWelcomeScreen:self animated:NO];
 	}else{
-//		[self.dashboardTableView triggerPullToRefresh];
+		[_locationManager startUpdatingLocation];
 	}
 
 		
@@ -249,6 +250,18 @@ enum MapViewVisibility : NSInteger {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - notification registration
+
+-(void) registerForNotifications{
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(welcomeScreenDismissed)
+												 name:TDWelcomeScreenDismissed object:nil];
+}
+
+-(void) welcomeScreenDismissed{
+	[[TDWatchrLocationManager sharedManager] startUpdatingLocation];
+}
+
 
 #pragma mark - CLLocationManagerDelegate Methods
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
@@ -261,16 +274,9 @@ enum MapViewVisibility : NSInteger {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-	if (_currentLocation == nil) {
 		//first load
 		_currentLocation = [locations lastObject];
 		[_dashboardFilters setFilterGeocodeWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude andRadius:[[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"filter"] doubleValue]];
-		[self.dashboardTableView triggerPullToRefresh];
-		return;
-	}
-	
-	_currentLocation = [locations lastObject];
-	[_dashboardFilters setFilterGeocodeWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude andRadius:[[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"filter"] doubleValue]];
 }
 
 #pragma mark - Action Picker Delegate
@@ -541,12 +547,6 @@ enum MapViewVisibility : NSInteger {
 
 }
 
-#pragma mark - TDFirstTunManagerDelegate methods
-
--(void) managerDidFinishFirstTimeSetUpWithData:(id)data{
-//	[self.dashboardTableView triggerPullToRefresh];
-	[_welcomeScreen dismissViewControllerAnimated:YES completion:nil];
-}
 
 #pragma mark - TDAddEventViewControllerDelegate methods
 

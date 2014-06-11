@@ -17,6 +17,17 @@
 
 @implementation TDWelcomeScreenViewController
 
+#pragma mark -
+#pragma mark Singleton
+static TDWelcomeScreenViewController* sharedWelcomeScreen = nil;
++(TDWelcomeScreenViewController*) sharedWelcomeScreen {
+    @synchronized(self) {
+        if(sharedWelcomeScreen == nil)
+            sharedWelcomeScreen = [[UIStoryboard storyboardWithName:@"IntroStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+    }
+    return sharedWelcomeScreen;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -98,7 +109,6 @@
 													  
 													  //TODO: Testing. Need to perform a first-time setup here. Get countries, profile statuses etc.
 													  TDFirstRunManager * firstRunner = [TDFirstRunManager sharedManager];
-													  firstRunner.delegate = self.ownerViewController;
 													  [firstRunner runFirstTimeSetUp];
 													
 												  }];
@@ -180,9 +190,24 @@
 		
 		_visible = ScreenVisibleNone;
 	}];
+}
 
-
+#pragma mark - Present/Dismiss
+-(void) presentWelcomeScreen:(id)sender animated:(BOOL) animated{
+	UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
 	
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:sender forKey:@"sender"];
+    [[NSNotificationCenter defaultCenter] postNotificationName: TDWelcomeScreenPresented object:nil userInfo:userInfo];
+	
+	[rootVC presentViewController:self animated:animated completion:nil];
+}
+
+-(void) dismissWelcomeScreen:(id)sender animated:(BOOL) animated{
+	UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:sender forKey:@"sender"];
+    [[NSNotificationCenter defaultCenter] postNotificationName: TDWelcomeScreenDismissed object:nil userInfo:userInfo];
+	
+	[rootVC dismissViewControllerAnimated:animated completion:nil];
 }
 
 

@@ -43,14 +43,14 @@ TBQuadTreeNodeData TBDataFromObject(NSDictionary *object, unsigned int index){
 	WatchrEventInfo* eventInfo = malloc(sizeof(WatchrEventInfo));
 		
 	NSString * eventName = [object objectForKey:@"event_name"];
-	if (eventName == nil) 
+	if (eventName == nil || [eventName isKindOfClass:[NSNull class]])
 		eventName = @"Unnamed event";
 	
 	eventInfo->eventName = malloc(sizeof(char) * eventName.length + 1);
 	strncpy(eventInfo->eventName, [eventName UTF8String], eventName.length + 1);
 
 	NSString * eventDescription = [object objectForKey:@"description"];
-	if (eventDescription == nil)
+	if (eventDescription == nil || [eventDescription isKindOfClass:[NSNull class]])
 		eventDescription = @"Description not available";
 
 	eventInfo->eventDescription = malloc(sizeof(char) * eventDescription.length + 1);

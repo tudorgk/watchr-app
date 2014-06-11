@@ -18,7 +18,7 @@
                             <rect key="frame" x="10" y="5" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-demo-picture.jpg" id="on2-IC-ATn">
+                                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-demo-picture.jpg" id="on2-IC-ATn">
                                     <rect key="frame" x="3" y="3" width="44" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
@@ -32,7 +32,7 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tudor Dragan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="SoG-FT-qps">
+                        <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tudor Dragan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="SoG-FT-qps">
                             <rect key="frame" x="68" y="12" width="114" height="35"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
@@ -76,6 +76,7 @@
                 <outlet property="circleView" destination="qRy-X9-Ov4" id="OW8-43-zdZ"/>
                 <outlet property="customBackgroundView" destination="fdN-He-Doi" id="85v-wp-UnH"/>
                 <outlet property="profileImageView" destination="on2-IC-ATn" id="79A-LJ-h4Q"/>
+                <outlet property="usernameLabel" destination="SoG-FT-qps" id="m14-fS-KXK"/>
             </connections>
         </view>
     </objects>

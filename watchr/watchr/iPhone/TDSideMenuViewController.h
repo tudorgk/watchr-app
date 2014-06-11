@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDSideMenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface TDSideMenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>{
 	NSMutableArray * _menuEntries;
 }
 @property (weak, nonatomic) IBOutlet UITableView *sideMenuTableView;

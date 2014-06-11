@@ -8,7 +8,7 @@
 
 #import "TDFirstRunManager.h"
 #import "Country.h"
-
+#import "TDWelcomeScreenViewController.h"
 @class TDFirstRunManager;
 
 @interface TDFirstRunManager()<TDWatchrAPIManagerDelegate>{
@@ -123,6 +123,8 @@ static TDFirstRunManager * sharedManager = nil;
 			if([self.delegate respondsToSelector:@selector(managerDidFinishFirstTimeSetUpWithData:)])
 				[self.delegate managerDidFinishFirstTimeSetUpWithData:nil];
 		}
+		
+		[[TDWelcomeScreenViewController sharedWelcomeScreen] dismissWelcomeScreen:self animated:YES];
 
 	}
 }

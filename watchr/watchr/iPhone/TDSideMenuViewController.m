@@ -9,7 +9,8 @@
 #import "TDSideMenuViewController.h"
 #import "TDProfileHeaderView.h"
 #import <QuartzCore/QuartzCore.h>
-@interface TDSideMenuViewController (){
+#import "TDWelcomeScreenViewController.h"
+@interface TDSideMenuViewController()<TDProfileHeaderViewDelegate>{
 	int * _selectedRow;
 }
 -(void) configureView;
@@ -89,6 +90,7 @@
 
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 	TDProfileHeaderView * profileHeader = (TDProfileHeaderView*)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"profileHeader"];
+	profileHeader.delegate =self;
 	
 	profileHeader.circleView.layer.cornerRadius = 25;
 	profileHeader.circleView.layer.masksToBounds = YES;
@@ -131,5 +133,28 @@
 	return 1;
 }
 
+#pragma mark - TDProfileHeaderViewDelegate methods
+
+-(void) profileHeader:(TDProfileHeaderView *)headerView profilePhotoTapped:(UIImageView *)profilePhoto{
+	UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+	UIActionSheet * action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Log out" otherButtonTitles: nil];
+	[action showInView:rootVC.view];
+}
+
+-(void) profileHeader:(TDProfileHeaderView *)headerView usernameTapped:(UILabel *)usernameLabel{
+	NSLog(@"label tapped");	
+}
+
+#pragma mark - UIActionSeheetDelegate methods
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+	if (buttonIndex==0) {
+		//Log out
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:TDWatchrAPIAccountIdentifier];
+		for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
+			[[NXOAuth2AccountStore sharedStore] removeAccount:account];
+		}
+		[[TDWelcomeScreenViewController sharedWelcomeScreen] presentWelcomeScreen:self animated:YES];
+	}
+}
 
 @end
