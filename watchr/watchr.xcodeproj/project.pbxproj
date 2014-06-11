@@ -20,6 +20,7 @@
 		05228141192BC3F5000E8868 /* user-location-small-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0522813B192BC3F5000E8868 /* user-location-small-icon.png */; };
 		05228142192BC3F5000E8868 /* user-location-small-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0522813C192BC3F5000E8868 /* user-location-small-icon@2x.png */; };
 		05228145192BD501000E8868 /* TDDashboardFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 05228144192BD501000E8868 /* TDDashboardFilterButton.m */; };
+		0537A0CF194899E20051202D /* TDCategorySelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537A0CE194899E20051202D /* TDCategorySelectorViewController.m */; };
 		05409D7F192557CE00E8544C /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05409D7C192557CE00E8544C /* FBShimmeringLayer.m */; };
 		05409D80192557CE00E8544C /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05409D7E192557CE00E8544C /* FBShimmeringView.m */; };
 		0541A0AE1938B2870033F3B6 /* TDPhotoPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0541A0AD1938B2870033F3B6 /* TDPhotoPickerTableViewCell.m */; };
@@ -234,6 +235,8 @@
 		0522813C192BC3F5000E8868 /* user-location-small-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-location-small-icon@2x.png"; sourceTree = "<group>"; };
 		05228143192BD501000E8868 /* TDDashboardFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDDashboardFilterButton.h; sourceTree = "<group>"; };
 		05228144192BD501000E8868 /* TDDashboardFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDDashboardFilterButton.m; sourceTree = "<group>"; };
+		0537A0CD194899E20051202D /* TDCategorySelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDCategorySelectorViewController.h; path = iPhone/TDCategorySelectorViewController.h; sourceTree = "<group>"; };
+		0537A0CE194899E20051202D /* TDCategorySelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDCategorySelectorViewController.m; path = iPhone/TDCategorySelectorViewController.m; sourceTree = "<group>"; };
 		05409D79192557CE00E8544C /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
 		05409D7A192557CE00E8544C /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
 		05409D7B192557CE00E8544C /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
@@ -594,6 +597,15 @@
 			name = FilterButton;
 			sourceTree = "<group>";
 		};
+		0537A0CB194896F40051202D /* Category Selector View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0537A0CD194899E20051202D /* TDCategorySelectorViewController.h */,
+				0537A0CE194899E20051202D /* TDCategorySelectorViewController.m */,
+			);
+			name = "Category Selector View Controller";
+			sourceTree = "<group>";
+		};
 		05409D77192557B300E8544C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -900,10 +912,10 @@
 		05965B9E1937428C00B0B870 /* Add Event View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				05E6A21C1945C0DD0061E2BB /* Custom Annotation */,
+				05965BB019376CC700B0B870 /* AddEventInputItems.plist */,
 				05965B9F193742C500B0B870 /* TDAddEventViewController.h */,
 				05965BA0193742C500B0B870 /* TDAddEventViewController.m */,
-				05965BB019376CC700B0B870 /* AddEventInputItems.plist */,
+				0537A0CB194896F40051202D /* Category Selector View Controller */,
 				05E6A2151945B9330061E2BB /* Select Location View Controller */,
 				05965BB2193774A600B0B870 /* Custom Cells */,
 			);
@@ -1296,6 +1308,7 @@
 		05E6A2151945B9330061E2BB /* Select Location View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				05E6A21C1945C0DD0061E2BB /* Custom Annotation */,
 				05E6A2161945B9600061E2BB /* TDSelectLocationViewController.h */,
 				05E6A2171945B9600061E2BB /* TDSelectLocationViewController.m */,
 			);
@@ -1690,6 +1703,7 @@
 				0578F9841928BDCA00F8F7B3 /* ECSlidingSegue.m in Sources */,
 				05EEAEF419462399002B26C2 /* MRNavigationBarProgressView.m in Sources */,
 				054F4099192E2CA600960ABE /* UIImage+WebP.m in Sources */,
+				0537A0CF194899E20051202D /* TDCategorySelectorViewController.m in Sources */,
 				0583C3E21942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				05BB5F20192F7DBB00D9BE6A /* TDSideMenuViewController.m in Sources */,
 				05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */,

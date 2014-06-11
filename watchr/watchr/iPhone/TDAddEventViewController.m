@@ -14,6 +14,7 @@
 #import "TDPhotoPickerTableViewCell.h"
 #import "CTAssetsPickerController.h"
 #import "TDSelectLocationViewController.h"
+#import "TDCategorySelectorViewController.h"
 #define kFontSize 17.0 // fontsize
 #define kTextViewWidth 302
 
@@ -130,8 +131,9 @@
 	_activeInputField = nil;
 	//add a tap gesture recognizer to dismiss the keyboard
 	_dismissKeyboardTapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+	_dismissKeyboardTapper.cancelsTouchesInView = NO;
 	[self.addEventTableView addGestureRecognizer:_dismissKeyboardTapper];
-	
+
 
 }
 
@@ -256,6 +258,8 @@
 			_activeInputField = nil;
 		}
 	}
+	//send the point of touch to the other views
+	
 }
 
 - (void)subscribeToKeyboardEvents:(BOOL)subscribe{
@@ -447,6 +451,12 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	switch (indexPath.section) {
+		case 1:
+		{
+			TDCategorySelectorViewController * categorySelectorVC = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"categorySelector"];
+			[self.navigationController pushViewController:categorySelectorVC animated:YES];
+		}
+			break;
 		case 3:
 		{
 			[self presentViewController:_picker animated:YES completion:nil];
