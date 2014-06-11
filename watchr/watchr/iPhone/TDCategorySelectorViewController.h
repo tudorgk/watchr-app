@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TDCategorySelectorViewController;
+@protocol TDCategorySelectorDelegate <NSObject>
 
+-(void) categorySelector:(TDCategorySelectorViewController*) categorySelectorViewController didSelectCategory:(NSDictionary*) category;
+
+@end
 @interface TDCategorySelectorViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
 	NSMutableArray * _categoryArray;
 	UIRefreshControl * _refreshControl;
 }
 @property (weak, nonatomic) IBOutlet UITableView *categoryTableView;
-
+@property (nonatomic,strong) NSDictionary * currentCategory;
+@property (nonatomic,assign) id<TDCategorySelectorDelegate> delegate;
 @end

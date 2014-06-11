@@ -8,10 +8,13 @@
 
 #import "TDCategorySelectorViewController.h"
 
-@interface TDCategorySelectorViewController ()
+@interface TDCategorySelectorViewController (){
+	UIBarButtonItem *_saveBarButtonItem;
+}
 
 -(void) configureTableView;
 -(void) refreshTable;
+-(void) userDidSaveCategory;
 @end
 
 @implementation TDCategorySelectorViewController
@@ -44,6 +47,11 @@
 	
 	self.title = @"Categories";
 	
+	//Add the save button. Set it hidden until the categories have been downloaded
+	_saveBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(userDidSaveCategory)];
+	self.navigationItem.rightBarButtonItem = _saveBarButtonItem;
+	[_saveBarButtonItem setEnabled:NO];
+	
 	[self configureTableView];
     // Do any additional setup after loading the view.
 }
@@ -73,7 +81,6 @@
 #pragma mark - Refersh Control
 
 -(void) refreshTable{
-	NSLog(@"refreshing");
 	
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/category/structured"]]
@@ -95,8 +102,20 @@
 					   
 					   NSArray *responseArray = [[TDWatchrAPIManager sharedManager] getArrayForKey:@"data" fromResponseData:responseData];
 					   _categoryArray = [NSMutableArray arrayWithArray:responseArray];
-					   [self.categoryTableView reloadData];
 					   
+					   //find the default subcategory (category_id = 1)
+					   for (int i = 0 ; i<[_categoryArray count]; i++) {
+						   NSArray *subCategoryArray = [[_categoryArray objectAtIndex:i] objectForKey:@"subcategories"];
+						   for (int j=0; j<[subCategoryArray count]; j++) {
+							   NSDictionary * subcategory = [subCategoryArray objectAtIndex:j];
+							   if([[subcategory objectForKey:@"category_id"] intValue] == 1){
+								   self.currentCategory = subcategory;
+							   }
+						   }
+					   }
+					   
+					   [self.categoryTableView reloadData];
+					   [_saveBarButtonItem setEnabled:YES];
 					   [_refreshControl endRefreshing];
 				   }];
 
@@ -118,14 +137,37 @@
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryNone) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        // Reflect selection in data model
-    } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        // Reflect deselection in data model
+	[tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+	NSInteger mainCategoryIndex = 0;
+	NSInteger subCategoryIndex = 0;
+	
+	//find the current subcategory
+	for (int i = 0 ; i<[_categoryArray count]; i++) {
+		NSArray *subCategoryArray = [[_categoryArray objectAtIndex:i] objectForKey:@"subcategories"];
+		for (int j=0; j<[subCategoryArray count]; j++) {
+			if ([self.currentCategory isEqual:[subCategoryArray objectAtIndex:j]]) {
+				mainCategoryIndex = i;
+				subCategoryIndex = j;
+			}
+		}
+	}
+	
+	if (mainCategoryIndex == indexPath.section && subCategoryIndex == indexPath.row) {
+		//it's the same. no need to reselect
+        return;
+    }
+    NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:subCategoryIndex inSection:mainCategoryIndex];
+	
+    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
+    if (newCell.accessoryType == UITableViewCellAccessoryNone) {
+        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        self.currentCategory = [[[_categoryArray objectAtIndex:indexPath.section] objectForKey:@"subcategories"] objectAtIndex:indexPath.row];
+    }
+	
+    UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
+    if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        oldCell.accessoryType = UITableViewCellAccessoryNone;
     }
 }
 
@@ -136,6 +178,12 @@
 	NSArray * mainCategoryItemSubcategories = [[_categoryArray objectAtIndex:indexPath.section] objectForKey:@"subcategories"];
 	NSDictionary * categoryItem = [mainCategoryItemSubcategories objectAtIndex:indexPath.row];
 	
+	if ([categoryItem isEqual:self.currentCategory]) {
+		cell.accessoryType = UITableViewCellAccessoryCheckmark;
+	}else{
+		cell.accessoryType = UITableViewCellAccessoryNone;
+	}
+	
 	cell.textLabel.text = [categoryItem objectForKey:@"category_name"];
 	cell.detailTextLabel.text = [categoryItem objectForKey:@"category_description"];
 	return cell;
@@ -144,4 +192,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 	return [[[_categoryArray objectAtIndex:section] objectForKey:@"subcategories"] count];
 }
+#pragma mark - Saving
+
+-(void) userDidSaveCategory{
+	if (_delegate) {
+		if ([_delegate respondsToSelector:@selector(categorySelector:didSelectCategory:)]) {
+			[_delegate categorySelector:self didSelectCategory:self.currentCategory];
+		}
+	}
+}
+
 @end

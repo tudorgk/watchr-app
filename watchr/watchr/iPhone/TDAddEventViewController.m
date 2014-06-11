@@ -24,8 +24,9 @@
 #define kTDWatchrEventLatitudeKey @"latitude"
 #define kTDWatchrEventLongitudeKey @"longitude"
 #define kTDWatchrEventMediaArrayKey @"media[]"
+#define kTDWatchrEventCategoriesArrayKey @"categories[]"
 
-@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate,TDSelectLocationViewControllerDelegate,CLLocationManagerDelegate>{
+@interface TDAddEventViewController ()<CTAssetsPickerControllerDelegate,UINavigationControllerDelegate,TDMapSelectorTableViewCellDelegate,TDSelectLocationViewControllerDelegate,CLLocationManagerDelegate,TDCategorySelectorDelegate>{
 	//the form
 	NSMutableArray * _addEventItems;
 	
@@ -54,7 +55,9 @@
 	//Add CLLocation manager
 	CLLocationManager * _addLocationManager;
 	CLLocation * _currentLocation;
-
+	
+	//Selected category
+	NSDictionary * _selectedCategory;
 
 }
 -(void) initialiseCells;
@@ -166,7 +169,12 @@
 	
 	if (_categorySelectorCell == nil) {
 		_categorySelectorCell = [self.addEventTableView dequeueReusableCellWithIdentifier:@"selector"];
-		_categorySelectorCell.detailTextLabel.text = @"None";
+		if (_selectedCategory != nil) {
+			_categorySelectorCell.detailTextLabel.text = [_selectedCategory objectForKey:@"category_name"];
+		}else{
+			_categorySelectorCell.detailTextLabel.text = @"Other";
+		}
+		
 	}
 	
 	if (_mapSelectorCell == nil) {
@@ -454,6 +462,7 @@
 		case 1:
 		{
 			TDCategorySelectorViewController * categorySelectorVC = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"categorySelector"];
+			categorySelectorVC.delegate = self;
 			[self.navigationController pushViewController:categorySelectorVC animated:YES];
 		}
 			break;
@@ -635,6 +644,9 @@
 	[parameters setObject:[NSNumber numberWithDouble:_watchrEventPoint.coordinate.latitude] forKey:kTDWatchrEventLatitudeKey];
 	[parameters setObject:[NSNumber numberWithDouble:_watchrEventPoint.coordinate.longitude] forKey:kTDWatchrEventLongitudeKey];
 	
+	if (_selectedCategory !=nil) {
+		[parameters setObject:@[[NSNumber numberWithInt:[[_selectedCategory objectForKey:@"category_id"] intValue]]] forKey:kTDWatchrEventCategoriesArrayKey];
+	}
 	
 	if ([_selectedPhotos count]!=0) {
 		//if we post an event with w/ media
@@ -830,6 +842,21 @@
 
 }
 
+#pragma mark - TDCategorySelectorDelegate methods
+-(void) categorySelector:(TDCategorySelectorViewController *)categorySelectorViewController didSelectCategory:(NSDictionary *)category{
+	_selectedCategory = [category copy];
+	
+	//reload the category cell
+//	NSIndexPath * categoryCellIndexPath = [self.addEventTableView indexPathForCell:_categorySelectorCell];
+	if (_selectedCategory != nil) {
+		_categorySelectorCell.detailTextLabel.text = [_selectedCategory objectForKey:@"category_name"];
+	}else{
+		_categorySelectorCell.detailTextLabel.text = @"Other";
+	}
+	
+	//remove the category selector view controller
+	[self.navigationController popViewControllerAnimated:YES];
+}
 
 
 @end
