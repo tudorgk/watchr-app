@@ -44,12 +44,12 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+30" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="aGz-QV-x6w">
                                                     <rect key="frame" x="8" y="2" width="56" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                                                     <color key="textColor" red="0.0" green="0.77340898722627738" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="importance-icon.png" id="6Es-B4-KO0">
-                                                    <rect key="frame" x="24" y="29" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="other-category-icon.png" id="6Es-B4-KO0">
+                                                    <rect key="frame" x="21" y="27" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin-small-icon.png" id="6mj-Au-xj5">
@@ -86,9 +86,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cellEventCategoryImageView" destination="6Es-B4-KO0" id="Q5q-um-8iv"/>
                                             <outlet property="cellEventDescriptionLabel" destination="xsV-vq-A6z" id="CzV-gX-KZQ"/>
                                             <outlet property="cellEventDistanceLabel" destination="RpU-oh-048" id="E9V-33-1kA"/>
-                                            <outlet property="cellEventImportanceImageView" destination="6Es-B4-KO0" id="QhJ-Gw-RvL"/>
                                             <outlet property="cellEventTitleLabel" destination="Tks-gP-ABs" id="0YJ-kI-M3A"/>
                                             <outlet property="cellRatingLabel" destination="aGz-QV-x6w" id="IAd-a8-cCK"/>
                                             <outlet property="cellTimeLabel" destination="HxW-cr-7tK" id="R0b-uB-TRJ"/>
@@ -188,7 +188,7 @@
     </scenes>
     <resources>
         <image name="dashboard-map-icon.png" width="25" height="25"/>
-        <image name="importance-icon.png" width="25" height="25"/>
+        <image name="other-category-icon.png" width="40" height="40"/>
         <image name="pin-small-icon.png" width="7" height="14"/>
         <image name="watchr-menu-button.png" width="24" height="15"/>
     </resources>

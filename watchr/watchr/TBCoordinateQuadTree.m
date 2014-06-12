@@ -172,6 +172,7 @@ float TBCellSizeForZoomScale(MKZoomScale zoomScale)
 
             NSMutableArray *names = [[NSMutableArray alloc] init];
             NSMutableArray *phoneNumbers = [[NSMutableArray alloc] init];
+			NSMutableArray *indexes = [[NSMutableArray alloc] init];
 
             TBQuadTreeGatherDataInRange(self.root, TBBoundingBoxForMapRect(mapRect), ^(TBQuadTreeNodeData data) {
                 totalX += data.x;
@@ -181,6 +182,7 @@ float TBCellSizeForZoomScale(MKZoomScale zoomScale)
                 WatchrEventInfo hotelInfo = *(WatchrEventInfo *)data.data;
                 [names addObject:[NSString stringWithFormat:@"%s", hotelInfo.eventName]];
                 [phoneNumbers addObject:[NSString stringWithFormat:@"%s", hotelInfo.eventDescription]];
+				[indexes addObject:[NSNumber numberWithUnsignedInt:hotelInfo.index]];
             });
 
             if (count == 1) {
@@ -188,6 +190,7 @@ float TBCellSizeForZoomScale(MKZoomScale zoomScale)
                 TBClusterAnnotation *annotation = [[TBClusterAnnotation alloc] initWithCoordinate:coordinate count:count];
                 annotation.title = [names lastObject];
                 annotation.subtitle = [phoneNumbers lastObject];
+				annotation.index = [[indexes lastObject] unsignedIntValue];
                 [clusteredAnnotations addObject:annotation];
             }
 

@@ -186,6 +186,8 @@
 	
 	cell.textLabel.text = [categoryItem objectForKey:@"category_name"];
 	cell.detailTextLabel.text = [categoryItem objectForKey:@"category_description"];
+	[cell.imageView setImage:[UIImage imageNamed:[categoryItem objectForKey:@"category_icon"]]];
+	[cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
 	return cell;
 }
 

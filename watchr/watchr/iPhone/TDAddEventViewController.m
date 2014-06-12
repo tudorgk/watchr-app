@@ -534,7 +534,7 @@
     return view;
 }
 
-
+//Important: I am treating the cells as "nondequeueable". Seems to work well
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	//add the submit cell
 	if(indexPath.section == [_addEventItems count])

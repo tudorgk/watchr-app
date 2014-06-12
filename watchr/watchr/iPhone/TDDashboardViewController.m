@@ -369,9 +369,10 @@ enum MapViewVisibility : NSInteger {
 #pragma mark - UITableViewDelegate Methods
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
 	TDEventDetailsViewController * detailsController = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
 	[self.navigationController pushViewController:detailsController animated:YES];
-	
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -382,9 +383,19 @@ enum MapViewVisibility : NSInteger {
 	
 	cell.cellEventTitleLabel.text = [cellData objectForKey:@"event_name"];
 	cell.cellEventDescriptionLabel.text = [cellData objectForKey:@"description"];
-	cell.cellEventDistanceLabel.text = [[cellData objectForKey:@"distance"] stringValue];
-	cell.cellRatingLabel.text = [cellData objectForKey:@"rating"];
+	
+	NSString *distance = [NSString stringWithFormat:@"%.2fkm", [[cellData objectForKey:@"distance"] floatValue]];
+	cell.cellEventDistanceLabel.text = distance;
+	
+	if ([[cellData objectForKey:@"rating"] isKindOfClass:[NSNull class]]) {
+		cell.cellRatingLabel.text = @"0";
+	}else{
+		cell.cellRatingLabel.text = [cellData objectForKey:@"rating"];
+	}
+
+	
 	cell.cellTimeLabel.text = [cellData objectForKey:@"created_at"];
+	cell.cellEventCategoryImageView.image = [UIImage imageNamed:[[cellData objectForKey:@"category"] objectForKey:@"category_icon"]];
 	return cell;
 }
 
@@ -639,10 +650,25 @@ enum MapViewVisibility : NSInteger {
 		
 		annotationView.canShowCallout = YES;
 		if ([annotation isKindOfClass:[TBClusterAnnotation class]]) {
-			annotationView.count = [(TBClusterAnnotation *)annotation count];
-			if (annotationView.count == 1) {
+			
+			NSInteger  annotationCount = [(TBClusterAnnotation *)annotation count];
+			
+			if (annotationCount == 1) {
+				//the actual event
 				annotationView.countLabel.hidden = YES;
+				annotationView.count = annotationCount;
+				// grab the original image
+				UIImage *originalImage = [UIImage imageNamed:[[[_dashboardData objectAtIndex:((TBClusterAnnotation*)annotation).index]objectForKey:@"category"] objectForKey:@"category_icon"]];
+				// scaling set to 2.0 makes the image 1/2 the size.
+				UIImage *scaledImage =
+                [UIImage imageWithCGImage:[originalImage CGImage]
+									scale:(originalImage.scale * 1.2)
+							  orientation:(originalImage.imageOrientation)];
+				
+				annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:scaledImage];
+				
 			}else{
+				annotationView.count = annotationCount;
 				annotationView.countLabel.hidden = NO;
 			}
 		}

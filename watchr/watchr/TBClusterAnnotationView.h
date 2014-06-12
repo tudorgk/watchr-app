@@ -12,4 +12,5 @@
 
 @property (assign, nonatomic) NSUInteger count;
 @property (strong, nonatomic) UILabel *countLabel;
+@property (assign, nonatomic) unsigned int index;
 @end

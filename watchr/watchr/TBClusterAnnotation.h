@@ -14,6 +14,8 @@
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *subtitle;
 @property (assign, nonatomic) NSInteger count;
+@property (assign, nonatomic) unsigned int index;
+
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate count:(NSInteger)count;
 
