@@ -36,6 +36,7 @@
 		//scrollView options
 		[self.scrollView setDelegate:self];
 		[self.scrollView setPagingEnabled:YES];
+		[self.scrollView setDirectionalLockEnabled:YES];
 		
 		
 		//add the images from the array to the scroll view
@@ -45,7 +46,7 @@
 			[imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 			[imageView setContentMode:UIViewContentModeScaleAspectFill];
 			[imageView setClipsToBounds:YES];
-			[imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"blurred-background"]];
+			[imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder-image.png"]];
 			
 			[self.imageViewArray addObject:imageView];
 			

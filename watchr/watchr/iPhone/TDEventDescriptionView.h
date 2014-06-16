@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *headerEventDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *headerEventNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *headerCategoryIcon;
+@property (weak, nonatomic) IBOutlet UILabel *headerEventAddressLabel;
 
 @end

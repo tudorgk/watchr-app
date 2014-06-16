@@ -8,7 +8,7 @@
 
 #import "TDEventTabSelectorView.h"
 
-@interface TDEventTabSelectorView()<DKScrollingTabControllerDelegate>{
+@interface TDEventTabSelectorView(){
 }
 @end
 @implementation TDEventTabSelectorView
@@ -46,40 +46,10 @@
 	_leftTabController.unselectedBackgroundColor = [UIColor clearColor];
 	_leftTabController.translucent = YES;
 	
-	_leftTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0" ];
-	[_leftTabController setButtonName:@"EVENT\nDETAILS" atIndex:0];
-	[_leftTabController setButtonName:@"COMMENTS\n143" atIndex:1];
-	[_leftTabController setButtonName:@"FOLLOWING\n1,092" atIndex:2];
-	[_leftTabController setButtonName:@"FOLLOWERS\n924" atIndex:3];
-		[_leftTabController setButtonName:@"FOLLOWERS\n924" atIndex:4];
-		[_leftTabController setButtonName:@"FOLLOWERS\n924" atIndex:5];
 	
-	
-	[_leftTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-		UIButton *button = obj;
-		button.titleLabel.numberOfLines = 2;
-		button.titleLabel.textAlignment = NSTextAlignmentCenter;
-		
-		NSString *buttonName = button.titleLabel.text;
-		NSString *text =  [buttonName substringWithRange: NSMakeRange(0, [buttonName rangeOfString: @"\n"].location)];
-		NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:buttonName];
-		NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:6] };
-		NSRange range = [buttonName rangeOfString:text];
-		[attributedString addAttributes:attributes range:range];
-		
-		button.titleLabel.text = @"";
-		[button setAttributedTitle:attributedString forState:UIControlStateNormal];
-	}];
 
 }
 
-#pragma mark - TabControllerDelegate
-
-- (void)DKScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
-    NSLog(@"Selection controller action button with index=%d",selection);
-	//when selected change the data source
-
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.

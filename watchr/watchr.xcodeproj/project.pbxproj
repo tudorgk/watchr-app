@@ -151,7 +151,11 @@
 		05965BBB193776A300B0B870 /* TDInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BBA193776A300B0B870 /* TDInputTableViewCell.m */; };
 		05965BBE193776AF00B0B870 /* TDBigInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */; };
 		05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */; };
-		05A731F0194EF6A90000EB46 /* TDEventDetailsDataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A731EF194EF6A90000EB46 /* TDEventDetailsDataSourceManager.m */; };
+		05A731F5194F1CB30000EB46 /* TDEventStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A731F4194F1CB30000EB46 /* TDEventStatusTableViewCell.m */; };
+		05A731F9194F20400000EB46 /* TDEventDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A731F8194F20400000EB46 /* TDEventDescriptionTableViewCell.m */; };
+		05A731FC194F3D7E0000EB46 /* placeholder-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A731FA194F3D7E0000EB46 /* placeholder-image.png */; };
+		05A731FD194F3D7E0000EB46 /* placeholder-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A731FB194F3D7E0000EB46 /* placeholder-image@2x.png */; };
+		05A73201194F69580000EB46 /* TDEventMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A73200194F69580000EB46 /* TDEventMapTableViewCell.m */; };
 		05B544CA193C80DE0081332D /* NSNull+TDJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B544C9193C80DE0081332D /* NSNull+TDJSON.m */; };
 		05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */; };
 		05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFA192F572700D9BE6A /* TDEventDescriptionView.m */; };
@@ -545,8 +549,14 @@
 		05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBigInputTableViewCell.m; sourceTree = "<group>"; };
 		05965BC0193799D100B0B870 /* TDSubmitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDSubmitTableViewCell.h; path = iPhone/TDSubmitTableViewCell.h; sourceTree = "<group>"; };
 		05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDSubmitTableViewCell.m; path = iPhone/TDSubmitTableViewCell.m; sourceTree = "<group>"; };
-		05A731EE194EF6A90000EB46 /* TDEventDetailsDataSourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventDetailsDataSourceManager.h; sourceTree = "<group>"; };
-		05A731EF194EF6A90000EB46 /* TDEventDetailsDataSourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEventDetailsDataSourceManager.m; sourceTree = "<group>"; };
+		05A731F3194F1CB30000EB46 /* TDEventStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventStatusTableViewCell.h; sourceTree = "<group>"; };
+		05A731F4194F1CB30000EB46 /* TDEventStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEventStatusTableViewCell.m; sourceTree = "<group>"; };
+		05A731F7194F20400000EB46 /* TDEventDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		05A731F8194F20400000EB46 /* TDEventDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEventDescriptionTableViewCell.m; sourceTree = "<group>"; };
+		05A731FA194F3D7E0000EB46 /* placeholder-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-image.png"; sourceTree = "<group>"; };
+		05A731FB194F3D7E0000EB46 /* placeholder-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-image@2x.png"; sourceTree = "<group>"; };
+		05A731FF194F69580000EB46 /* TDEventMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventMapTableViewCell.h; sourceTree = "<group>"; };
+		05A73200194F69580000EB46 /* TDEventMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEventMapTableViewCell.m; sourceTree = "<group>"; };
 		05B544C8193C80DE0081332D /* NSNull+TDJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+TDJSON.h"; sourceTree = "<group>"; };
 		05B544C9193C80DE0081332D /* NSNull+TDJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+TDJSON.m"; sourceTree = "<group>"; };
 		05B66A1B1928ACC9009D6F1F /* TDWelcomeNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDWelcomeNavigationDelegate.h; path = iPhone/TDWelcomeNavigationDelegate.h; sourceTree = "<group>"; };
@@ -1158,9 +1168,9 @@
 		054F4069192E292900960ABE /* Event Details View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				05A731EC194EF6720000EB46 /* Event Details Data Source Manager */,
 				054F406A192E294600960ABE /* TDEventDetailsViewController.h */,
 				054F406B192E294600960ABE /* TDEventDetailsViewController.m */,
+				05A731F1194F1C8E0000EB46 /* Custom Cells */,
 				05060883194E1908004F55E0 /* Tab Controller */,
 				054F409C192E35A300960ABE /* EventDescriptionView */,
 			);
@@ -1208,9 +1218,9 @@
 		054F409C192E35A300960ABE /* EventDescriptionView */ = {
 			isa = PBXGroup;
 			children = (
-				05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */,
 				05BB5EF9192F572700D9BE6A /* TDEventDescriptionView.h */,
 				05BB5EFA192F572700D9BE6A /* TDEventDescriptionView.m */,
+				05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */,
 			);
 			name = EventDescriptionView;
 			sourceTree = "<group>";
@@ -1401,13 +1411,41 @@
 			name = "Submit Cell";
 			sourceTree = "<group>";
 		};
-		05A731EC194EF6720000EB46 /* Event Details Data Source Manager */ = {
+		05A731F1194F1C8E0000EB46 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
-				05A731EE194EF6A90000EB46 /* TDEventDetailsDataSourceManager.h */,
-				05A731EF194EF6A90000EB46 /* TDEventDetailsDataSourceManager.m */,
+				05A731FE194F69400000EB46 /* Event Map */,
+				05A731F6194F202E0000EB46 /* Event Description */,
+				05A731F2194F1C970000EB46 /* Event status */,
 			);
-			name = "Event Details Data Source Manager";
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		05A731F2194F1C970000EB46 /* Event status */ = {
+			isa = PBXGroup;
+			children = (
+				05A731F3194F1CB30000EB46 /* TDEventStatusTableViewCell.h */,
+				05A731F4194F1CB30000EB46 /* TDEventStatusTableViewCell.m */,
+			);
+			name = "Event status";
+			sourceTree = "<group>";
+		};
+		05A731F6194F202E0000EB46 /* Event Description */ = {
+			isa = PBXGroup;
+			children = (
+				05A731F7194F20400000EB46 /* TDEventDescriptionTableViewCell.h */,
+				05A731F8194F20400000EB46 /* TDEventDescriptionTableViewCell.m */,
+			);
+			name = "Event Description";
+			sourceTree = "<group>";
+		};
+		05A731FE194F69400000EB46 /* Event Map */ = {
+			isa = PBXGroup;
+			children = (
+				05A731FF194F69580000EB46 /* TDEventMapTableViewCell.h */,
+				05A73200194F69580000EB46 /* TDEventMapTableViewCell.m */,
+			);
+			name = "Event Map";
 			sourceTree = "<group>";
 		};
 		05B544C6193C80C40081332D /* Helpers */ = {
@@ -1652,6 +1690,8 @@
 		05C0782D1924FCD4005AB425 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
+				05A731FA194F3D7E0000EB46 /* placeholder-image.png */,
+				05A731FB194F3D7E0000EB46 /* placeholder-image@2x.png */,
 				058117651925FD6F00B79087 /* bg-red.jpg */,
 				058117631925FCC700B79087 /* bg-yellow.png */,
 				058117611925FC6E00B79087 /* blurred-violet.jpg */,
@@ -2009,6 +2049,7 @@
 				05BE37771949AC9F002A4E15 /* safety-hazard-category-icon@2x.png in Resources */,
 				058117661925FD6F00B79087 /* bg-red.jpg in Resources */,
 				05BB5F2A192FA7CD00D9BE6A /* profile-demo-picture.jpg in Resources */,
+				05A731FD194F3D7E0000EB46 /* placeholder-image@2x.png in Resources */,
 				0506084B194DC966004F55E0 /* bubble_stroked@2x.png in Resources */,
 				05BB5F22192F7E6E00D9BE6A /* SideMenuStoryboard_iPhone.storyboard in Resources */,
 				05060847194DC966004F55E0 /* bubble_min@2x.png in Resources */,
@@ -2042,6 +2083,7 @@
 				05C077A01924EC12005AB425 /* InfoPlist.strings in Resources */,
 				05C0783F19253C6E005AB425 /* login-background@2x.png in Resources */,
 				0506084E194DC966004F55E0 /* bubble_tailless.png in Resources */,
+				05A731FC194F3D7E0000EB46 /* placeholder-image.png in Resources */,
 				05C0783D19253C6E005AB425 /* back-chevron.png in Resources */,
 				05BE376D1949AC9F002A4E15 /* floodings-category-icon@2x.png in Resources */,
 				05C6AFB8194452BD007E68AC /* user-location-on@2x.png in Resources */,
@@ -2146,6 +2188,7 @@
 				05965BB51937754700B0B870 /* TDMapSelectorTableViewCell.m in Sources */,
 				05C077A61924EC12005AB425 /* TDAppDelegate.m in Sources */,
 				05C40A53192A4D8E002F1F1A /* MEDynamicTransition.m in Sources */,
+				05A73201194F69580000EB46 /* TDEventMapTableViewCell.m in Sources */,
 				05060860194DC966004F55E0 /* JSQMessagesTimestampFormatter.m in Sources */,
 				05C40A75192A8018002F1F1A /* FacingView.m in Sources */,
 				0506085B194DC966004F55E0 /* JSQMessagesKeyboardController.m in Sources */,
@@ -2184,6 +2227,7 @@
 				05E6A2241945D34F0061E2BB /* LFGlassView.m in Sources */,
 				05060862194DC966004F55E0 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				0506086C194DC967004F55E0 /* JSQMessagesComposerTextView.m in Sources */,
+				05A731F5194F1CB30000EB46 /* TDEventStatusTableViewCell.m in Sources */,
 				05C0783419253B63005AB425 /* TDLoginViewController.m in Sources */,
 				05060868194DC966004F55E0 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				05060864194DC966004F55E0 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
@@ -2210,12 +2254,12 @@
 				054B8535193B9555009051F5 /* Country.m in Sources */,
 				0541A0CF1938B5CD0033F3B6 /* NSDate+timeDescription.m in Sources */,
 				05EEAEF719462399002B26C2 /* MRMessageInterceptor.m in Sources */,
-				05A731F0194EF6A90000EB46 /* TDEventDetailsDataSourceManager.m in Sources */,
 				0506085A194DC966004F55E0 /* UIView+JSQMessages.m in Sources */,
 				05C077A21924EC12005AB425 /* main.m in Sources */,
 				054B852B193B8B3B009051F5 /* TDFirstRunManager.m in Sources */,
 				0583C3F81942520300D8CCD7 /* DistancePickerView.m in Sources */,
 				05060871194DC967004F55E0 /* JSQMessagesToolbarContentView.m in Sources */,
+				05A731F9194F20400000EB46 /* TDEventDescriptionTableViewCell.m in Sources */,
 				05965BAD19376BD000B0B870 /* HPGrowingTextView.m in Sources */,
 				054F408D192E2CA600960ABE /* MKAnnotationView+WebCache.m in Sources */,
 				0541A0C61938B5CD0033F3B6 /* ALAssetsGroup+isEqual.m in Sources */,

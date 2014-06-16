@@ -68,7 +68,8 @@ static char UIScrollViewParallaxView;
         [parallaxView setClipsToBounds:YES];
         [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [parallaxView addSubview:view];
-        
+		[parallaxView bringSubviewToFront:parallaxView.shadowView];
+		
         parallaxView.scrollView = self;
         parallaxView.parallaxHeight = height;
         [self addSubview:parallaxView];
@@ -76,7 +77,7 @@ static char UIScrollViewParallaxView;
         parallaxView.originalTopInset = self.contentInset.top;
         
         UIEdgeInsets newInset = self.contentInset;
-        newInset.top = height;
+        newInset.top = height + 60; //the offset by the navigation bar 
         self.contentInset = newInset;
         
         self.parallaxView = parallaxView;

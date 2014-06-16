@@ -47,10 +47,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin-small-icon.png" id="oFp-Cb-owm">
-                            <rect key="frame" x="83" y="57" width="7" height="14"/>
+                            <rect key="frame" x="83" y="58" width="7" height="14"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alexandru Moga nr 3A, Bucharest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="oAK-Q1-xTZ">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="oAK-Q1-xTZ">
                             <rect key="frame" x="92" y="55" width="203" height="21"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -77,6 +77,7 @@
             </subviews>
             <connections>
                 <outlet property="headerCategoryIcon" destination="1dp-Gu-HBB" id="3Nq-xL-Glj"/>
+                <outlet property="headerEventAddressLabel" destination="oAK-Q1-xTZ" id="IdX-Am-iTX"/>
                 <outlet property="headerEventDateLabel" destination="viu-kh-GV7" id="vtu-gO-1B0"/>
                 <outlet property="headerEventNameLabel" destination="Qe7-x3-jH5" id="uu5-Sf-zSt"/>
                 <outlet property="headerProfileImageView" destination="An4-gJ-rEB" id="yRb-mG-UAp"/>
