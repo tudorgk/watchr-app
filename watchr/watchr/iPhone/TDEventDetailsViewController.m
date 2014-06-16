@@ -9,6 +9,7 @@
 #import "TDEventDetailsViewController.h"
 #import "TDCarouselView.h"
 #import "UILabel+dynamicSizeMe.h"
+#import "TDEventTabSelectorView.h"
 @interface TDEventDetailsViewController ()
 -(void) configureView;
 -(void) initDescriptionView;
@@ -25,12 +26,21 @@
     return self;
 }
 
+-(void) awakeFromNib{
+	[super awakeFromNib];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	NSLog(@"watchr Event = %@", self.watchrEvent);
+	//TODO: Testing
+	[TDEventDetailsDataSourceManager new];
+	
+	
 	[self configureView];
-	
-	
 }
 
 -(void) configureView{
@@ -50,9 +60,20 @@
 }
 
 -(void) initDescriptionView{
-//	self.eventDescriptionView = [[TDEventDescriptionViewController alloc] initWithNibName:@"TDEventDescriptionViewController" bundle:nil];
 	[self.eventDetailsTableView registerNib:[UINib nibWithNibName:@"TDEventDescriptionView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"descriptionView"];
-//	[self.eventDescriptionView.view setFrame:CGRectMake(0, 0, 320, 150)];
+	[self.eventDetailsTableView registerNib:[UINib nibWithNibName:@"TDEventTabSelectorView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"selectorView"];
+
+	
+	TDEventDescriptionView * headerView = [self.eventDetailsTableView dequeueReusableHeaderFooterViewWithIdentifier:@"descriptionView"];
+	
+	headerView.headerEventDateLabel.text = [_watchrEvent objectForKey:@"created_at"];
+	headerView.headerEventNameLabel.text = [_watchrEvent objectForKey:@"event_name"];
+	headerView.headerCategoryIcon.image = [UIImage imageNamed:[[_watchrEvent objectForKey:@"category"] objectForKey:@"category_icon"]];
+	headerView.headerProfileNameLabel.text = [[_watchrEvent objectForKey:@"creator"] objectForKey:@"last_name"];
+	headerView.headerUsernameLabel.text = [[_watchrEvent objectForKey:@"creator"] objectForKey:@"username"];
+	
+	self.eventDetailsTableView.tableHeaderView = headerView;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,8 +85,9 @@
 #pragma mark - UITableViewDelegate Methods
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-	TDEventDescriptionView * headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"descriptionView"];
-	return headerView;
+	TDEventTabSelectorView * tabView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"selectorView"];
+	
+	return tabView;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -91,7 +113,7 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-	return 150;
+	return 40;
 }
 
 @end

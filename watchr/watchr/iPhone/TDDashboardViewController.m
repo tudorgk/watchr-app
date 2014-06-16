@@ -372,6 +372,7 @@ enum MapViewVisibility : NSInteger {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	TDEventDetailsViewController * detailsController = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
+	[detailsController setWatchrEvent:[_dashboardData objectAtIndex:indexPath.row]];
 	[self.navigationController pushViewController:detailsController animated:YES];
 }
 

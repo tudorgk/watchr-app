@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "TDEventDescriptionView.h"
 #import "HeaderInsetTableView.h"
+#import "TDEventDetailsDataSourceManager.h"
+
+
 @interface TDEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 
 @property (weak, nonatomic) IBOutlet HeaderInsetTableView *eventDetailsTableView;
+@property (nonatomic, strong) NSDictionary * watchrEvent;
 @end

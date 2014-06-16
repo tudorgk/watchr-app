@@ -24,6 +24,7 @@
 	#import	"TDWatchrLocationManager.h"
 	#import	"MRProgress.h"
 	#import "TDHelperClass.h"
+	#import "JSQMessagesViewController/JSQMessages.h"    
 #endif
 
 
