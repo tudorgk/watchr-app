@@ -80,19 +80,22 @@
                                             <outlet property="cellTitleLabel" destination="EpE-Im-2pM" id="lux-9z-vWy"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mapCell" rowHeight="200" id="wN8-yR-VVb" customClass="TDEventMapTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="mapCell" rowHeight="200" id="wN8-yR-VVb" customClass="TDEventMapTableViewCell">
                                         <rect key="frame" x="0.0" y="305" width="320" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wN8-yR-VVb" id="FEO-uo-uzW">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="fYJ-2j-OJB">
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="fYJ-2j-OJB">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </mapView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellMapView" destination="fYJ-2j-OJB" id="Lcc-Cy-u3q"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

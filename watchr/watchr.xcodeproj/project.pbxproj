@@ -151,6 +151,7 @@
 		05965BBB193776A300B0B870 /* TDInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BBA193776A300B0B870 /* TDInputTableViewCell.m */; };
 		05965BBE193776AF00B0B870 /* TDBigInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */; };
 		05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */; };
+		05A0BCE7195047AD00FEE9D0 /* JSQDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0BCE6195047AD00FEE9D0 /* JSQDemoViewController.m */; };
 		05A731F5194F1CB30000EB46 /* TDEventStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A731F4194F1CB30000EB46 /* TDEventStatusTableViewCell.m */; };
 		05A731F9194F20400000EB46 /* TDEventDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A731F8194F20400000EB46 /* TDEventDescriptionTableViewCell.m */; };
 		05A731FC194F3D7E0000EB46 /* placeholder-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A731FA194F3D7E0000EB46 /* placeholder-image.png */; };
@@ -549,6 +550,8 @@
 		05965BBD193776AF00B0B870 /* TDBigInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBigInputTableViewCell.m; sourceTree = "<group>"; };
 		05965BC0193799D100B0B870 /* TDSubmitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDSubmitTableViewCell.h; path = iPhone/TDSubmitTableViewCell.h; sourceTree = "<group>"; };
 		05965BC1193799D100B0B870 /* TDSubmitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDSubmitTableViewCell.m; path = iPhone/TDSubmitTableViewCell.m; sourceTree = "<group>"; };
+		05A0BCE5195047AD00FEE9D0 /* JSQDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQDemoViewController.h; sourceTree = "<group>"; };
+		05A0BCE6195047AD00FEE9D0 /* JSQDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQDemoViewController.m; sourceTree = "<group>"; };
 		05A731F3194F1CB30000EB46 /* TDEventStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventStatusTableViewCell.h; sourceTree = "<group>"; };
 		05A731F4194F1CB30000EB46 /* TDEventStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEventStatusTableViewCell.m; sourceTree = "<group>"; };
 		05A731F7194F20400000EB46 /* TDEventDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventDescriptionTableViewCell.h; sourceTree = "<group>"; };
@@ -1168,6 +1171,8 @@
 		054F4069192E292900960ABE /* Event Details View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				05A0BCE5195047AD00FEE9D0 /* JSQDemoViewController.h */,
+				05A0BCE6195047AD00FEE9D0 /* JSQDemoViewController.m */,
 				054F406A192E294600960ABE /* TDEventDetailsViewController.h */,
 				054F406B192E294600960ABE /* TDEventDetailsViewController.m */,
 				05A731F1194F1C8E0000EB46 /* Custom Cells */,
@@ -2286,6 +2291,7 @@
 				0541A0CA1938B5CD0033F3B6 /* CTAssetsPickerController.m in Sources */,
 				05F5501319471AD7009B9135 /* TBCoordinateQuadTree.m in Sources */,
 				05C40A7B192A8018002F1F1A /* UIView+Screenshot.m in Sources */,
+				05A0BCE7195047AD00FEE9D0 /* JSQDemoViewController.m in Sources */,
 				05F5501219471AD7009B9135 /* TBClusterAnnotationView.m in Sources */,
 				0506085C194DC966004F55E0 /* JSQMessagesViewController.m in Sources */,
 				05EEAEF819462399002B26C2 /* MRWeakProxy.m in Sources */,

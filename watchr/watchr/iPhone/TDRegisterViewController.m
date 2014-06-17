@@ -43,6 +43,16 @@
 {
     [super viewDidLoad];
 	[self configureView];
+	
+	//add gesture recognizer ot profile photo image view
+	UITapGestureRecognizer *_tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileImageViewTapped:)];
+	[_profilePhotoImageView addGestureRecognizer:_tapper];
+	
+	//photo corner radius
+	_profilePhotoImageView.layer.cornerRadius = 5.0f;
+	_profilePhotoImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+	_profilePhotoImageView.layer.borderWidth = 1.0f;
+	_profilePhotoImageView.layer.masksToBounds = YES;
 }
 
 
@@ -277,4 +287,97 @@
 	NSLog(@"error = %@", [error description]);
 }
 
+-(IBAction)profileImageViewTapped:(id)sender{
+	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+		
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+															  message:@"Device has no camera"
+															 delegate:nil
+													cancelButtonTitle:@"OK"
+													otherButtonTitles: nil];
+        
+        [myAlertView show];
+		return;
+    }
+	
+	UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose Existing Photo", nil];
+	[actionSheet showInView:[[[UIApplication sharedApplication] delegate] window]];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+	
+	
+	
+	
+	switch (buttonIndex) {
+		case 0:
+		{
+			//Take Photo
+			[self takePhoto:nil];
+		}
+			break;
+		case 1:
+		{
+			//Choose existing
+			[self selectPhoto:nil];
+		}
+			break;
+			
+		default:
+		{
+			//Cancel
+		}
+			break;
+	}
+}
+
+- (IBAction)takePhoto:(UIButton *)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+
+- (IBAction)selectPhoto:(UIButton *)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+	
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+	_profileImage = chosenImage;
+    self.profilePhotoImageView.image = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+   	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+	
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+-(void) navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+	
+}
 @end

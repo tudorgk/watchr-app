@@ -9,7 +9,9 @@
 #import "TDEventDetailsViewController.h"
 #import "TDCarouselView.h"
 #import "UILabel+dynamicSizeMe.h"
-
+#import "TDAnnotation.h"
+#import "JSQMessages.h"
+#import "JSQDemoViewController.h"
 typedef enum {
 	TDEventActiveDataSourceDetails = 0,
 	TDEventActiveDataSourceComments = 1,
@@ -18,7 +20,7 @@ typedef enum {
 } TDEventActiveDataSource;
 
 
-@interface TDEventDetailsViewController (){
+@interface TDEventDetailsViewController ()<MKMapViewDelegate>{
 	TDEventActiveDataSource _activeDataSource;
 }
 -(void) configureView;
@@ -82,7 +84,17 @@ typedef enum {
 		
 	}
 	
+		
 	
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+	[super viewDidAppear:YES];
+	
+	//TODO: Testing JSQMessageView Controller
+//	JSQDemoViewController *vc = [JSQDemoViewController messagesViewController];
+//	[self.navigationController pushViewController:vc animated:YES];
+
 }
 
 -(void) registerNibsForTableView{
@@ -164,6 +176,25 @@ typedef enum {
 	
 	//MAP CELL
 	_mapCell = (TDEventMapTableViewCell*) [self.eventDetailsTableView dequeueReusableCellWithIdentifier:@"mapCell"];
+	_mapCell.cellMapView.delegate =self;
+	CLLocationCoordinate2D eventCoordinates = CLLocationCoordinate2DMake([[[_watchrEvent objectForKey:@"position"] objectForKey:@"latitude"] doubleValue], [[[_watchrEvent objectForKey:@"position"] objectForKey:@"longitude"] doubleValue]);
+	MKCoordinateRegion adjustedRegion = [_mapCell.cellMapView regionThatFits:MKCoordinateRegionMakeWithDistance(eventCoordinates, 200, 200)];
+	[_mapCell.cellMapView setRegion:adjustedRegion animated:NO];
+	
+	
+	TDAnnotation * eventAnnotation = [[TDAnnotation alloc] initWithCoordinate:eventCoordinates title:[_watchrEvent objectForKey:@"event_name"] andAddress:@"address"];
+	[_mapCell.cellMapView addAnnotation:eventAnnotation];
+	
+	
+	CLGeocoder * geocoder = [CLGeocoder new];
+	CLLocation * eventLocation = [[CLLocation alloc] initWithLatitude:eventCoordinates.latitude longitude:eventCoordinates.longitude];
+	[geocoder reverseGeocodeLocation:eventLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+		CLPlacemark * placemark = [placemarks firstObject];
+		eventAnnotation.subtitle = placemark.name;
+	
+	}];
+
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -363,15 +394,54 @@ typedef enum {
 			[self.eventDetailsTableView reloadData];
 			[self.eventDetailsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 			[self.eventDetailsTableView setScrollEnabled:NO];
+			CLLocationCoordinate2D eventLocation = CLLocationCoordinate2DMake([[[_watchrEvent objectForKey:@"position"] objectForKey:@"latitude"] doubleValue], [[[_watchrEvent objectForKey:@"position"] objectForKey:@"longitude"] doubleValue]);
+			MKCoordinateRegion adjustedRegion = [_mapCell.cellMapView regionThatFits:MKCoordinateRegionMakeWithDistance(eventLocation, 200, 200)];
+			[_mapCell.cellMapView setRegion:adjustedRegion animated:YES];
 		}
 			break;
 			
 		default:
 			break;
 	}
-	
-	
+
+}
+
+
+#pragma mark - MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    
+	if ([annotation isKindOfClass:[MKUserLocation class]]){
+		return nil;
+	}else{
+		static NSString *const reuseID = @"eventLocationReuseID";
+		
+
+		MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[_mapCell.cellMapView dequeueReusableAnnotationViewWithIdentifier:reuseID];
+		
+		if (!annotationView) {
+			annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseID];
+		}
+		
+		annotationView.canShowCallout = YES;
+
+		return annotationView;
+		
+	}
 	
 }
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+
+}
+
+
+
 
 @end

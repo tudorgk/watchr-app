@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TDEventMapTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet MKMapView *cellMapView;
 
 @end
