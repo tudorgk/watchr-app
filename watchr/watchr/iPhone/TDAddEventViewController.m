@@ -679,7 +679,7 @@
 		[NXOAuth2Request performMethod:@"POST"
 							onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/new_with_media"]]
 					   usingParameters:parameters
-						   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+						   withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
 				   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 					   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
 					   
@@ -741,7 +741,7 @@
 		[NXOAuth2Request performMethod:@"POST"
 							onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/new"]]
 					   usingParameters:parameters
-						   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+						   withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
 				   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 					   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
    					   

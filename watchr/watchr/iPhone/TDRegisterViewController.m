@@ -1,4 +1,4 @@
-//
+////////
 //  TDLoginViewController.m
 //  watchr
 //
@@ -202,28 +202,75 @@
 		return;
 	}
 	
-	
-	
-	NSString *post = [NSString stringWithFormat:@"&username=%@&email=%@&password=%@&country=%d&gender=%d",_username,_email,_password,_country,_gender];
-	
-	NSLog(@"%@", post);
-	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;
-	[request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, TDRegisterFromURL]]];
-	[request setHTTPMethod:@"POST"];
-	[request setValue:[NSString stringWithFormat:@"%d",post.length] forHTTPHeaderField:@"Content-Length"];
-	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-	[request setHTTPBody:postData];
-	NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-	
-	if(conn)
-	{
-		NSLog(@"Connection Successful");
+	NXOAuth2FileStreamWrapper * file = nil;
+	//create a File Stream Wrapper for the profile photo
+	if (_profileImage) {
+		NSData *imgData = UIImageJPEGRepresentation(_profileImage, 1);
+		NSInputStream * inputStream = [[NSInputStream alloc] initWithData:imgData];
+		NSLog(@"Size of Image(bytes):%d",[imgData length]);
+		
+		 file = [NXOAuth2FileStreamWrapper wrapperWithStream:inputStream contentLength:[imgData length] fileName:@"profile_image.jpg"];
 	}
-	else
-	{
-		NSLog(@"Connection could not be made");
+	
+	//set up parameters
+	NSMutableDictionary * registerParams = [[NSMutableDictionary alloc] initWithDictionary:@{@"username": _username,
+																							@"email" : _email,
+																							@"password" : _password,
+																							 @"first_name" : _firstName,
+																							 @"last_name" : _lastName,
+																							@"country" : [NSNumber numberWithInt:_country],
+																							 @"gender" : [NSNumber numberWithInt:_gender]}];
+	if (file) {
+		[registerParams setObject:file forKey:@"profile_photo"];
 	}
+	
+	[NXOAuth2Request performMethod:@"POST"
+						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/users"]]
+				   usingParameters:registerParams
+					   withAccount:nil
+			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+				   
+//				   double sent = bytesSend;
+//				   double total = bytesTotal;
+//				   float ratio = sent/total;
+				   
+				}
+				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+					   NSString * responseString =[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+					   NSLog(@"responseData = %@", responseString );
+					   NSLog(@"response = %@", [response description]);
+					   NSLog(@"error = %@", [error userInfo]);
+					   
+					   id JSONObject = [NSJSONSerialization
+										JSONObjectWithData:responseData
+										options:NSJSONReadingMutableContainers
+										error:&error];
+					   
+					   NSLog(@"%@",JSONObject);
+					   
+					   //if error
+					   if (error) {
+						   //display the errors
+						   NSMutableString * responseString = [[NSMutableString alloc] init];
+						   for (NSString * errorMessage in [JSONObject objectForKey:@"error"]) {
+							   
+							   NSLog(@"error message =%@", errorMessage);
+							   [responseString appendFormat:@"%@ ",errorMessage];
+							   
+						   }
+						   
+						   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+						   [alert show];
+					   }else{
+						   //everything is ok. user created. attempt login
+						   [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"watchrAPI" username:_username password:_password];  
+					   }
+					   
+				   }];
+	
+
+	
 }
 
 #pragma mark - UITextFieldDelegate methods
@@ -240,52 +287,15 @@
 		_password = inputText;
 	}else if (textField == self.confirmPasswordTextField){
 		_confirmPassword = inputText;
+	}else if (textField == self.firstNameTextField){
+		_firstName = inputText;
+	}else if (textField == self.lastNameTextField){
+		_lastName = inputText;
 	}
 	
 	return YES;
 }
 
-#pragma	mark - NSURLConnectionDataDelegate methods
-
-- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse*)response {
-	NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-	_responseStatusCode = [httpResponse statusCode];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data{
-	NSLog(@"success = %@" , [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-	
-	NSError * error = [[NSError alloc] init];
-	
-	id JSONObject = [NSJSONSerialization
-					 JSONObjectWithData:data
-					 options:NSJSONReadingMutableContainers
-					 error:&error];
-	
-	NSLog(@"%@",JSONObject);
-	
-	if (_responseStatusCode !=400) {
-		//everything is ok. user created. attempt login
-		[[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"watchrAPI" username:_username password:_password];
-	}else{
-		//display the errors
-		NSMutableString * responseString = [[NSMutableString alloc] init];
-		for (NSString * errorMessage in [JSONObject objectForKey:@"error"]) {
-			
-			NSLog(@"error message =%@", errorMessage);
-			[responseString appendFormat:@"%@ ",errorMessage];
-
-		}
-		
-		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:responseString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-		[alert show];
-	}
-	
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
-	NSLog(@"error = %@", [error description]);
-}
 
 -(IBAction)profileImageViewTapped:(id)sender{
 	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

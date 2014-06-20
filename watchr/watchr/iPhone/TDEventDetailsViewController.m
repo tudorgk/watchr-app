@@ -72,7 +72,7 @@ typedef enum {
 
 	NSMutableArray * imageURLS = [NSMutableArray new];
 	for (NSDictionary * attachment in [_watchrEvent objectForKey:@"attachments"]) {
-		[imageURLS addObject:[NSURL URLWithString:[attachment objectForKey:@"location"]]];
+		[imageURLS addObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", TDAPIBaseURL,[attachment  objectForKey:@"location"] ]]];
 	}
 	
 	if ([imageURLS count] != 0) {
@@ -110,8 +110,9 @@ typedef enum {
 	_headerView.headerEventDateLabel.text = [_watchrEvent objectForKey:@"created_at"];
 	_headerView.headerEventNameLabel.text = [_watchrEvent objectForKey:@"event_name"];
 	_headerView.headerCategoryIcon.image = [UIImage imageNamed:[[_watchrEvent objectForKey:@"category"] objectForKey:@"category_icon"]];
-	_headerView.headerProfileNameLabel.text = [[_watchrEvent objectForKey:@"creator"] objectForKey:@"last_name"];
+	_headerView.headerProfileNameLabel.text = [NSString stringWithFormat:@"%@ %@",[[_watchrEvent objectForKey:@"creator"] objectForKey:@"first_name"],[[_watchrEvent objectForKey:@"creator"] objectForKey:@"last_name"]];
 	_headerView.headerUsernameLabel.text = [[_watchrEvent objectForKey:@"creator"] objectForKey:@"username"];
+	[_headerView.headerProfileImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,[[[_watchrEvent objectForKey:@"creator"] objectForKey:@"profile_photo"] objectForKey:@"location"]]] placeholderImage:[UIImage imageNamed:@"profile-photo-placeholder.png"]];
 	
 	CLGeocoder * geocoder = [CLGeocoder new];
 	

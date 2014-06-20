@@ -12,9 +12,12 @@
 #import "TDWelcomeScreenViewController.h"
 @interface TDSideMenuViewController()<TDProfileHeaderViewDelegate>{
 	int * _selectedRow;
+	
+	NSDictionary * _userInformation;
 }
 -(void) configureView;
 -(void) configureTableView;
+-(void) registerForNotifications;
 @end
 
 @implementation TDSideMenuViewController
@@ -30,9 +33,35 @@
 
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
+
+	@try {
+		NSData * userInformationData = [[NSUserDefaults standardUserDefaults ] objectForKey:TDWatchrLoggedInUserInformationKey];
+		NSError * JSONParsingError = nil;
+		id JSONObject = [NSJSONSerialization
+						 JSONObjectWithData:userInformationData
+						 options:NSJSONReadingMutableContainers
+						 error:&JSONParsingError];
+		
+		if (JSONParsingError !=nil) {
+			NSLog(@"Error retrieving user information");
+		}else{
+			_userInformation = [[JSONObject objectForKey:@"data"] copy];
+			[_sideMenuTableView reloadData];
+		}
+		
+	}
+	@catch (NSException *exception) {
+		_userInformation = nil;
+	}
+	@finally {
+		
+	}
+	
 	[self configureView];
 	[self configureTableView];
+	[self registerForNotifications];
 
 }
 
@@ -43,9 +72,11 @@
 	self.edgesForExtendedLayout=UIRectEdgeNone;
 	self.extendedLayoutIncludesOpaqueBars=NO;
 	self.automaticallyAdjustsScrollViewInsets=NO;
-	
-	
+}
 
+-(void) viewWillAppear:(BOOL)animated{
+	
+	
 }
 
 -(void) configureTableView{
@@ -58,6 +89,29 @@
 	_selectedRow = (int*) calloc(_menuEntries.count, sizeof(int));
 	_selectedRow[0]= 1;
 }
+
+-(void) registerForNotifications{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivesUserLogInNotification:) name:TDWatchrUserDidLogInNotification object:nil];
+
+}
+
+-(void) receivesUserLogInNotification:(id) sender{
+	NSData * userInformationData = [[NSUserDefaults standardUserDefaults ] objectForKey:TDWatchrLoggedInUserInformationKey];
+	NSError * JSONParsingError = nil;
+	id JSONObject = [NSJSONSerialization
+					 JSONObjectWithData:userInformationData
+					 options:NSJSONReadingMutableContainers
+					 error:&JSONParsingError];
+	
+	if (JSONParsingError !=nil) {
+		NSLog(@"Error retrieving user information");
+	}else{
+		_userInformation = [[JSONObject objectForKey:@"data"] copy];
+		NSLog(@"_userInfor = %@", _userInformation);
+		[_sideMenuTableView reloadData];
+	}
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -97,6 +151,11 @@
 	
 	profileHeader.profileImageView.layer.cornerRadius = 22;
 	profileHeader.profileImageView.layer.masksToBounds = YES;
+	
+	if (_userInformation) {
+		[profileHeader.profileImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", TDAPIBaseURL,[[_userInformation objectForKey:@"profile_photo"] objectForKey:@"location"] ]] placeholderImage:[UIImage imageNamed:@"profile-photo-placeholder.png"]];
+		profileHeader.usernameLabel.text = [NSString stringWithFormat:@"%@ %@", [_userInformation objectForKey:@"first_name"], [_userInformation objectForKey:@"last_name"]];
+	}
 
 	
 	return profileHeader;
@@ -150,6 +209,8 @@
 	if (buttonIndex==0) {
 		//Log out
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:TDWatchrAPIAccountIdentifier];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:TDWatchrLoggedInUserInformationKey];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 		for (NXOAuth2Account * account in [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"watchrAPI"]) {
 			[[NXOAuth2AccountStore sharedStore] removeAccount:account];
 		}

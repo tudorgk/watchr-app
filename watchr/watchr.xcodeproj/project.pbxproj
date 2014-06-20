@@ -95,6 +95,8 @@
 		0541A0D11938B5E60033F3B6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0541A0D01938B5E60033F3B6 /* AssetsLibrary.framework */; };
 		0541A0DE1939C85B0033F3B6 /* libOAuth2Client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0541A0DB1939C8260033F3B6 /* libOAuth2Client.a */; };
 		0541A0E01939C8DF0033F3B6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0541A0DF1939C8DF0033F3B6 /* Security.framework */; };
+		054806941951E33200FF9EF4 /* profile-photo-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 054806921951E33200FF9EF4 /* profile-photo-placeholder.png */; };
+		054806951951E33200FF9EF4 /* profile-photo-placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054806931951E33200FF9EF4 /* profile-photo-placeholder@2x.png */; };
 		054B8526193B5F5D009051F5 /* TDWatchrAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 054B8525193B5F5D009051F5 /* TDWatchrAPIManager.m */; };
 		054B852B193B8B3B009051F5 /* TDFirstRunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 054B852A193B8B3B009051F5 /* TDFirstRunManager.m */; };
 		054B8531193B914C009051F5 /* udevCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 054B8530193B914C009051F5 /* udevCoreDataHelper.m */; };
@@ -157,6 +159,7 @@
 		05A731FC194F3D7E0000EB46 /* placeholder-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A731FA194F3D7E0000EB46 /* placeholder-image.png */; };
 		05A731FD194F3D7E0000EB46 /* placeholder-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A731FB194F3D7E0000EB46 /* placeholder-image@2x.png */; };
 		05A73201194F69580000EB46 /* TDEventMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A73200194F69580000EB46 /* TDEventMapTableViewCell.m */; };
+		05B4614B19534EB100E5CB26 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 05B4614A19534EB100E5CB26 /* default.gpx */; };
 		05B544CA193C80DE0081332D /* NSNull+TDJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B544C9193C80DE0081332D /* NSNull+TDJSON.m */; };
 		05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */; };
 		05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BB5EFA192F572700D9BE6A /* TDEventDescriptionView.m */; };
@@ -442,6 +445,8 @@
 		0541A0D01938B5E60033F3B6 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		0541A0D31939C8250033F3B6 /* OAuth2Client.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OAuth2Client.xcodeproj; path = OAuth2Client/OAuth2Client.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0541A0DF1939C8DF0033F3B6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		054806921951E33200FF9EF4 /* profile-photo-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-photo-placeholder.png"; sourceTree = "<group>"; };
+		054806931951E33200FF9EF4 /* profile-photo-placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-photo-placeholder@2x.png"; sourceTree = "<group>"; };
 		054B8524193B5F5D009051F5 /* TDWatchrAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrAPIManager.h; sourceTree = "<group>"; };
 		054B8525193B5F5D009051F5 /* TDWatchrAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWatchrAPIManager.m; sourceTree = "<group>"; };
 		054B8529193B8B3B009051F5 /* TDFirstRunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFirstRunManager.h; sourceTree = "<group>"; };
@@ -560,6 +565,7 @@
 		05A731FB194F3D7E0000EB46 /* placeholder-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-image@2x.png"; sourceTree = "<group>"; };
 		05A731FF194F69580000EB46 /* TDEventMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventMapTableViewCell.h; sourceTree = "<group>"; };
 		05A73200194F69580000EB46 /* TDEventMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEventMapTableViewCell.m; sourceTree = "<group>"; };
+		05B4614A19534EB100E5CB26 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		05B544C8193C80DE0081332D /* NSNull+TDJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+TDJSON.h"; sourceTree = "<group>"; };
 		05B544C9193C80DE0081332D /* NSNull+TDJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+TDJSON.m"; sourceTree = "<group>"; };
 		05B66A1B1928ACC9009D6F1F /* TDWelcomeNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDWelcomeNavigationDelegate.h; path = iPhone/TDWelcomeNavigationDelegate.h; sourceTree = "<group>"; };
@@ -1546,6 +1552,7 @@
 		05C077891924EC12005AB425 = {
 			isa = PBXGroup;
 			children = (
+				05B4614A19534EB100E5CB26 /* default.gpx */,
 				05C0779B1924EC12005AB425 /* watchr */,
 				05C077B31924EC12005AB425 /* Images.xcassets */,
 				05C077C01924EC12005AB425 /* watchrTests */,
@@ -1695,6 +1702,8 @@
 		05C0782D1924FCD4005AB425 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
+				054806921951E33200FF9EF4 /* profile-photo-placeholder.png */,
+				054806931951E33200FF9EF4 /* profile-photo-placeholder@2x.png */,
 				05A731FA194F3D7E0000EB46 /* placeholder-image.png */,
 				05A731FB194F3D7E0000EB46 /* placeholder-image@2x.png */,
 				058117651925FD6F00B79087 /* bg-red.jpg */,
@@ -2126,7 +2135,9 @@
 				05C077D51924EE2B005AB425 /* IntroStoryboard_iPhone.storyboard in Resources */,
 				05BE37761949AC9F002A4E15 /* safety-hazard-category-icon.png in Resources */,
 				05228132192BB0B6000E8868 /* importance-icon.png in Resources */,
+				054806941951E33200FF9EF4 /* profile-photo-placeholder.png in Resources */,
 				05060849194DC966004F55E0 /* bubble_min_tailless@2x.png in Resources */,
+				054806951951E33200FF9EF4 /* profile-photo-placeholder@2x.png in Resources */,
 				05C0784119253C6E005AB425 /* login-button-clear@2x.png in Resources */,
 				0522813F192BC3F5000E8868 /* tags-small-icon.png in Resources */,
 				05060848194DC966004F55E0 /* bubble_min_tailless.png in Resources */,
@@ -2141,6 +2152,7 @@
 				05060846194DC966004F55E0 /* bubble_min.png in Resources */,
 				05228133192BB0B6000E8868 /* importance-icon@2x.png in Resources */,
 				05C6AFB6194452BD007E68AC /* user-location-off@2x.png in Resources */,
+				05B4614B19534EB100E5CB26 /* default.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

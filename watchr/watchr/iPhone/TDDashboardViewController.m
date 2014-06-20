@@ -376,6 +376,10 @@ enum MapViewVisibility : NSInteger {
 	[self.navigationController pushViewController:detailsController animated:YES];
 }
 
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	return 84;
+}
+
 #pragma mark - UITableViewDataSource Methods
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -470,7 +474,7 @@ enum MapViewVisibility : NSInteger {
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
 				   usingParameters:[_dashboardFilters filtersToDictionary]
-					   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+					   withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
 			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
 			   }
@@ -521,7 +525,7 @@ enum MapViewVisibility : NSInteger {
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
 				   usingParameters:[_dashboardFilters filtersToDictionary]
-					   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+					   withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
 			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
 			   }

@@ -85,7 +85,7 @@
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/category/structured"]]
 				   usingParameters:nil
-					   withAccount:[[TDWatchrAPIManager sharedManager] defaultWatchrAccount]
+					   withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
 			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
 			   }

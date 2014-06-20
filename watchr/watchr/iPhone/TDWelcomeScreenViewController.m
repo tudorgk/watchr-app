@@ -99,18 +99,64 @@ static TDWelcomeScreenViewController* sharedWelcomeScreen = nil;
 													  //everything a ok
 													  NXOAuth2Account * account = [[aNotification userInfo] objectForKey:NXOAuth2AccountStoreNewAccountUserInfoKey];
 													  
-													  NSLog(@"success = %@", account.identifier);
-													  
-													  //save the account identifier to NSUserDefaults
-													  [[NSUserDefaults standardUserDefaults] setObject:account.identifier forKey:TDWatchrAPIAccountIdentifier];
-													  [[NSUserDefaults standardUserDefaults] synchronize];
-													  //we now know that the login was successful.
-													  //we need to get the categories for the events and the events with default settings
-													  
-													  //TODO: Testing. Need to perform a first-time setup here. Get countries, profile statuses etc.
-													  TDFirstRunManager * firstRunner = [TDFirstRunManager sharedManager];
-													  [firstRunner runFirstTimeSetUp];
-													
+													  if (account) {
+														  NSLog(@"success = %@", account.identifier);
+														  
+														  //save the account identifier to NSUserDefaults
+														  [[NSUserDefaults standardUserDefaults] setObject:account.identifier forKey:TDWatchrAPIAccountIdentifier];
+														  [[NSUserDefaults standardUserDefaults] synchronize];
+														  //we now know that the login was successful.
+														  //get the logged in user's information and create a notification for observers
+														  [NXOAuth2Request performMethod:@"GET"
+																			  onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/users/me"]]
+																		 usingParameters:nil
+																			 withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
+																	 sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+																		 NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+																		 
+																	 }
+																		 responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+																			 NSString * responseString =[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+																			 NSLog(@"responseData = %@", responseString );
+																			 NSLog(@"response = %@", [response description]);
+																			 NSLog(@"error = %@", [error userInfo]);
+																			 
+																			 //if error
+																			 if (error) {
+																				 UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[error.userInfo objectForKey:@"NSLocalizedDescription"] message:@"Cannot get the logged in user's information." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+																				 [alert show];
+																			 }else{
+																				 
+																				 NSError * JSONParsingError = nil;
+																				 id JSONObject = [NSJSONSerialization
+																								  JSONObjectWithData:responseData
+																								  options:NSJSONReadingAllowFragments
+																								  error:&JSONParsingError];
+																				 
+																				 if (JSONParsingError) {
+																					 NSLog(@"JSON parsing error");
+																				 }else{
+																					 //save the loggin info to nsuserdefaults
+																					 [[NSUserDefaults standardUserDefaults] setObject:responseData forKey:TDWatchrLoggedInUserInformationKey];
+																					 [[NSUserDefaults standardUserDefaults] synchronize];
+																					 
+																					 //post notification
+																					 [[NSNotificationCenter defaultCenter] postNotificationName: TDWatchrUserDidLogInNotification object:responseData userInfo:nil];
+																					 
+																				 }
+																				 
+																				 
+																			 }
+																			 
+																		 }];
+														  
+														  
+														  //we need to get the categories for the events and the events with default settings
+														  
+														  //TODO: Testing. Need to perform a first-time setup here. Get countries, profile statuses etc.
+														  TDFirstRunManager * firstRunner = [TDFirstRunManager sharedManager];
+														  [firstRunner runFirstTimeSetUp];
+													  }
 												  }];
 	
 	[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification

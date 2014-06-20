@@ -44,7 +44,7 @@ static TDWatchrAPIManager * sharedManager = nil;
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/country/all"]]
 				   usingParameters:nil
-					   withAccount:_defaultWatchrAccount
+					   withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
 			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
 			   }
@@ -83,7 +83,7 @@ static TDWatchrAPIManager * sharedManager = nil;
 	[NXOAuth2Request performMethod:@"GET"
 						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/active"]]
 				   usingParameters:[filters filtersToDictionary]
-					   withAccount:_defaultWatchrAccount
+					   withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
 			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
 				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
 			   }

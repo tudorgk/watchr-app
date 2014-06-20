@@ -13,6 +13,7 @@
 #import "TDEventStatusTableViewCell.h"
 #import "TDEventDescriptionTableViewCell.h"
 #import "TDEventMapTableViewCell.h"
+
 @interface TDEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
 	TDEventDescriptionView * _headerView;
 	TDEventTabSelectorView * _selectorView;

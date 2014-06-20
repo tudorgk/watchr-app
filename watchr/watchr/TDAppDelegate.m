@@ -47,9 +47,9 @@
     [[NXOAuth2AccountStore sharedStore] setClientID:@"b9a498c3d5a0ba46214d1d000bad50b6"
                                              secret:@"0f9e736b70e4c093fac59ad8d567c73c"
 											  scope:[NSSet setWithObject:@"basic"]
-                                   authorizationURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @"/oauth/authorize"]]
-                                           tokenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @"/oauth/access_token"]]
-                                        redirectURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @"/"]]
+                                   authorizationURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @"oauth/authorize"]]
+                                           tokenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @"oauth/access_token"]]
+                                        redirectURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",TDAPIBaseURL, @""]]
                                      forAccountType:@"watchrAPI"];
 		
 }

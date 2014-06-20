@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "TDWelcomeNavigationDelegate.h"
 
-@interface TDRegisterViewController : UIViewController<UITextFieldDelegate,NSURLConnectionDataDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
+@interface TDRegisterViewController : UIViewController<UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
 	NSString * _username;
 	NSString * _password;
 	NSString * _email;
 	NSString * _confirmPassword;
+	NSString * _firstName;
+	NSString * _lastName;
 	NSInteger _country;
 	NSInteger _gender;
 	
@@ -28,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhotoImageView;
+@property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (assign,nonatomic) id<TDWelcomeNavigationDelegate> delegate;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *registerFormTextFields;
