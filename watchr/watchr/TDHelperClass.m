@@ -90,4 +90,45 @@ static TDHelperClass * sharedHelper = nil;
     }
 }
 
+
+-(NSString*) getStringRepresentationForstartDate:(NSDate*) startDate andEndDate:(NSDate*) endDate{
+	
+	
+	if (!startDate || !endDate) {
+		return @"no date";
+	}
+	
+	NSCalendar *gregorian = [[NSCalendar alloc]
+							 initWithCalendarIdentifier:NSGregorianCalendar];
+	
+	NSUInteger unitFlags =NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+	
+
+	NSDateComponents * startdateComponents = [gregorian components:unitFlags fromDate:startDate];
+	
+	NSDateComponents *differencecomponents = [gregorian components:unitFlags
+												fromDate:startDate
+												  toDate:endDate options:0];
+	NSInteger diffYears = [differencecomponents year];
+	NSInteger diffMonths = [differencecomponents month];
+	NSInteger diffDays = [differencecomponents day];
+	NSInteger diffHours = [differencecomponents hour];
+	NSInteger diffMinutes = [differencecomponents minute];
+	NSInteger diffSeconds = [differencecomponents second];
+	
+	if (diffMonths || diffYears) {
+		return [NSString stringWithFormat:@"%d/%d/%d", [startdateComponents day], [startdateComponents month], [startdateComponents year]];
+	}else if (diffDays){
+		return [NSString stringWithFormat:@"%dd ago", diffDays];
+	}else if(diffHours){
+		return [NSString stringWithFormat:@"%dh ago",diffHours];
+	}else if(diffMinutes){
+		return [NSString stringWithFormat:@"%dm ago",diffMinutes];
+	}else{
+		return @"now";
+	}
+	
+	
+}
+
 @end

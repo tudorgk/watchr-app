@@ -64,6 +64,7 @@
 		05060882194E1881004F55E0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05060881194E1881004F55E0 /* DKScrollingTabController.m */; };
 		05060886194E194B004F55E0 /* TDEventTabSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05060885194E194B004F55E0 /* TDEventTabSelectorView.m */; };
 		05060888194E1963004F55E0 /* TDEventTabSelectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05060887194E1963004F55E0 /* TDEventTabSelectorView.xib */; };
+		051EB8581955D45F00D359CD /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 051EB8571955D45F00D359CD /* UIScrollView+InfiniteScroll.m */; };
 		05228129192B86A6000E8868 /* UIView+Origami.m in Sources */ = {isa = PBXBuildFile; fileRef = 05228128192B86A6000E8868 /* UIView+Origami.m */; };
 		0522812C192BAD82000E8868 /* TDDashboardEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0522812B192BAD82000E8868 /* TDDashboardEventTableViewCell.m */; };
 		05228132192BB0B6000E8868 /* importance-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0522812E192BB0B6000E8868 /* importance-icon.png */; };
@@ -122,6 +123,7 @@
 		054F409B192E2CA600960ABE /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F408C192E2CA600960ABE /* UIImageView+WebCache.m */; };
 		054F40A2192E39C400960ABE /* UILabel+dynamicSizeMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F40A1192E39C400960ABE /* UILabel+dynamicSizeMe.m */; };
 		054F40A7192E46E500960ABE /* HeaderInsetTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F40A6192E46E500960ABE /* HeaderInsetTableView.m */; };
+		054F89281954515400B73E55 /* TDEventDetailsNavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F89271954515400B73E55 /* TDEventDetailsNavigationTitleView.m */; };
 		0554B4D6193DFD4700624138 /* TDWatchrEventFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554B4D5193DFD4700624138 /* TDWatchrEventFilters.m */; };
 		0578F9811928BDCA00F8F7B3 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0578F9751928BDCA00F8F7B3 /* ECPercentDrivenInteractiveTransition.m */; };
 		0578F9821928BDCA00F8F7B3 /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0578F9771928BDCA00F8F7B3 /* ECSlidingAnimationController.m */; };
@@ -395,6 +397,8 @@
 		05060884194E194B004F55E0 /* TDEventTabSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDEventTabSelectorView.h; path = iPhone/TDEventTabSelectorView.h; sourceTree = "<group>"; };
 		05060885194E194B004F55E0 /* TDEventTabSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDEventTabSelectorView.m; path = iPhone/TDEventTabSelectorView.m; sourceTree = "<group>"; };
 		05060887194E1963004F55E0 /* TDEventTabSelectorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TDEventTabSelectorView.xib; sourceTree = "<group>"; };
+		051EB8561955D45F00D359CD /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
+		051EB8571955D45F00D359CD /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		05228127192B86A6000E8868 /* UIView+Origami.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Origami.h"; sourceTree = "<group>"; };
 		05228128192B86A6000E8868 /* UIView+Origami.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Origami.m"; sourceTree = "<group>"; };
 		0522812A192BAD82000E8868 /* TDDashboardEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDDashboardEventTableViewCell.h; path = iPhone/TDDashboardEventTableViewCell.h; sourceTree = "<group>"; };
@@ -497,6 +501,8 @@
 		054F40A1192E39C400960ABE /* UILabel+dynamicSizeMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+dynamicSizeMe.m"; sourceTree = "<group>"; };
 		054F40A5192E46E500960ABE /* HeaderInsetTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderInsetTableView.h; sourceTree = "<group>"; };
 		054F40A6192E46E500960ABE /* HeaderInsetTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderInsetTableView.m; sourceTree = "<group>"; };
+		054F89261954515400B73E55 /* TDEventDetailsNavigationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventDetailsNavigationTitleView.h; sourceTree = "<group>"; };
+		054F89271954515400B73E55 /* TDEventDetailsNavigationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEventDetailsNavigationTitleView.m; sourceTree = "<group>"; };
 		0554B4D4193DFD4700624138 /* TDWatchrEventFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWatchrEventFilters.h; sourceTree = "<group>"; };
 		0554B4D5193DFD4700624138 /* TDWatchrEventFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWatchrEventFilters.m; sourceTree = "<group>"; };
 		0578F9741928BDCA00F8F7B3 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
@@ -973,6 +979,16 @@
 			name = "Tab Controller";
 			sourceTree = "<group>";
 		};
+		051EB8551955D45F00D359CD /* InfiniteScroll */ = {
+			isa = PBXGroup;
+			children = (
+				051EB8561955D45F00D359CD /* UIScrollView+InfiniteScroll.h */,
+				051EB8571955D45F00D359CD /* UIScrollView+InfiniteScroll.m */,
+			);
+			name = InfiniteScroll;
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		05228126192B86A6000E8868 /* XYOrigami */ = {
 			isa = PBXGroup;
 			children = (
@@ -1031,6 +1047,7 @@
 		05409D77192557B300E8544C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				051EB8551955D45F00D359CD /* InfiniteScroll */,
 				0506087F194E1881004F55E0 /* DKScrollingTabController */,
 				0506087E194DD8C2004F55E0 /* JTSTextView */,
 				050607EE194DC966004F55E0 /* JSQMessagesViewController */,
@@ -1181,6 +1198,7 @@
 				05A0BCE6195047AD00FEE9D0 /* JSQDemoViewController.m */,
 				054F406A192E294600960ABE /* TDEventDetailsViewController.h */,
 				054F406B192E294600960ABE /* TDEventDetailsViewController.m */,
+				054F89241954512000B73E55 /* Navigation Header View */,
 				05A731F1194F1C8E0000EB46 /* Custom Cells */,
 				05060883194E1908004F55E0 /* Tab Controller */,
 				054F409C192E35A300960ABE /* EventDescriptionView */,
@@ -1252,6 +1270,15 @@
 				054F40A6192E46E500960ABE /* HeaderInsetTableView.m */,
 			);
 			name = "Header Inset TableView";
+			sourceTree = "<group>";
+		};
+		054F89241954512000B73E55 /* Navigation Header View */ = {
+			isa = PBXGroup;
+			children = (
+				054F89261954515400B73E55 /* TDEventDetailsNavigationTitleView.h */,
+				054F89271954515400B73E55 /* TDEventDetailsNavigationTitleView.m */,
+			);
+			name = "Navigation Header View";
 			sourceTree = "<group>";
 		};
 		0578F9731928BDCA00F8F7B3 /* ECSlidingViewController */ = {
@@ -2251,6 +2278,7 @@
 				05060857194DC966004F55E0 /* NSString+JSQMessages.m in Sources */,
 				054F405E192E210C00960ABE /* TDCarouselView.m in Sources */,
 				05228145192BD501000E8868 /* TDDashboardFilterButton.m in Sources */,
+				051EB8581955D45F00D359CD /* UIScrollView+InfiniteScroll.m in Sources */,
 				05965BA1193742C500B0B870 /* TDAddEventViewController.m in Sources */,
 				05228129192B86A6000E8868 /* UIView+Origami.m in Sources */,
 				0506086F194DC967004F55E0 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
@@ -2295,6 +2323,7 @@
 				05060886194E194B004F55E0 /* TDEventTabSelectorView.m in Sources */,
 				05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */,
 				05E6A2231945D34F0061E2BB /* LFDisplayBridge.m in Sources */,
+				054F89281954515400B73E55 /* TDEventDetailsNavigationTitleView.m in Sources */,
 				0578F9851928BDCA00F8F7B3 /* ECSlidingViewController.m in Sources */,
 				0522812C192BAD82000E8868 /* TDDashboardEventTableViewCell.m in Sources */,
 				05060858194DC966004F55E0 /* UIColor+JSQMessages.m in Sources */,

@@ -154,17 +154,16 @@
 		
 		// set the model
 		_eventDescriptionString = @"";
+		// now that we've resized the frame properly, let's run this through again to get proper dimensions for the contentSize.
+		_eventDescriptionCell.cellBigInputField.text = _eventDescriptionString;
 		
 		// create a rect for the text view so it's the right size coming out of IB. Size it to something that is form fitting to the string in the model.
-		float height = [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString];
-		CGRect textViewRect = CGRectMake(10, 2, kTextViewWidth, height);
+		float height = [[TDHelperClass sharedHelper] measureHeightOfUITextView:_eventDescriptionCell.cellBigInputField];
+		CGRect textViewRect = _eventDescriptionCell.cellBigInputField.frame;
+		textViewRect.size.height = height;
 		
 		_eventDescriptionCell.cellBigInputField.frame = textViewRect;
 		
-		// now that we've resized the frame properly, let's run this through again to get proper dimensions for the contentSize.
-		_eventDescriptionCell.cellBigInputField.contentSize = CGSizeMake(kTextViewWidth, [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString]);
-		
-		_eventDescriptionCell.cellBigInputField.text = _eventDescriptionString;
 	}
 	
 	if (_categorySelectorCell == nil) {
@@ -407,26 +406,31 @@
 - (void) textViewDidChange:(UITextView *)textView
 {
     _eventDescriptionString	 = textView.text;
+	[self.addEventTableView beginUpdates];
+    [self.addEventTableView endUpdates];
 }
 
 -(void) textViewDidBeginEditing:(UITextView *)textView{
 	_activeInputField = textView;
+	[self.addEventTableView beginUpdates];
+    [self.addEventTableView endUpdates];
 }
 
 -(BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
 	
 	_eventDescriptionString = [textView.text stringByReplacingCharactersInRange:range withString:text];
-
+	
 	if ([_eventDescriptionString isEqualToString:@""]) {
 		[_eventDescriptionCell.cellPlaceholderLabel setHidden:NO];
 	}else{
 		[_eventDescriptionCell.cellPlaceholderLabel setHidden:YES];
 	}
 	
-    [self.addEventTableView beginUpdates];
-    [self.addEventTableView endUpdates];
+    
+	
 	return YES;
 }
+
 
 - (void) textViewDidEndEditing:(UITextView *)textView
 {
@@ -492,7 +496,10 @@
 	if (indexPath.section < [_addEventItems count] && indexPath.section != 0 && indexPath.row !=1) {
 		return [[[[_addEventItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"height"] intValue];
 	}else if(indexPath.section == 0 && indexPath.row ==1){
-		float height = [self heightForTextView:_eventDescriptionCell.cellBigInputField containingString:_eventDescriptionString];
+		float height = [[TDHelperClass sharedHelper] measureHeightOfUITextView:_eventDescriptionCell.cellBigInputField];
+		CGRect textViewFrame = _eventDescriptionCell.cellBigInputField.frame;
+		textViewFrame.size.height = height;
+		_eventDescriptionCell.cellBigInputField.frame = textViewFrame;
         return height + kFontSize; // a little extra padding is needed
 	}else{
 		return 44.0f;

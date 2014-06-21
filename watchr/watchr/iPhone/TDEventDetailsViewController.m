@@ -65,6 +65,12 @@ typedef enum {
 }
 
 -(void) configureView{
+	
+	//set up the titleview
+	_titleView = [TDEventDetailsNavigationTitleView titleViewWithTitle:[_watchrEvent objectForKey:@"event_name"] andSubtitle:@"tap here for event info"];
+	_titleView.delegate = self;
+	self.navigationItem.titleView = _titleView;
+	
 	//set delegate and data source
 	[self.eventDetailsTableView setDelegate:self];
 	[self.eventDetailsTableView setDataSource:self];
@@ -106,8 +112,10 @@ typedef enum {
 	
 	
 	_headerView = [self.eventDetailsTableView dequeueReusableHeaderFooterViewWithIdentifier:@"descriptionView"];
-	
-	_headerView.headerEventDateLabel.text = [_watchrEvent objectForKey:@"created_at"];
+	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc ]init];;
+	[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	NSDate * date = [dateFormatter dateFromString:[_watchrEvent objectForKey:@"created_at"]];
+	_headerView.headerEventDateLabel.text = [[TDHelperClass sharedHelper] getStringRepresentationForstartDate:date andEndDate:[NSDate date]];
 	_headerView.headerEventNameLabel.text = [_watchrEvent objectForKey:@"event_name"];
 	_headerView.headerCategoryIcon.image = [UIImage imageNamed:[[_watchrEvent objectForKey:@"category"] objectForKey:@"category_icon"]];
 	_headerView.headerProfileNameLabel.text = [NSString stringWithFormat:@"%@ %@",[[_watchrEvent objectForKey:@"creator"] objectForKey:@"first_name"],[[_watchrEvent objectForKey:@"creator"] objectForKey:@"last_name"]];
@@ -442,7 +450,13 @@ typedef enum {
 
 }
 
+#pragma mark - title view delegate methods
 
+-(void) titleViewTapped:(TDEventDetailsNavigationTitleView *)titleView{
+	NSLog(@"titleView tapped!");
+	UIViewController * view = [UIViewController new];
+	[self.navigationController pushViewController:view animated:YES];
+}
 
 
 @end

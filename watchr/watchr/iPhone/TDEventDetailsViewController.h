@@ -13,8 +13,9 @@
 #import "TDEventStatusTableViewCell.h"
 #import "TDEventDescriptionTableViewCell.h"
 #import "TDEventMapTableViewCell.h"
+#import "TDEventDetailsNavigationTitleView.h"
 
-@interface TDEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface TDEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDEventDetailsNavigationTitleViewDelegate>{
 	TDEventDescriptionView * _headerView;
 	TDEventTabSelectorView * _selectorView;
 	
@@ -22,6 +23,9 @@
 	TDEventDescriptionTableViewCell * _descriptionCell;
 	TDEventStatusTableViewCell * _statusCell;
 	TDEventMapTableViewCell * _mapCell;
+	
+	//title View
+	TDEventDetailsNavigationTitleView * _titleView;
 }
 
 @property (weak, nonatomic) IBOutlet HeaderInsetTableView *eventDetailsTableView;

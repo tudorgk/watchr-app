@@ -75,7 +75,7 @@ enum MapViewVisibility : NSInteger {
 }
 
 -(void)awakeFromNib{
-	 self.title = @"Dashboard";
+	 self.title = @"Feed";
 
 	_mapState= MapViewVisibilityHidden;
 	
@@ -167,7 +167,6 @@ enum MapViewVisibility : NSInteger {
 	[self.tagFilterButton setCustomTitle:@"Desc." forControlState:UIControlStateNormal];
 	
 	
-	
 
 	
 
@@ -181,11 +180,15 @@ enum MapViewVisibility : NSInteger {
     }];
 	
     // setup infinite scrolling
-    [self.dashboardTableView addInfiniteScrollingWithActionHandler:^{
-        [self infiniteScrollHandler];
-    }];
+//    [self.dashboardTableView addInfiniteScrollingWithActionHandler:^{
+//        [self infiniteScrollHandler];
+//    }];
+
+//	self.dashboardTableView.showsInfiniteScrolling = YES;
 	
-	self.dashboardTableView.showsInfiniteScrolling = YES;
+	[self.dashboardTableView addInfiniteScrollWithHandler:^(UIScrollView * scrollView){
+		[self infiniteScrollHandler];
+	}];
 }
 
 -(void) configureDataSource{
@@ -398,8 +401,10 @@ enum MapViewVisibility : NSInteger {
 		cell.cellRatingLabel.text = [cellData objectForKey:@"rating"];
 	}
 
-	
-	cell.cellTimeLabel.text = [cellData objectForKey:@"created_at"];
+	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc ]init];;
+	[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	NSDate * date = [dateFormatter dateFromString:[cellData objectForKey:@"created_at"]];
+	cell.cellTimeLabel.text = [[TDHelperClass sharedHelper] getStringRepresentationForstartDate:date andEndDate:[NSDate date] ];
 	cell.cellEventCategoryImageView.image = [UIImage imageNamed:[[cellData objectForKey:@"category"] objectForKey:@"category_icon"]];
 	return cell;
 }
@@ -507,7 +512,7 @@ enum MapViewVisibility : NSInteger {
 						   }];
 					   }
 						
-					   [self.dashboardTableView.infiniteScrollingView stopAnimating];
+//					   [self.dashboardTableView.infiniteScrollingView stopAnimating];
 					   
 				   }];
 }

@@ -12,4 +12,4 @@
 // here's how you should import SVPullToRefresh now:
 
 #import "UIScrollView+SVPullToRefresh.h"
-#import "UIScrollView+SVInfiniteScrolling.h"
+

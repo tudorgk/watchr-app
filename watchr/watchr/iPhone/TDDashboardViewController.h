@@ -15,9 +15,11 @@
 #import "ActionSheetCustomPicker.h"
 #import "TDWatchrLocationManager.h"
 #import	"TDAddEventViewController.h"
+
 @interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDWatchrAPIManagerDelegate,ActionSheetCustomPickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLLocationManagerDelegate,TDAddEventViewControllerDelegate>{
 	
 	TDWatchrLocationManager * _locationManager;
+
 }
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (weak, nonatomic) IBOutlet UITableView *dashboardTableView;

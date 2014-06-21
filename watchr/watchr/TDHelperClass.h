@@ -10,6 +10,8 @@
 
 @interface TDHelperClass : NSObject
 
++(TDHelperClass *) sharedHelper;
 +(void)performBlock:(void(^)())block afterDelay:(NSTimeInterval)delay ;
-
+- (CGFloat)measureHeightOfUITextView:(UITextView *)textView;
+-(NSString*) getStringRepresentationForstartDate:(NSDate*) startDate andEndDate:(NSDate*) endDate;
 @end
