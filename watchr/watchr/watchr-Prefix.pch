@@ -20,7 +20,6 @@
 	#import	"udevCoreDataHelper.h"
 	#import	"TDWatchrAPIManager.h"
 	#import "NSNull+TDJSON.h"
-	#import "SVPullToRefresh.h"
 	#import	"TDWatchrLocationManager.h"
 	#import	"MRProgress.h"
 	#import "TDHelperClass.h"

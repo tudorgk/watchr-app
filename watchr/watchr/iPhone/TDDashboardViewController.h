@@ -19,6 +19,9 @@
 @interface TDDashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDWatchrAPIManagerDelegate,ActionSheetCustomPickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLLocationManagerDelegate,TDAddEventViewControllerDelegate>{
 	
 	TDWatchrLocationManager * _locationManager;
+	UIRefreshControl * _refreshControl;
+	
+	BOOL _firstRun;
 
 }
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;

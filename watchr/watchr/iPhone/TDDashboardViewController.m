@@ -76,7 +76,9 @@ enum MapViewVisibility : NSInteger {
 
 -(void)awakeFromNib{
 	 self.title = @"Feed";
-
+	
+	_firstRun = YES;
+	
 	_mapState= MapViewVisibilityHidden;
 	
 	//add multiple bar button items to navigation bar
@@ -174,17 +176,10 @@ enum MapViewVisibility : NSInteger {
 
 -(void) configureTableView{
 	
-	// setup pull-to-refresh
-    [self.dashboardTableView addPullToRefreshWithActionHandler:^{
-        [self pullToRefreshHandler];
-    }];
-	
-    // setup infinite scrolling
-//    [self.dashboardTableView addInfiniteScrollingWithActionHandler:^{
-//        [self infiniteScrollHandler];
-//    }];
+	 _refreshControl = [[UIRefreshControl alloc] init];
+	[self.dashboardTableView addSubview:_refreshControl];
+	[_refreshControl addTarget:self action:@selector(pullToRefreshHandler) forControlEvents:UIControlEventValueChanged];
 
-//	self.dashboardTableView.showsInfiniteScrolling = YES;
 	
 	[self.dashboardTableView addInfiniteScrollWithHandler:^(UIScrollView * scrollView){
 		[self infiniteScrollHandler];
@@ -277,10 +272,16 @@ enum MapViewVisibility : NSInteger {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-		//first load
-		_currentLocation = [locations lastObject];
-		[_dashboardFilters setFilterGeocodeWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude andRadius:[[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"filter"] doubleValue]];
+	_currentLocation = [locations lastObject];
+	[_dashboardFilters setFilterGeocodeWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude andRadius:[[[[_filterPlist objectForKey:TDDefaultRadiusKey] objectAtIndex:_distancePickerIndex] objectForKey:@"filter"] doubleValue]];
+	
+	//first load
+	if (_firstRun) {
+		[self pullToRefreshHandler];
+		_firstRun = NO;
+	}
 }
+
 
 #pragma mark - Action Picker Delegate
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -336,7 +337,7 @@ enum MapViewVisibility : NSInteger {
 	[self refreshDashboardFilters];
 	
 	//trigger the refresh
-	[self.dashboardTableView triggerPullToRefresh];
+	[self pullToRefreshHandler];
 }
 
 - (void)actionSheetPickerDidCancel:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin{
@@ -512,8 +513,7 @@ enum MapViewVisibility : NSInteger {
 						   }];
 					   }
 						
-//					   [self.dashboardTableView.infiniteScrollingView stopAnimating];
-					   
+					   [self.dashboardTableView finishInfiniteScroll];
 				   }];
 }
 -(void) pullToRefreshHandler{
@@ -561,9 +561,8 @@ enum MapViewVisibility : NSInteger {
 						   }];
 
 					   }
-					   
-					   [self.dashboardTableView.pullToRefreshView stopAnimating];
-					   
+
+					   [_refreshControl endRefreshing];
 				   }];
 
 }
@@ -573,7 +572,7 @@ enum MapViewVisibility : NSInteger {
 
 -(void) controller:(TDAddEventViewController *)addEventViewController didPostEventSuccessfully:(BOOL)success{
 	if (success) {
-		[self.dashboardTableView triggerPullToRefresh];
+		[self pullToRefreshHandler];
 		[self dismissViewControllerAnimated:YES completion:nil];
 	}
 }

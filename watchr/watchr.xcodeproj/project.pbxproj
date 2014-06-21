@@ -134,8 +134,6 @@
 		058117621925FC6E00B79087 /* blurred-violet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 058117611925FC6E00B79087 /* blurred-violet.jpg */; };
 		058117641925FCC700B79087 /* bg-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 058117631925FCC700B79087 /* bg-yellow.png */; };
 		058117661925FD6F00B79087 /* bg-red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 058117651925FD6F00B79087 /* bg-red.jpg */; };
-		0583C3E11942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3DE1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m */; };
-		0583C3E21942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */; };
 		0583C3F31942520300D8CCD7 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3E71942520300D8CCD7 /* AbstractActionSheetPicker.m */; };
 		0583C3F41942520300D8CCD7 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3E91942520300D8CCD7 /* ActionSheetCustomPicker.m */; };
 		0583C3F51942520300D8CCD7 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0583C3EC1942520300D8CCD7 /* ActionSheetDatePicker.m */; };
@@ -521,11 +519,6 @@
 		058117611925FC6E00B79087 /* blurred-violet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blurred-violet.jpg"; sourceTree = "<group>"; };
 		058117631925FCC700B79087 /* bg-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-yellow.png"; sourceTree = "<group>"; };
 		058117651925FD6F00B79087 /* bg-red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bg-red.jpg"; sourceTree = "<group>"; };
-		0583C3DC1942382900D8CCD7 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
-		0583C3DD1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
-		0583C3DE1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
-		0583C3DF1942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
-		0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		0583C3E61942520300D8CCD7 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
 		0583C3E71942520300D8CCD7 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
 		0583C3E81942520300D8CCD7 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
@@ -1056,7 +1049,6 @@
 				05EEAED419462399002B26C2 /* MRProgress */,
 				05E6A21D1945D34F0061E2BB /* LiveFrost */,
 				0583C3E51942520200D8CCD7 /* Pickers */,
-				0583C3E41942382E00D8CCD7 /* SVPullToRefresh */,
 				0541A0D31939C8250033F3B6 /* OAuth2Client.xcodeproj */,
 				0541A0AF1938B5CD0033F3B6 /* CTAssetsPickerController */,
 				05965BAF19376BD400B0B870 /* Growing Text View */,
@@ -1299,18 +1291,6 @@
 				0578F9801928BDCA00F8F7B3 /* UIViewController+ECSlidingViewController.m */,
 			);
 			path = ECSlidingViewController;
-			sourceTree = "<group>";
-		};
-		0583C3E41942382E00D8CCD7 /* SVPullToRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				0583C3DC1942382900D8CCD7 /* SVPullToRefresh.h */,
-				0583C3DD1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.h */,
-				0583C3DE1942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m */,
-				0583C3DF1942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.h */,
-				0583C3E01942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m */,
-			);
-			name = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
 		0583C3E51942520200D8CCD7 /* Pickers */ = {
@@ -2200,7 +2180,6 @@
 			files = (
 				0583C3F61942520300D8CCD7 /* ActionSheetDistancePicker.m in Sources */,
 				05EEAEF619462399002B26C2 /* MRStopButton.m in Sources */,
-				0583C3E11942382900D8CCD7 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				054F409A192E2CA600960ABE /* UIImageView+HighlightedWebCache.m in Sources */,
 				05965BC2193799D100B0B870 /* TDSubmitTableViewCell.m in Sources */,
 				05C40A79192A8018002F1F1A /* ShadowView.m in Sources */,
@@ -2318,7 +2297,6 @@
 				05EEAEF419462399002B26C2 /* MRNavigationBarProgressView.m in Sources */,
 				054F4099192E2CA600960ABE /* UIImage+WebP.m in Sources */,
 				0537A0CF194899E20051202D /* TDCategorySelectorViewController.m in Sources */,
-				0583C3E21942382900D8CCD7 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				05BB5F20192F7DBB00D9BE6A /* TDSideMenuViewController.m in Sources */,
 				05060886194E194B004F55E0 /* TDEventTabSelectorView.m in Sources */,
 				05BB5EFB192F572700D9BE6A /* TDEventDescriptionView.m in Sources */,
