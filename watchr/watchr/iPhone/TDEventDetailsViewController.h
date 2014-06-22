@@ -14,7 +14,7 @@
 #import "TDEventDescriptionTableViewCell.h"
 #import "TDEventMapTableViewCell.h"
 #import "TDEventDetailsNavigationTitleView.h"
-
+#import "TDFollowButton.h"
 @interface TDEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDEventDetailsNavigationTitleViewDelegate>{
 	TDEventDescriptionView * _headerView;
 	TDEventTabSelectorView * _selectorView;
@@ -26,6 +26,7 @@
 	
 	//title View
 	TDEventDetailsNavigationTitleView * _titleView;
+	TDFollowButton *_followButton;
 }
 
 @property (weak, nonatomic) IBOutlet HeaderInsetTableView *eventDetailsTableView;

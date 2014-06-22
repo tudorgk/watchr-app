@@ -193,24 +193,28 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     if (!copyMessage) {
         return;
     }
+	
+	[JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+	[self.messages addObject:copyMessage];
+	[self finishReceivingMessage];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
-        [copyAvatars removeObject:self.sender];
-        copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
-        
-        /**
-         *  This you should do upon receiving a message:
-         *
-         *  1. Play sound (optional)
-         *  2. Add new id<JSQMessageData> object to your data source
-         *  3. Call `finishReceivingMessage`
-         */
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-        [self.messages addObject:copyMessage];
-        [self finishReceivingMessage];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
+//        [copyAvatars removeObject:self.sender];
+//        copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
+//        
+//        /**
+//         *  This you should do upon receiving a message:
+//         *
+//         *  1. Play sound (optional)
+//         *  2. Add new id<JSQMessageData> object to your data source
+//         *  3. Call `finishReceivingMessage`
+//         */
+//        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+//        [self.messages addObject:copyMessage];
+//        [self finishReceivingMessage];
+//    });
 }
 
 - (void)closePressed:(UIBarButtonItem *)sender

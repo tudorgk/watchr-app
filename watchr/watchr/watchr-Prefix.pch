@@ -34,8 +34,8 @@
 #define TDWatchrAPIAccountIdentifier @"watchrAPIAccountIdentifier"
 #define TDWatchrLoggedInUserInformationKey @"loggedInUserInformationKey"
 #define TDWatchrUserDidLogInNotification @"userDidLogInNotification"
-//#define TDAPIBaseURL @"http://46.108.140.147:8080"
-#define TDAPIBaseURL @"http://192.168.1.100"
+#define TDAPIBaseURL @"http://46.108.140.147:8080"
+//#define TDAPIBaseURL @"http://192.168.1.100"
 #define TDRegisterFromURL @"/users"
 
 #define kTDWatchrManagerCountryKey @"country_list"

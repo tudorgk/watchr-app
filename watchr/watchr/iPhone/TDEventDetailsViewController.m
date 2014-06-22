@@ -28,7 +28,8 @@ typedef enum {
 -(void) initTabSelectorView;
 -(void) registerNibsForTableView;
 -(void) initCells;
-
+-(void) initFollowButton;
+-(void) followButtonTapped:(id)sender;
 @end
 
 @implementation TDEventDetailsViewController
@@ -61,6 +62,7 @@ typedef enum {
 	[self initCells];
 	[self initDescriptionView];
 	[self initTabSelectorView];
+	[self initFollowButton];
 
 }
 
@@ -96,11 +98,6 @@ typedef enum {
 
 -(void) viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:YES];
-	
-	//TODO: Testing JSQMessageView Controller
-//	JSQDemoViewController *vc = [JSQDemoViewController messagesViewController];
-//	[self.navigationController pushViewController:vc animated:YES];
-
 }
 
 -(void) registerNibsForTableView{
@@ -206,10 +203,25 @@ typedef enum {
 
 }
 
+-(void) initFollowButton{
+	
+	_followButton = [[TDFollowButton alloc] initWithFrame:CGRectMake(0, 0, 60, 25)];
+	[_followButton addTarget:self action:@selector(followButtonTapped:) forControlEvents:UIControlEventTouchUpInside]; 
+	UIBarButtonItem * rightBBI = [[UIBarButtonItem alloc] initWithCustomView:_followButton];
+	[self.navigationItem setRightBarButtonItem:rightBBI];
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Follow Button
+
+-(void) followButtonTapped:(id)sender{
+	[_followButton setFollowing:(![_followButton isFollowing])];
 }
 
 #pragma mark - UITableViewDelegate Methods
@@ -454,8 +466,9 @@ typedef enum {
 
 -(void) titleViewTapped:(TDEventDetailsNavigationTitleView *)titleView{
 	NSLog(@"titleView tapped!");
-	UIViewController * view = [UIViewController new];
-	[self.navigationController pushViewController:view animated:YES];
+	//TODO: Testing JSQMessageView Controller
+	JSQDemoViewController *vc = [JSQDemoViewController messagesViewController];
+	[self.navigationController pushViewController:vc animated:YES];
 }
 
 
