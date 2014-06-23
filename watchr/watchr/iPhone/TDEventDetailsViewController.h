@@ -15,6 +15,7 @@
 #import "TDEventMapTableViewCell.h"
 #import "TDEventDetailsNavigationTitleView.h"
 #import "TDFollowButton.h"
+#import "TDVoteButton.h"
 @interface TDEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TDEventDetailsNavigationTitleViewDelegate>{
 	TDEventDescriptionView * _headerView;
 	TDEventTabSelectorView * _selectorView;
@@ -27,8 +28,10 @@
 	//title View
 	TDEventDetailsNavigationTitleView * _titleView;
 	TDFollowButton *_followButton;
+	TDVoteButton *_voteUpButton;
+	TDVoteButton * _voteDownButton;
 }
 
 @property (weak, nonatomic) IBOutlet HeaderInsetTableView *eventDetailsTableView;
-@property (nonatomic, strong) NSDictionary * watchrEvent;
+@property (nonatomic, strong) NSMutableDictionary * watchrEvent;
 @end

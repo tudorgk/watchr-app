@@ -29,7 +29,10 @@ typedef enum {
 -(void) registerNibsForTableView;
 -(void) initCells;
 -(void) initFollowButton;
+-(void) initVoteButtons;
 -(void) followButtonTapped:(id)sender;
+-(void) voteUpPressed:(id)sender;
+-(void) voteDownPressed:(id)sender;
 @end
 
 @implementation TDEventDetailsViewController
@@ -62,7 +65,8 @@ typedef enum {
 	[self initCells];
 	[self initDescriptionView];
 	[self initTabSelectorView];
-	[self initFollowButton];
+//	[self initFollowButton];
+	[self initVoteButtons];
 
 }
 
@@ -211,11 +215,113 @@ typedef enum {
 	[self.navigationItem setRightBarButtonItem:rightBBI];
 }
 
+-(void) initVoteButtons{
+	_voteUpButton = [[TDVoteButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+	[_voteUpButton setButtonOffImage:[UIImage imageNamed:@"rate-up-icon-off.png"]];
+	[_voteUpButton setButtonOnImage:[UIImage imageNamed:@"rate-up-icon-on.png"]];
+	[_voteUpButton setButtonState:TDVoteButtonStateOff];
+	[_voteUpButton addTarget:self action:@selector(voteUpPressed:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem * voteUpBBI = [[UIBarButtonItem alloc] initWithCustomView:_voteUpButton];
+
+	
+	_voteDownButton = [[TDVoteButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+	[_voteDownButton setButtonOffImage:[UIImage imageNamed:@"rate-down-icon-off.png"]];
+	[_voteDownButton setButtonOnImage:[UIImage imageNamed:@"rate-down-icon-on.png"]];
+	[_voteDownButton setButtonState:TDVoteButtonStateOff];
+	[_voteDownButton addTarget:self action:@selector(voteDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem * voteDownBBI = [[UIBarButtonItem alloc] initWithCustomView:_voteDownButton];
+
+	[self.navigationItem setRightBarButtonItems:@[voteUpBBI,voteDownBBI]];
+	
+	if ([[_watchrEvent objectForKey:@"user_voted"] boolValue]) {
+		switch ([[_watchrEvent objectForKey:@"user_vote_value"] integerValue]) {
+			case 0:
+			{
+				[_voteDownButton setButtonState:TDVoteButtonStateOff];
+				[_voteUpButton setButtonState:TDVoteButtonStateOff];
+			}
+				break;
+			case 1:
+			{
+				[_voteDownButton setButtonState:TDVoteButtonStateOff];
+				[_voteUpButton setButtonState:TDVoteButtonStateOn];
+			}
+				break;
+			case -1:
+			{
+				[_voteDownButton setButtonState:TDVoteButtonStateOn];
+				[_voteUpButton setButtonState:TDVoteButtonStateOff];
+			}
+				break;
+				
+			default:
+				break;
+		}
+	}else{
+		[_voteDownButton setButtonState:TDVoteButtonStateOff];
+		[_voteUpButton setButtonState:TDVoteButtonStateOff];
+	}
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Vote up/down
+
+-(void) voteUpPressed:(id)sender{
+	TDVoteButton * button = (TDVoteButton*) sender;
+	[button setButtonState:(!button.buttonState)];
+	[_voteDownButton setButtonState:TDVoteButtonStateOff];
+	if (button.buttonState == TDVoteButtonStateOn) {
+		[self sendRateRequest:1];
+	}else{
+		[self sendRateRequest:0];
+	}
+	
+}
+
+-(void) voteDownPressed:(id)sender{
+	TDVoteButton * button = (TDVoteButton*) sender;
+	[button setButtonState:(!button.buttonState)];
+	[_voteUpButton setButtonState:TDVoteButtonStateOff];
+	if (button.buttonState == TDVoteButtonStateOn) {
+		[self sendRateRequest:-1];
+	}else{
+		[self sendRateRequest:0];
+	}
+
+}
+
+-(void) sendRateRequest:(NSInteger) rateValue{
+	
+	
+	//send the request
+	[NXOAuth2Request performMethod:@"POST"
+						onResource:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",TDAPIBaseURL,@"/events/rating"]]
+				   usingParameters:@{@"rating_value" :[NSNumber numberWithInteger:rateValue],
+									 @"event_id" : [NSNumber numberWithInteger:[[_watchrEvent objectForKey:@"event_id"] integerValue]]}
+					   withAccount:[[NXOAuth2AccountStore sharedStore] accountWithIdentifier:[[NSUserDefaults standardUserDefaults] objectForKey:TDWatchrAPIAccountIdentifier] ]
+			   sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+				   NSLog(@"sent/total = %llu/%llu",bytesSend,bytesTotal);
+			   }
+				   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error){
+					   NSString * responseString =[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+					   NSLog(@"responseData = %@", responseString );
+					   NSLog(@"response = %@", [response description]);
+					   NSLog(@"error = %@", [error userInfo]);
+					   
+					   //if error
+					   if (error) {
+						   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving events" message:[[error userInfo] description] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+						   [alert show];
+					   }else{
+						   [[NSNotificationCenter defaultCenter] postNotificationName:TDWatchrEventDidChangeNotification object:nil];
+					   }
+					   
+				   }];
 }
 
 #pragma mark - Follow Button

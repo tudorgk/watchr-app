@@ -254,6 +254,11 @@ enum MapViewVisibility : NSInteger {
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(welcomeScreenDismissed)
 												 name:TDWelcomeScreenDismissed object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(pullToRefreshHandler)
+												 name:TDWatchrEventDidChangeNotification
+											   object:nil];
+	
 }
 
 -(void) welcomeScreenDismissed{
@@ -376,7 +381,7 @@ enum MapViewVisibility : NSInteger {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	TDEventDetailsViewController * detailsController = [[UIStoryboard storyboardWithName:@"EventStoryboard_iPhone" bundle:nil] instantiateInitialViewController];
-	[detailsController setWatchrEvent:[_dashboardData objectAtIndex:indexPath.row]];
+	[detailsController setWatchrEvent:[NSMutableDictionary dictionaryWithDictionary:[_dashboardData objectAtIndex:indexPath.row]]];
 	[self.navigationController pushViewController:detailsController animated:YES];
 }
 
@@ -396,10 +401,31 @@ enum MapViewVisibility : NSInteger {
 	NSString *distance = [NSString stringWithFormat:@"%.2fkm", [[cellData objectForKey:@"distance"] floatValue]];
 	cell.cellEventDistanceLabel.text = distance;
 	
-	if ([[cellData objectForKey:@"rating"] isKindOfClass:[NSNull class]]) {
-		cell.cellRatingLabel.text = @"0";
+	
+	//check if the user voted
+	if ([[cellData objectForKey:@"user_voted"] boolValue] == YES) {
+		switch ([[cellData objectForKey:@"user_vote_value"] integerValue]) {
+			case 0:
+				cell.cellRatingLabel.textColor = [UIColor lightGrayColor];
+				break;
+			case 1:
+				cell.cellRatingLabel.textColor = [UIColor colorWithRed:0.21 green:0.64 blue:0.36 alpha:1];
+				break;
+			case -1:
+				cell.cellRatingLabel.textColor = [UIColor colorWithRed:0.87 green:0.08 blue:0.13 alpha:1];
+				break;
+			default:
+				cell.cellRatingLabel.textColor = [UIColor lightGrayColor];
+				break;
+		}
 	}else{
-		cell.cellRatingLabel.text = [cellData objectForKey:@"rating"];
+			cell.cellRatingLabel.textColor = [UIColor lightGrayColor];
+	}
+	
+	if ([[cellData objectForKey:@"rating"] isKindOfClass:[NSNull class]]) {
+		cell.cellRatingLabel.text = @"-";
+	}else{
+		cell.cellRatingLabel.text = [cellData objectForKey:@"rating"] ;
 	}
 
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc ]init];;

@@ -160,6 +160,15 @@
 		05A731FC194F3D7E0000EB46 /* placeholder-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A731FA194F3D7E0000EB46 /* placeholder-image.png */; };
 		05A731FD194F3D7E0000EB46 /* placeholder-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A731FB194F3D7E0000EB46 /* placeholder-image@2x.png */; };
 		05A73201194F69580000EB46 /* TDEventMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A73200194F69580000EB46 /* TDEventMapTableViewCell.m */; };
+		05A751FD195834C300FDA395 /* TDVoteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A751FC195834C300FDA395 /* TDVoteButton.m */; };
+		05A7520B19583C8E00FDA395 /* rate-up-icon-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7520719583C8E00FDA395 /* rate-up-icon-off.png */; };
+		05A7520C19583C8E00FDA395 /* rate-up-icon-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7520819583C8E00FDA395 /* rate-up-icon-off@2x.png */; };
+		05A7520D19583C8E00FDA395 /* rate-up-icon-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7520919583C8E00FDA395 /* rate-up-icon-on.png */; };
+		05A7520E19583C8E00FDA395 /* rate-up-icon-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7520A19583C8E00FDA395 /* rate-up-icon-on@2x.png */; };
+		05A7521319583D1800FDA395 /* rate-down-icon-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7520F19583D1800FDA395 /* rate-down-icon-off.png */; };
+		05A7521419583D1800FDA395 /* rate-down-icon-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7521019583D1800FDA395 /* rate-down-icon-off@2x.png */; };
+		05A7521519583D1800FDA395 /* rate-down-icon-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7521119583D1800FDA395 /* rate-down-icon-on.png */; };
+		05A7521619583D1800FDA395 /* rate-down-icon-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7521219583D1800FDA395 /* rate-down-icon-on@2x.png */; };
 		05B4614B19534EB100E5CB26 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 05B4614A19534EB100E5CB26 /* default.gpx */; };
 		05B544CA193C80DE0081332D /* NSNull+TDJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B544C9193C80DE0081332D /* NSNull+TDJSON.m */; };
 		05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BB5EF7192F56BF00D9BE6A /* TDEventDescriptionView.xib */; };
@@ -567,6 +576,16 @@
 		05A731FB194F3D7E0000EB46 /* placeholder-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-image@2x.png"; sourceTree = "<group>"; };
 		05A731FF194F69580000EB46 /* TDEventMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEventMapTableViewCell.h; sourceTree = "<group>"; };
 		05A73200194F69580000EB46 /* TDEventMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEventMapTableViewCell.m; sourceTree = "<group>"; };
+		05A751FB195834C300FDA395 /* TDVoteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDVoteButton.h; sourceTree = "<group>"; };
+		05A751FC195834C300FDA395 /* TDVoteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDVoteButton.m; sourceTree = "<group>"; };
+		05A7520719583C8E00FDA395 /* rate-up-icon-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-up-icon-off.png"; sourceTree = "<group>"; };
+		05A7520819583C8E00FDA395 /* rate-up-icon-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-up-icon-off@2x.png"; sourceTree = "<group>"; };
+		05A7520919583C8E00FDA395 /* rate-up-icon-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-up-icon-on.png"; sourceTree = "<group>"; };
+		05A7520A19583C8E00FDA395 /* rate-up-icon-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-up-icon-on@2x.png"; sourceTree = "<group>"; };
+		05A7520F19583D1800FDA395 /* rate-down-icon-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-down-icon-off.png"; sourceTree = "<group>"; };
+		05A7521019583D1800FDA395 /* rate-down-icon-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-down-icon-off@2x.png"; sourceTree = "<group>"; };
+		05A7521119583D1800FDA395 /* rate-down-icon-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-down-icon-on.png"; sourceTree = "<group>"; };
+		05A7521219583D1800FDA395 /* rate-down-icon-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-down-icon-on@2x.png"; sourceTree = "<group>"; };
 		05B4614A19534EB100E5CB26 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		05B544C8193C80DE0081332D /* NSNull+TDJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+TDJSON.h"; sourceTree = "<group>"; };
 		05B544C9193C80DE0081332D /* NSNull+TDJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+TDJSON.m"; sourceTree = "<group>"; };
@@ -1207,6 +1226,7 @@
 		054F4069192E292900960ABE /* Event Details View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				05A751F91958349C00FDA395 /* Vote Buttons */,
 				054F406A192E294600960ABE /* TDEventDetailsViewController.h */,
 				054F406B192E294600960ABE /* TDEventDetailsViewController.m */,
 				053EDA921956F36B002E7C8A /* Comment System Demo */,
@@ -1487,6 +1507,30 @@
 			name = "Event Map";
 			sourceTree = "<group>";
 		};
+		05A751F91958349C00FDA395 /* Vote Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				05A751FB195834C300FDA395 /* TDVoteButton.h */,
+				05A751FC195834C300FDA395 /* TDVoteButton.m */,
+			);
+			name = "Vote Buttons";
+			sourceTree = "<group>";
+		};
+		05A7520619583B8200FDA395 /* Event Details */ = {
+			isa = PBXGroup;
+			children = (
+				05A7520719583C8E00FDA395 /* rate-up-icon-off.png */,
+				05A7520819583C8E00FDA395 /* rate-up-icon-off@2x.png */,
+				05A7520919583C8E00FDA395 /* rate-up-icon-on.png */,
+				05A7520A19583C8E00FDA395 /* rate-up-icon-on@2x.png */,
+				05A7520F19583D1800FDA395 /* rate-down-icon-off.png */,
+				05A7521019583D1800FDA395 /* rate-down-icon-off@2x.png */,
+				05A7521119583D1800FDA395 /* rate-down-icon-on.png */,
+				05A7521219583D1800FDA395 /* rate-down-icon-on@2x.png */,
+			);
+			name = "Event Details";
+			sourceTree = "<group>";
+		};
 		05B544C6193C80C40081332D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1718,6 +1762,7 @@
 		05C0782C1924FCC8005AB425 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				05A7520619583B8200FDA395 /* Event Details */,
 				05BE374E1949AC8C002A4E15 /* Category icons */,
 				05C6AFAF194452A0007E68AC /* Add Event */,
 				05BB5F04192F7BF000D9BE6A /* Menu */,
@@ -2071,6 +2116,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05A7520C19583C8E00FDA395 /* rate-up-icon-off@2x.png in Resources */,
 				05BE377B1949AC9F002A4E15 /* toxic-waste-category-icon@2x.png in Resources */,
 				05BB5EF8192F56BF00D9BE6A /* TDEventDescriptionView.xib in Resources */,
 				05228135192BB0B6000E8868 /* pin-small-icon@2x.png in Resources */,
@@ -2079,13 +2125,18 @@
 				05BE37791949AC9F002A4E15 /* thievery-category-icon@2x.png in Resources */,
 				05BB5F2F192FAC7100D9BE6A /* menu-notification-button-off@2x.png in Resources */,
 				05060872194DC967004F55E0 /* JSQMessagesToolbarContentView.xib in Resources */,
+				05A7521519583D1800FDA395 /* rate-down-icon-on.png in Resources */,
+				05A7520B19583C8E00FDA395 /* rate-up-icon-off.png in Resources */,
 				05BB5F1A192F7C1800D9BE6A /* menu-spots-icon-off@2x.png in Resources */,
+				05A7521319583D1800FDA395 /* rate-down-icon-off.png in Resources */,
 				0506084A194DC966004F55E0 /* bubble_stroked.png in Resources */,
 				05BB5F14192F7C1800D9BE6A /* menu-friends-icon-on@2x.png in Resources */,
 				05BE37731949AC9F002A4E15 /* polluted-water-category-icon@2x.png in Resources */,
 				0506085D194DC966004F55E0 /* JSQMessagesViewController.xib in Resources */,
+				05A7520E19583C8E00FDA395 /* rate-up-icon-on@2x.png in Resources */,
 				05BB5F28192FA74300D9BE6A /* TDProfileHeaderView.xib in Resources */,
 				05BE37681949AC9F002A4E15 /* car-accident-category-icon.png in Resources */,
+				05A7521619583D1800FDA395 /* rate-down-icon-on@2x.png in Resources */,
 				058117641925FCC700B79087 /* bg-yellow.png in Resources */,
 				05C077AC1924EC12005AB425 /* Main_iPad.storyboard in Resources */,
 				05BE37771949AC9F002A4E15 /* safety-hazard-category-icon@2x.png in Resources */,
@@ -2149,6 +2200,7 @@
 				05BB5F32192FAC7100D9BE6A /* menu-request-button-on@2x.png in Resources */,
 				05BB5F1C192F7C1800D9BE6A /* watchr-menu-button@2x.png in Resources */,
 				05060853194DC966004F55E0 /* typing@2x.png in Resources */,
+				05A7520D19583C8E00FDA395 /* rate-up-icon-on.png in Resources */,
 				05BE377A1949AC9F002A4E15 /* toxic-waste-category-icon.png in Resources */,
 				05228142192BC3F5000E8868 /* user-location-small-icon@2x.png in Resources */,
 				05060855194DC966004F55E0 /* message_sent.aiff in Resources */,
@@ -2175,6 +2227,7 @@
 				05BB5F11192F7C1800D9BE6A /* menu-feed-icon-off@2x.png in Resources */,
 				05F5501619471DD8009B9135 /* USA-HotelMotel.csv in Resources */,
 				05BE37671949AC9F002A4E15 /* burglary-category-icon@2x.png in Resources */,
+				05A7521419583D1800FDA395 /* rate-down-icon-off@2x.png in Resources */,
 				0506084F194DC966004F55E0 /* bubble_tailless@2x.png in Resources */,
 				05BE376C1949AC9F002A4E15 /* floodings-category-icon.png in Resources */,
 				05060846194DC966004F55E0 /* bubble_min.png in Resources */,
@@ -2233,6 +2286,7 @@
 				05965BB51937754700B0B870 /* TDMapSelectorTableViewCell.m in Sources */,
 				05C077A61924EC12005AB425 /* TDAppDelegate.m in Sources */,
 				05C40A53192A4D8E002F1F1A /* MEDynamicTransition.m in Sources */,
+				05A751FD195834C300FDA395 /* TDVoteButton.m in Sources */,
 				05A73201194F69580000EB46 /* TDEventMapTableViewCell.m in Sources */,
 				05060860194DC966004F55E0 /* JSQMessagesTimestampFormatter.m in Sources */,
 				05C40A75192A8018002F1F1A /* FacingView.m in Sources */,
